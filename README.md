@@ -62,11 +62,24 @@
 ## Python with Flask
 ## Python with Subprocess
 ## Python with Regular expression
+``` python
+import re
+```
+**Information:**
+Regular expressions are patterns used to match character combinations in strings.
+For example, we may want to check if an input is an email.
+Since every email must be bounded by the pattern, we can use regular expression to help us check this.
 ## Python with Database
 ## Python with Statistics
 ## Python with Math
 ## Python with OS
+``` python
+import os
+```
 ## Python with Sys
+``` python
+import sys
+```
 ## Python with Collections
 ## Python with Random
 ## Python with JSON
