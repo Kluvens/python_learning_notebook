@@ -14,6 +14,9 @@
     6. [Python with Math](#python-with-math)
 
 # Why Python
+## Python history
+## Why Python is popular
+## Why Python is slow
 
 # Python basic syntax
 ## Python Comments
@@ -25,6 +28,7 @@
 ### Python If statement
 ### Python While loop
 ### Python For loop
+### Python Switch statement
 ## Python Strings
 ## Python Lists
 ## Python Dictionaries
@@ -35,12 +39,17 @@
 
 # Python advanced syntax
 ## Python Lambda
+## Python Extended Keyword Arguments (*args, **kwargs)
 ## Python Generators
 ## Python Iterators
 ## Python Decorators
 ## Python Type checking
 
+# Python program testing and debugging
+
 # Python Object Oriented Programming
+## Everything in Python is an object
+## Python Operator overloading
 
 # Python with data structure and algorithms
 ## Python Linked lists
@@ -61,6 +70,7 @@
 ## Python with Collections
 ## Python with Random
 ## Python with JSON
+## Python with CSV
 
 # Python topics
 ## Python pip
