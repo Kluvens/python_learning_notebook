@@ -44,6 +44,7 @@
 ## Python Iterators
 ## Python Decorators
 ## Python Type checking
+## [Python Memory management](https://docs.python.org/3/c-api/memory.html#:~:text=Memory%20management%20in%20Python%20involves,by%20the%20Python%20memory%20manager.)
 
 # Python program testing and debugging
 
@@ -84,6 +85,7 @@ import sys
 ## Python with Random
 ## Python with JSON
 ## Python with CSV
+## Python with Pickle
 
 # Python topics
 ## Python pip
