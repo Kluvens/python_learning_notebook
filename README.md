@@ -48,9 +48,76 @@ Python code is first compiled into python Byte Code. The Byte Code interpreter c
 
 # Python basic syntax
 ## Python Comments
+### Single-line comments
+A comment in Python starts with the hash character(#), and extends to the end of the physical line. In other words, all contents after # are invlaid except the # is inside a string.
+``` python
+# define the general structure of the product with default values
+product = {
+    "productId": 0,          # product reference id, default: 0
+    "description": "",       # item description, default: empty
+    "categoryId": 0,         # item category, default: 0
+    "price": 0.00            # price, default: 0.00
+}
+```
+### Multi-line comments
+There are two versions of multi-line comments.
+
+Version 1: combines single-line comments as follows:
+``` python
+# LinuxThingy version 1.6.5
+#
+# Parameters:
+#
+# -t (--text): show the text interface
+# -h (--help): display this help
+```
+Version 2: It's originally intended to be used for creating documentation (see more about this below), but it can also be used for multi-line comments. The commented contents inside """ """.
+``` python
+"""
+LinuxThingy version 1.6.5
+
+Parameters:
+
+-t (--text): show the text interface
+-h (--help): display this help
+"""
+```
 ## Python Variables
+### Variables
+A variable is a value that can change, depending on conditions or on information passed to the program. We can understand it as a container for storing data values.
+### Creating variables
+Python has no command for declaring a variable.
+A variable is created the moment you first assign a value to it.
+
+**Information:** A declaration of a variable is where a program says that it needs a variable whereas initializing a variable means specifying an initial value to assign to it.
+``` python
+x = 5           # we are creating a variable called x and the value stored is 5
+y = "John"      # we are creating a variable called y and the value stored is "John"
+```
 ## Python Data types
-## Python Casting
+### Python built-in data types
+### Getting the type of a variable
+### Python type casting
+Python is an object-prientated language, and as such it uses classes to define data types, including its primitive types. Casting can specify a type on to a variable.
+``` python
+x = int(1)              # specify the type of x as int, x will be 1
+y = int(2.8)            # specify the type of y as int, y will be 2
+z = int("3")            # specify the type of z as int, z will be 3
+x = float(1)            # x will be 1.0
+y = float(2.8)          # y will be 2.8
+z = float("3")          # z will be 3.0
+w = float("4.2")        # w will be 4.2
+x = str("all5all")      # x will be 'all5all'
+y = str(1)              # y will be '1'
+z = str(5.6)            # z will be '5.6'
+x = int("Justin")       # will give ValueError, could not convert from string to int
+x = float("Justin")     # will give ValueError, could not convert from string to float
+x = bool(1)             # x will be True
+x = bool(0)             # x will be False
+x = int(True)           # x will be 1
+x = float(True)         # x will be 1.0
+x = str(True)           # x will be 'True'
+```
 ## Python Operators
 ## Python Control flow
 ### Python If statement
