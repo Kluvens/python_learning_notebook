@@ -333,6 +333,27 @@ print(1 not in a)       # False
 print(5 not in a)       # True
 ```
 
+### Python Bitwise Operators
+``` python
+# '&' is AND operator, it sets each bit to 1 if both bits are 1
+print(5 & 3)            # 0101 & 0011 => 0001 => 1
+
+# '|' is OR operator, it sets each bit to 1 if one of two bits is 1
+print(5 | 3)            # 0101 | 0011 => 0111 => 7
+
+# '^' is XOR operator, it sets each bit to 1 if only one of two bits is 1
+print(5 ^ 3)            # 0101 ^ 0011 => 0110 => 6
+
+# '~' is NOT operator, it inverts all the bits
+print(~5)               # ~00000101 => 11111010 => -6 
+
+# '>>' is Zero fill left shift, it shifts left by pushing zeros in from the right and let the leftmost bits fall off
+print(5 >> 2 )         # 0101 >> 2 => 0001 => 1
+
+# '<<' is Signed right shift, it shifts right by pushing copies of the leftmost bit in from the left, and let the rightmost bits fall off
+print(5 << 1  )        # 0101 << 1 => 1010 => 10
+```
+
 ## Python Strings
 Strings in Python are surrounded by either single quotation marks, or double quotation marks.
 ```'hello'``` has no difference with ```"hello"```.
