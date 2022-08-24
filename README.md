@@ -95,8 +95,28 @@ x = 5           # we are creating a variable called x and the value stored is 5
 y = "John"      # we are creating a variable called y and the value stored is "John"
 ```
 ## Python Data types
+Variables can store data of different types, and different types can do different things.
 ### Python built-in data types
+- Test type: ```str```
+- Numeric types: ```int```, ```float```, ```complex```
+- Sequence types: ```list```, ```tuple```, ```range```
+- Mapping type: ```dict```
+- Set types: ```set```, ```frozenset```
+- Boolean type: ```bool```
+- Binary types: ```bytes```, ```bytearray```, ```memoryview```
+- None type: ```NoneType```
+
+More specifically:
+- ```int```: means integer or whole number, can be 0, positive or negative, without decimals, of unlimited length
+- ```float```: means floating point number, is a number, positive or negative, containing one or more decimals. Float can also be scientific numbers with an "e" to indicate the power of 10. ```35e3``` means 35*(10^3).
 ### Getting the type of a variable
+We can use Python built-in function ```type()``` to get the type of a variable.
+``` python
+print(type(5))          # <class 'int'>, means it is an integer
+print(type(5.1))        # <class 'float'>, means it is a floating point number
+print(type("5.1"))      # <class 'str'>, means it is a string
+print(type(True))       # <class 'bool'>, means it is a boolean value
+```
 ### Python type casting
 Python is an object-prientated language, and as such it uses classes to define data types, including its primitive types. Casting can specify a type on to a variable.
 ``` python
@@ -119,12 +139,133 @@ x = float(True)         # x will be 1.0
 x = str(True)           # x will be 'True'
 ```
 ## Python Operators
+There are several groups of operators that Python provides:
+- Arithmetic operators
+- Assignment operators
+- Comparison operators
+- Logical operators
+- Identity operators
+- Membership operators
+- Bitwise operators
+### Python Arithmetic Operators
+``` python
+# '+' means addition
+print(3 + 2)            # 5
+print(3 + 2.0)          # 5.0
+print(3 + True)         # 4 because True acturally means 1 and False means 0
+
+# '-' means subtraction
+print(3 - 2)            # 1
+print(3 - 2.0)          # 1.0
+
+# '*' means multiplication
+print(3 * 2)            # 6
+
+# '/' means division. Division gives a float value as result
+print(3 / 2)            # 1.5
+print(4 / 2)            # 2.0
+
+# '%' means modulus
+print(3 % 2)            # 1
+print(4 % 2)            # 0
+
+# '**' means exponentiation
+print(3 ** 2)           # 9
+print(3 ** 2.0)         # 9.0
+
+# '//' means floor division. This is the same as '/' in C.
+print(3 // 2)           # 1
+print(4 // 2)           # 2
+print(3 // 2.0)         # 1.0
+```
+### Python Assignment Operators
+``` python
+# '=' is an assignment operator, it puts the value on the right hand side to the left hand side
+x = 5                   # assign 5 to variable x
+print(x)                # 5
+
+# '+='
+x += 3                  # the same as x = x + 3
+print(x)                # 8
+
+# '-='
+x -= 3                  # the same as x = x - 3
+print(x)                # 5
+
+# '*='
+x *= 3                  # the same as x = x * 3
+print(x)                # 15
+
+# '/='
+x /= 3                  # the same as x = x / 3
+print(x)                # 5.0 instead of 5
+
+# '%='
+x %= 3                  # the same as x = x % 3
+print(x)                # 2.0
+
+# '//='
+x = 5
+x //= 3                 # the same as x = x // 3
+print(x)                # 1
+
+# '**='
+x = 5
+x **= 3                 # the same as x = x ** 3
+print(x)                # 125
+
+# '&='
+x = 5
+x &= 3                  # the same as x = x & 3
+print(x)                # 0101 & 0011 => 0001 => 1
+
+# '|='
+x = 5
+x |= 3                  # the same as x = x | 3
+print(x)                # 0101 | 0011 => 0111 => 7
+
+# '^='
+x = 5
+x ^= 3                  # the same as x = x ^ 3
+print(x)                # 0101 ^ 0011 => 0110 => 6
+
+# '>>='
+x = 5
+x >>= 2                 # the same as x = x >> 2
+print(x)                # 0101 >> 2 => 0001 => 1
+
+# '<<='
+x = 5
+x <<= 1                 # the same as x = x << 1
+print(x)                # 0101 << 1 => 1010 => 10
+```
+## Python Strings
+Strings in Python are surrounded by either single quotation marks, or double quotation marks.
+```'hello'``` has no difference with ```"hello"```.
+We can display a string on standard output with the ```print()``` function.
+``` python
+print("Hello")
+print('Hello')
+```
+A variable can store string value, we can assign string to a variable.
+``` python
+a = "Hello"
+print(a)
+```
+Python also surpport multi-line string. We can assign a multi-line string to a variable by using three double quotes or three single quotes.
+``` python
+a = """Python is a very useful language,
+it has many features,
+Python is important in data science and AI.
+let's get started and learn Python"""
+print(a)
+```
+## Python Booleans
 ## Python Control flow
 ### Python If statement
 ### Python While loop
 ### Python For loop
 ### Python Switch statement
-## Python Strings
 ## Python Lists
 ## Python Dictionaries
 ## Python Tuples
