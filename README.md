@@ -298,13 +298,39 @@ print(not(1 > 5))       # True
 ```
 
 ### Python Identity Operators
+The is operator determines whether two variables reference the same object.
 ``` python
+# 'is'
+a = [1, 2]
+b = a 
+print(a is b)           # True
+print(5 is 5)           # True
+print(5 is int(5))      # True
+print(5.0 is float(5))  # False
+print([1, 2] is [1, 2]) # False
+print([] is list())     # False
+print(1 is True)        # False
 
+# 'is not'
+a = [1, 2]
+b = a 
+c = [1, 2]
+print(b is not c)       # True
 ```
 
 ### Python Membership Operators
+Membership operators are used to test if a sequence is presented in an object
 ``` python
+# 'in'
+a = [1 , 2, 3]
+print(1 in a)           # True
+b = set([1, 2, 3])
+print(1 in b)           # True
 
+# 'not in'
+a = [1, 2, 3]
+print(1 not in a)       # False
+print(5 not in a)       # True
 ```
 
 ## Python Strings
