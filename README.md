@@ -281,28 +281,6 @@ print(5 <= 4.2)         # False
 print(5 <= True)        # False
 ```
 
-## Python Strings
-Strings in Python are surrounded by either single quotation marks, or double quotation marks.
-```'hello'``` has no difference with ```"hello"```.
-We can display a string on standard output with the ```print()``` function.
-``` python
-print("Hello")
-print('Hello')
-```
-A variable can store string value, we can assign string to a variable.
-``` python
-a = "Hello"
-print(a)
-```
-Python also surpport multi-line string. We can assign a multi-line string to a variable by using three double quotes or three single quotes.
-``` python
-a = """Python is a very useful language,
-it has many features,
-Python is important in data science and AI.
-let's get started and learn Python"""
-print(a)
-```
-
 ### Python Logical Operators
 ``` python
 # 'and', return True if both statements are True
@@ -328,6 +306,29 @@ print(not(1 > 5))       # True
 ``` python
 
 ```
+
+## Python Strings
+Strings in Python are surrounded by either single quotation marks, or double quotation marks.
+```'hello'``` has no difference with ```"hello"```.
+We can display a string on standard output with the ```print()``` function.
+``` python
+print("Hello")
+print('Hello')
+```
+A variable can store string value, we can assign string to a variable.
+``` python
+a = "Hello"
+print(a)
+```
+Python also surpport multi-line string. We can assign a multi-line string to a variable by using three double quotes or three single quotes.
+``` python
+a = """Python is a very useful language,
+it has many features,
+Python is important in data science and AI.
+let's get started and learn Python"""
+print(a)
+```
+
 ## Python Booleans
 ## Python Control flow
 ### Python If statement
