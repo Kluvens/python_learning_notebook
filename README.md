@@ -47,8 +47,11 @@ Unlike native languages like C/C++, Python code gets interpreted at runtime inst
 Python code is first compiled into python Byte Code. The Byte Code interpreter conversion happens internally and most of it is hidden from the developer.Byte code is platform-independent and lower-level programming. Compilation of byte code is to ramp up the execution of source code. The source code compiled to byte code is then executed in Python’s virtual machine one by one, to carry out the operations. The virtual machine is an internal component of Python. Internally Python code is interpreted during run time rather than being compiled to native code hence it is a bit slower. 
 
 # Python basic syntax
+
 ## Python Comments
+
 ### Single-line comments
+
 A comment in Python starts with the hash character(#), and extends to the end of the physical line. In other words, all contents after # are invlaid except the # is inside a string.
 ``` python
 # define the general structure of the product with default values
@@ -59,6 +62,7 @@ product = {
     "price": 0.00            # price, default: 0.00
 }
 ```
+
 ### Multi-line comments
 There are two versions of multi-line comments.
 
@@ -72,6 +76,7 @@ Version 1: combines single-line comments as follows:
 # -h (--help): display this help
 ```
 Version 2: It's originally intended to be used for creating documentation (see more about this below), but it can also be used for multi-line comments. The commented contents inside """ """.
+
 ``` python
 """
 LinuxThingy version 1.6.5
@@ -82,6 +87,7 @@ Parameters:
 -h (--help): display this help
 """
 ```
+
 ## Python Variables
 ### Variables
 A variable is a value that can change, depending on conditions or on information passed to the program. We can understand it as a container for storing data values.
@@ -109,6 +115,13 @@ Variables can store data of different types, and different types can do differen
 More specifically:
 - ```int```: means integer or whole number, can be 0, positive or negative, without decimals, of unlimited length
 - ```float```: means floating point number, is a number, positive or negative, containing one or more decimals. Float can also be scientific numbers with an "e" to indicate the power of 10. ```35e3``` means 35*(10^3).
+
+***Notice***: Python has its way to deal with floating point number, it's risky if we compare two floating point numbers
+``` python
+print(0.1 + 0.2 == 0.3)                 # False
+print((0.1 + 0.2) - 0.3)                # 5.551115123125783e-17
+```
+
 ### Getting the type of a variable
 We can use Python built-in function ```type()``` to get the type of a variable.
 ``` python
