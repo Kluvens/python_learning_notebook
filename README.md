@@ -147,6 +147,7 @@ There are several groups of operators that Python provides:
 - Identity operators
 - Membership operators
 - Bitwise operators
+
 ### Python Arithmetic Operators
 ``` python
 # '+' means addition
@@ -178,6 +179,7 @@ print(3 // 2)           # 1
 print(4 // 2)           # 2
 print(3 // 2.0)         # 1.0
 ```
+
 ### Python Assignment Operators
 ``` python
 # '=' is an assignment operator, it puts the value on the right hand side to the left hand side
@@ -239,6 +241,7 @@ x = 5
 x <<= 1                 # the same as x = x << 1
 print(x)                # 0101 << 1 => 1010 => 10
 ```
+
 ### Python Comparison Operators
 Comparison operators are used to compare two values
 ``` python
@@ -277,6 +280,7 @@ print(5 <= 4)           # False
 print(5 <= 4.2)         # False
 print(5 <= True)        # False
 ```
+
 ## Python Strings
 Strings in Python are surrounded by either single quotation marks, or double quotation marks.
 ```'hello'``` has no difference with ```"hello"```.
@@ -297,6 +301,32 @@ it has many features,
 Python is important in data science and AI.
 let's get started and learn Python"""
 print(a)
+```
+
+### Python Logical Operators
+``` python
+# 'and', return True if both statements are True
+print(1 < 5 and 5 >= 5) # True
+print(1 > 5 and 5 >= 5) # False
+
+# 'or', return True if one of the statements is True
+print(1 < 5 or 5 >= 5)  # True
+print(1 > 5 or 5 >= 5)  # True
+print(1 < 5 or 5 > 5)   # False
+
+# 'not', reverse the result, returns False if the result is True
+print(not(5 <= 5))      # False
+print(not(1 > 5))       # True
+```
+
+### Python Identity Operators
+``` python
+
+```
+
+### Python Membership Operators
+``` python
+
 ```
 ## Python Booleans
 ## Python Control flow
