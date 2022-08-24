@@ -239,6 +239,44 @@ x = 5
 x <<= 1                 # the same as x = x << 1
 print(x)                # 0101 << 1 => 1010 => 10
 ```
+### Python Comparison Operators
+Comparison operators are used to compare two values
+``` python
+# '=='
+x = 5
+y = 5
+print(x == y)           # True
+z = 5.0
+print(x == z)           # True
+print(1 == True)        # True
+
+# '!='
+print(False != True)    # True
+print(1 != 1)           # False
+
+# '>'
+print(5 > 5)            # False
+print(5 > 4)            # True
+print(5 > 4.2)          # True
+print(5 > True)         # True
+
+# '<'
+print(5 < 4)            # False
+print(5 < 4.2)          # False
+print(5 < True)         # False
+
+# '>='
+print(5 >= 5)           # True
+print(5 >= 4)           # True
+print(5 >= 4.2)         # True
+print(5 >= True)        # True
+
+# '<='
+print(5 <= 5)           # True 
+print(5 <= 4)           # False
+print(5 <= 4.2)         # False
+print(5 <= True)        # False
+```
 ## Python Strings
 Strings in Python are surrounded by either single quotation marks, or double quotation marks.
 ```'hello'``` has no difference with ```"hello"```.
