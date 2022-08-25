@@ -512,6 +512,69 @@ print(f"{today} is {day}")                  # Today is Thursday
 ## Python Booleans
 ## Python Control flow
 ### Python If statement
+```if```
+- An if statement is written by using the ```if``` keyword.
+- Python relies on indentation (whitespace at the beginning of a line) to define scope in the code.
+- The code with indentation under if statement will run if the condition is True.
+
+``` python
+a = 5
+b = 6
+if a > b:
+    print("5 is greater than 6")    # we will not see this line because the condition is False and the line will not be executed
+
+if a < b:
+    print("5 is less than 6")       # we can see this line because the condition is True
+```
+
+```elif```
+
+The ```elif``` keyword is pythons way of saying if the previous conditions were false, then try to check this condition.
+``` python
+a = 33
+b = 33
+if b > a:
+  print("b is greater than a")      # failed this check
+elif a == b:
+  print("a and b are equal")        # passed this check and print the line
+```
+
+```else```
+
+The ```else``` keyword catches anything which isn't caught by the preceding conditions.
+``` python
+a = 200
+b = 33
+if b > a:
+  print("b is greater than a")      # can't pass the condition
+elif a == b:
+  print("a and b are equal")        # can't pass the condition
+else:
+  print("a is greater than b")      # run this line anyway
+```
+
+Short hand if:
+if you have only one statement to execute, you can put it on the same line as the if statement
+``` python
+if a > b: print("a is greater than b")
+# this is the same as:
+# if a > b:
+#     print("a is greater than b")
+```
+
+Short hand if ..else
+``` python
+a = 2
+b = 330
+print("A") if a > b else print("B")
+# this is the same as:
+# if a > b:
+#     print("A")
+# else:
+#     print("8")
+```
+
+The above technique is known as **Ternary Operators**, or **Conditional Expressions**.
 ### Python While loop
 ### Python For loop
 ### Python Switch statement
