@@ -367,6 +367,11 @@ print(5 >> 2 )         # 0101 >> 2 => 0001 => 1
 print(5 << 1  )        # 0101 << 1 => 1010 => 10
 ```
 
+## Python Booleans
+- Booleans represent one of two values: ```True``` or ```False```.
+- We can evaluate any expression in Python and get a boolean value as a result.
+- We can use bool() 
+
 ## Python Strings
 Strings in Python are surrounded by either single quotation marks, or double quotation marks.
 ```'hello'``` has no difference with ```"hello"```.
@@ -509,7 +514,6 @@ day = "Thursday"
 print(f"{today} is {day}")                  # Today is Thursday
 ```
 
-## Python Booleans
 ## Python Control flow
 ### Python If statement
 ```if```
