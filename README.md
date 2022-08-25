@@ -372,13 +372,13 @@ Strings in Python are surrounded by either single quotation marks, or double quo
 ```'hello'``` has no difference with ```"hello"```.
 We can display a string on standard output with the ```print()``` function.
 ``` python
-print("Hello")
-print('Hello')
+print("Hello")                  # Hello
+print('Hello')                  # Hello
 ```
 A variable can store string value, we can assign string to a variable.
 ``` python
 a = "Hello"
-print(a)
+print(a)                        # Hello
 ```
 Python also surpport multi-line string. We can assign a multi-line string to a variable by using three double quotes or three single quotes.
 ``` python
@@ -387,6 +387,126 @@ it has many features,
 Python is important in data science and AI.
 let's get started and learn Python"""
 print(a)
+```
+
+More functions and methods about strings:
+``` python
+string = "Hello hello HeLLo_and$Ok123"
+
+# a string can be treated as an array, with the same way we access element and loop through
+print(string[2])                            # l
+for i in string:
+    print(i)                                # print each element of the string per line
+
+# use len() function to get the length of the string
+print(len(string))                          # 27
+
+# we can use membership operation to check if a piece is within a string
+print("Hello" in string)                    # True
+print("123" not in string)                  # False
+
+# index method to search the first occurence, and return error if not found
+print(string.index("llo"))                  # 2
+print(string.index("p"))                    # ValueError, substring not found
+
+# rindex method to search the last occurence, and return error if not found(r means from right)
+print(string.rindex("llo"))                 # 8
+
+# find method to search the first occurence, and return -1 if not found
+print(string.find("llo"))                   # 2
+print(string.find("lllo"))                  # -1
+
+# rfind method to search the last occurence, and return -1 if not found
+print(string.rfind("llo"))                  # 8
+print(string.rfind("lllo"))                 # -1
+
+# we can use '+' to concatenate strings in Python
+substr = 'hi'
+print(substr)                               # hi
+substr = substr + 'harry' + 'potter'
+print(substr)                               # hiharrypotter
+
+# id() function returns the identity of the object.
+print(id(string))                           # 140378634129696 (but every time you run this command, we get a different result)
+
+# change the string to upper case
+print(string.upper())                       # HELLO HELLO HELLO_AND$OK123
+
+# change the string to lower case
+print(string.lower())                       # hello hello hello_and$ok123
+
+# first character to be capitalized
+print(string.capitalize())                  # Hello hello hello_and$ok123
+# every first character of a word to be capitalized
+print(string.title())                       # Hello Hello Hello_And$Ok123
+# swap lower and upper case
+print(string.swapcase())                    # hELLO HELLO hEllO_AND$oK123
+
+# check if a string a digit number
+print(string.isdigit())                     # False
+
+# check if a string is alphabetic
+print(string.isalpha())                     # False
+
+# check if a string is alphanumeric
+print(string.isalnum())                     # False
+print("all123good".isalnum())               # True
+
+# check if a string is in upper case
+print(string.isupper())                     # False
+
+# check if a string is in lower case
+print(string.islower())                     # False
+
+# split the string and return a list (maxsplit from left)
+left = string.split(" ")
+print(left)                                 # ['Hello', 'hello', 'HeLLo_and$Ok123']
+left_max = string.split(" ", maxsplit = 1)
+print(left_max)                             # ['Hello', 'hello HeLLo_and$Ok123']
+# split the string and return a list (maxsplit from right)
+right = string.rsplit(" ")
+print(right)                                # ['Hello', 'hello', 'HeLLo_and$Ok123']
+right_max = string.rsplit(" ", maxsplit = 1)
+print(right_max)                            # ['Hello hello', 'HeLLo_and$Ok123']
+
+# replace method(what we have, what we want, maximum time to be replaced default to all)
+print(string.replace("hello", "youh", 1))   # Hello youh HeLLo_and$Ok123
+print(string)                               # string itself is not modified
+
+# reverse a string
+print(string[::-1])                         # 321kO$dna_oLLeH olleh olleH
+
+# strip() method is to remove the leading and the trailing characters based on the string argument passed
+new_string = "    cool and i like it      \n"
+print(new_string.strip())                   # cool and i like it
+# rstrip() only removes the trailing characters
+print(new_string.rstrip())                  #     cool and i like it
+# lstrip() only removes the leading characters
+print(new_string.lstrip())                  # cool and i like it      \n (\n is interpreted as a newline)
+# we can specify a character
+new_string = "HHHHHcool and i like itHHHHH"
+print(new_string.strip("H"))                # cool and i like it
+
+# check if a string starts with another string
+print(string.startswith("Hello"))           # True
+
+# string format
+# print specific number of digits
+f = 3.1415926
+print("{:.3f}".format(f))                   # 3.142
+# insert a value to the placeholder
+txt = "For only {price:.2f} dollars!"
+print(txt.format(price = 49))               # For only 49.00 dollars!
+txt = "{today} is {date}"
+print(txt.format(today = "Today", date = "Thursday"))   # Today is Thursday
+txt = "{0} is {1}"
+print(txt.format("Today", "Thursday"))      # Today is Thursday
+txt = "{} is {}"
+print(txt.format("Today", "Thursday"))      # Today is Thursday
+# another print format
+today = "Today"
+day = "Thursday"
+print(f"{today} is {day}")                  # Today is Thursday
 ```
 
 ## Python Booleans
