@@ -785,6 +785,9 @@ else:
     print("something")
 ```
 ## Python Lists
+- List items are ordered, changeable, and allow duplicate values.
+- List items can be of any data type.
+
 More functions and methods on Python list:
 ``` python
 # list
@@ -847,6 +850,19 @@ print(l[1:5])              # [True, False, 5.6, 3]
 l.clear()
 print(l)                    # []
 ```
+
+**enumerate()**
+Enumerate() method adds a counter to an iterable and returns it in a form of enumberating object. The syntax is enumberate(iterable, start=0) where iterable is any object that supports iteration, and start means the index value from which the counter is to be started, by default it is 0.
+``` python
+items = ['a', 'b', 'c', 'd']
+
+# [(0, 'a'), (1, 'b'), (2, 'c'), (3, 'd')]
+print(list(enumerate(items)))
+
+# [(5, 'a'), (6, 'b'), (7, 'c'), (8, 'd')]
+print(list(enumerate(items, start=5)))
+```
+
 ## Python Dictionaries
 ## Python Tuples
 ## Python Sets
