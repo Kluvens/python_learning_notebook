@@ -870,7 +870,92 @@ print(list(enumerate(items, start=5)))
 - The values in dictionary items can be of any data type.
 
 ``` python
+# dictionary
+dic = {
+    "COMP1511" : "Programming Fundamentals",
+    "COMP1521" : "OS Fundamentals",
+    "COMP1531" : "Software Fundamentals"
+}
 
+# {'COMP1511': 'Programming Fundamentals', 'COMP1521': 'OS Fundamentals', 'COMP1531': 'Software Fundamentals'}
+print(dic)
+
+# get the keys or values of a dictionary
+print(dic.keys())               # dict_keys(['COMP1511', 'COMP1521', 'COMP1531'])
+print(type(dic.keys()))         # <class 'dict_keys'>
+print(dic.values())             # dict_values(['Programming Fundamentals', 'OS Fundamentals', 'Software Fundamentals'])
+print(type(dic.values()))       # <class 'dict_values'>
+
+# we can loop through keys and values
+for i in dic.keys():
+    print(i)                    # print 'COMP1511', 'COMP1521', 'COMP1531' in sequence
+
+# copy a dictionary
+dic2 = dic.copy()
+print(dic2)                     # {'COMP1511': 'Programming Fundamentals', 'COMP1521': 'OS Fundamentals', 'COMP1531': 'Software Fundamentals'}
+
+# get a matching value of a key
+print(dic.get("COMP1511"))      # Programming Fundamentals
+
+# see all items as tuples
+# ('COMP1511', 'Programming Fundamentals')
+t1 = dic.items()
+# dict_items([('COMP1511', 'Programming Fundamentals'), ('COMP1521', 'OS Fundamentals'), ('COMP1531', 'Software Fundamentals')])
+print(t1)
+# <class 'dict_items'>
+print(type(t1))
+
+# t1 is an iterable with tuples, we can loop through it
+for i in t1:
+    # print ('COMP1511', 'Programming Fundamentals'), ('COMP1521', 'OS Fundamentals'), ('COMP1531', 'Software Fundamentals') in sequence
+    print(i)
+
+# pop the last item
+dic.popitem()
+print(dic)                      # {'COMP1511': 'Programming Fundamentals', 'COMP1521': 'OS Fundamentals'}
+
+# pop a specified item
+dic.pop("COMP1521")
+print(dic)                      # {'COMP1511': 'Programming Fundamentals'}
+
+# increase an item
+dic.update({"COMP1521": "Operating System Fundamentals"})
+print(dic)                      # {'COMP1511': 'Programming Fundamentals', 'COMP1521': 'Operating System Fundamentals'}
+
+# we can directly give a value to a key that is not created before
+dic["COMP1531"] = "Software Fundamentals"
+print(dic)                      # {'COMP1511': 'Programming Fundamentals', 'COMP1521': 'Operating System Fundamentals', 'COMP1531': 'Software Fundamentals'}
+
+# The setdefault() method returns the value of a key (if the key is in dictionary). If not, it inserts key with a value to the dictionary.
+print(dic.setdefault("COMP1511", 21))       # Programming Fundamentals
+print(dic.setdefault("COMP2511", 22))       # 22
+# {'COMP1511': 'Programming Fundamentals', 'COMP1521': 'Operating System Fundamentals', 'COMP1531': 'Software Fundamentals', 'COMP2511': 22}
+print(dic)
+
+# clear the dictionary
+dic.clear()
+print(dic)                                  # {}
+
+# example: grap information from a long list and increment this value by 1
+# if the key exists and set value to 1 if the key shows up for the first time
+my_list = ["a", "b", "a", "c", "m", "a", "c"]
+my_dict = {}
+for i in my_list:
+    my_dict[i] = my_dict.setdefault(i, 0) + 1
+
+# {'a': 3, 'b': 1, 'c': 2, 'm': 1}
+print(my_dict)
+
+# Convert two lists into a dictionary with zip function
+# The zip() function returns a zip object
+# which is an iterator of tuples where the first item in each passed iterator
+# is paired together, and then the second item in each passed iterator
+# are paired together etc.
+keys = ['Ten', 'Twenty', 'Thirty']
+values = [10, 20, 30]
+print(zip(keys, values))            # <zip object at 0x7f81be4ba280>
+res_dict = dict(zip(keys, values))
+print(res_dict)                     # {'Ten': 10, 'Twenty': 20, 'Thirty': 30}
 ```
 
 ## Python Tuples
