@@ -667,7 +667,111 @@ else:
 ```
 
 ### Python For loop
+A ```for``` loop is usually used for iterating over a sequence (either a list, a tuple, a dictionary, a set or a string)
+
+``` python
+# loop through a list
+fruits = ["apple", "banana", "cherry"]
+for x in fruits:
+  print(x)          # we will get apple, banana, cherry in sequence
+
+# loop through a string
+for i in "banana":
+    print(i)        # we will get each character per line
+
+# loop through a tuple
+for i in ("name", "age"):
+    print(i)        # we will get name and age in sequence
+
+# loop through a dictionary
+thisdict = {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+# we get the keys in sequence
+# namingly brand, model, year
+for i in thisdict:
+    print(i)
+```
+
+**The ```break```, ```continue``` and ```else``` statement are also valid in ```for``` loop.**
+``` python
+fruits = ["apple", "banana", "cherry"]
+for x in fruits:
+    if x == "banana":
+        break
+    print(x)        # only print apple since stop the loop when x == banana
+
+for x in fruits:
+    if x == "banana":
+        continue
+    print(x)        # print apple and cherry, we only stop the iteration when x == banana
+
+for x in fruits:
+    print(x)
+else:
+    print("printed all fruits")     # this line will be printed
+```
+
+**The range() Function**
+
+The ```range()``` function returns a sequence of numbers, starting from 0 by default, and increments by by default, and ends at a specified number not including. We can specify by range(start, end, increment).
+``` python
+for x in range(6):
+  print(x)              # we can get numbers from 0 to 5
+  
+for x in range(2, 30, 3):
+  print(x)              # we can get numbers 2, 5, 8, 11, 14, 17, 20, 23, 26, 29
+```
+
+**nested loops**
+
+A nested loop is a loop inside a loop
+``` python
+adj = ["red", "big", "tasty"]
+fruits = ["apple", "banana", "cherry"]
+
+for x in adj:
+  for y in fruits:
+    print(x, y)
+
+# output is
+# red apple
+# red banana
+# red cherry
+# big apple
+# big banana
+# big cherry
+# tasty apple
+# tasty banana
+# tasty cherry
+```
 ### Python Switch statement
+Python ```switch``` statement is only available for Python 3.10 and above.
+
+``` python
+match argument:
+    case 0:
+        return "zero"
+    case 1:
+        return "one"
+    case 2:
+        return "two"
+    case default:
+        return "something"
+```
+which is the same as:
+``` python
+if argument == 0:
+    print("zero")
+elif argument == 1: 
+    print("one")
+elif argument == 2:
+    print("two")
+else:
+    print("something")
+```
 ## Python Lists
 ## Python Dictionaries
 ## Python Tuples
