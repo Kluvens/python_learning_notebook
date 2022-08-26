@@ -730,6 +730,11 @@ for x in range(6):
   
 for x in range(2, 30, 3):
   print(x)              # we can get numbers 2, 5, 8, 11, 14, 17, 20, 23, 26, 29
+  
+# a more C style for loop through a list
+items = ['a', 'b', 'c', 'd']
+for i in range(len(items)):
+    print(items[i])
 ```
 
 **nested loops**
@@ -780,6 +785,68 @@ else:
     print("something")
 ```
 ## Python Lists
+More functions and methods on Python list:
+``` python
+# list
+l = [1, 2, 3, "this", 5.6, False, True]
+
+# append an item at the end of the list
+l.append("hello")
+print(l)                    # [1, 2, 3, 'this', 5.6, False, True, 'hello']
+
+# get a copy of l called l2
+l2 = l.copy()
+print(l2)                   # [1, 2, 3, 'this', 5.6, False, True, 'hello']
+
+# get the number of given item
+# True is also 1, 1 is also True
+print(l.count(1))           # 2
+print(l.count(True))        # 2
+
+# get the item at the first appearance
+print(l.index(1))           # 0
+
+# append another list at the end of the list
+new_l = ["good"]
+l.extend(new_l)
+print(l)                    # [1, 2, 3, 'this', 5.6, False, True, 'hello', 'good']
+
+# insert at a given position
+l.insert(0, 'h')
+print(l)                    # ['h', 1, 2, 3, 'this', 5.6, False, True, 'hello', 'good']
+
+# remove at a given position
+l.pop(-1)
+print(l)                    # ['h', 1, 2, 3, 'this', 5.6, False, True, 'hello']
+
+# reverse a list
+l.reverse()
+print(l)                    # ['hello', True, False, 5.6, 'this', 3, 2, 1, 'h']
+
+# sort the list
+num_l = [5, 1, 3]
+num_l.sort()
+print(num_l)                # [1, 3, 5]
+
+alpha_l = ["Hello", "hello", "good"]
+alpha_l.sort()
+print(alpha_l)              # ['Hello', 'good', 'hello']
+
+l.sort()
+print(l)                    # receive a TypeError, we need to make sure these are comparable types
+
+# remove the first matching element from the list
+l.remove("this")
+print(l)                    # ['hello', True, False, 5.6, 3, 2, 1, 'h']
+
+# list slicing (get part of the list)
+# start:end but not including the end index
+print(l[1:5])              # [True, False, 5.6, 3]
+
+# completely clear a list
+l.clear()
+print(l)                    # []
+```
 ## Python Dictionaries
 ## Python Tuples
 ## Python Sets
