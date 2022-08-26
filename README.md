@@ -370,7 +370,9 @@ print(5 << 1  )        # 0101 << 1 => 1010 => 10
 ## Python Booleans
 - Booleans represent one of two values: ```True``` or ```False```.
 - We can evaluate any expression in Python and get a boolean value as a result.
-- We can use bool() 
+- We can use bool() to get a boolean value of anything.
+- Almost any value is evaluated as True.
+- False, None, int(0), "", (), [], {} will be evaluated as False.
 
 ## Python Strings
 Strings in Python are surrounded by either single quotation marks, or double quotation marks.
@@ -516,7 +518,7 @@ print(f"{today} is {day}")                  # Today is Thursday
 
 ## Python Control flow
 ### Python If statement
-```if```
+**if**
 - An if statement is written by using the ```if``` keyword.
 - Python relies on indentation (whitespace at the beginning of a line) to define scope in the code.
 - The code with indentation under if statement will run if the condition is True.
@@ -531,7 +533,7 @@ if a < b:
     print("5 is less than 6")       # we can see this line because the condition is True
 ```
 
-```elif```
+**elif**
 
 The ```elif``` keyword is pythons way of saying if the previous conditions were false, then try to check this condition.
 ``` python
@@ -543,7 +545,7 @@ elif a == b:
   print("a and b are equal")        # passed this check and print the line
 ```
 
-```else```
+**else**
 
 The ```else``` keyword catches anything which isn't caught by the preceding conditions.
 ``` python
@@ -557,7 +559,8 @@ else:
   print("a is greater than b")      # run this line anyway
 ```
 
-Short hand if:
+**Short hand if**
+
 if you have only one statement to execute, you can put it on the same line as the if statement
 ``` python
 if a > b: print("a is greater than b")
@@ -566,7 +569,7 @@ if a > b: print("a is greater than b")
 #     print("a is greater than b")
 ```
 
-Short hand if ..else
+**Short hand if ..else**
 ``` python
 a = 2
 b = 330
@@ -579,7 +582,90 @@ print("A") if a > b else print("B")
 ```
 
 The above technique is known as **Ternary Operators**, or **Conditional Expressions**.
+
+**nested if**
+
+We can have ```if``` statement inside ```if``` statement, this is called nested ```if``` statement.
+``` python
+x = 41
+
+# run the code below, we can get Less than 60, but above 20!
+if x < 60:
+  print("Less than 60,")
+  if x > 20:
+    print("but above 20!")
+  else:
+    print("and also less than 20.")
+```
+
+**pass**
+
+The ```pass``` statement basically means do nothing.
+```if``` statements cannot be empty, but if we don't want to do anything and also make sure our code compile, we can use ```pass``` statement to avoid getting an error.
+``` python
+a = 33
+b = 200
+
+# execute the code below, we can't get any output, but code compile successfully
+if b > a:
+  pass
+else:
+  print("200 is not greater than 33")
+```
+
 ### Python While loop
+With the ```while``` loop we can execute a set of statements as long as a condition is true.
+The ```while``` loop requires relevant variables to be ready, so we need to initialize variable first.
+
+``` python
+# print i as long as i is less than 6
+i = 1
+while i < 6:
+  print(i)
+  i += 1                    # remember to increment i, this is a common mistake for beginners
+```
+
+**break**
+
+With the ```break``` statement, we can stop the loop even if the while condition is true.
+``` python
+i = 1
+# we can get from 1 to 3
+# since when i == 3, we stop the loop anyway regardless of the condition
+while i < 6:
+  print(i)
+  if i == 3:
+    break
+  i += 1
+```
+
+**continue**
+
+With the ```continue``` statement we can stop the current iteration, and jump to the next iteration.
+``` python
+i = 1
+# we can get 1, 2, 4, 5
+# since when i == 3, we stop the current iteration and jump to the next iteration and print 4
+while i < 6:
+    if i == 3:
+        i += 1
+        continue
+    print(i)
+    i += 1
+```
+
+**else**
+
+With the ```else``` statement, we can run a block of code once when the condition no longer is True.
+``` python
+i = 1
+while i < 6:
+  print(i)
+  i += 1
+else:
+  print("i is no longer less than 6")   # print the line after the while loop
+```
+
 ### Python For loop
 ### Python Switch statement
 ## Python Lists
