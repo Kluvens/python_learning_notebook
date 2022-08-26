@@ -852,6 +852,7 @@ print(l)                    # []
 ```
 
 **enumerate()**
+
 Enumerate() method adds a counter to an iterable and returns it in a form of enumberating object. The syntax is enumberate(iterable, start=0) where iterable is any object that supports iteration, and start means the index value from which the counter is to be started, by default it is 0.
 ``` python
 items = ['a', 'b', 'c', 'd']
@@ -864,8 +865,80 @@ print(list(enumerate(items, start=5)))
 ```
 
 ## Python Dictionaries
+- Dictionaries are used to store data values in key:value pairs.
+- Dictionary items are ordered, changeable, and does not allow duplicates.
+- The values in dictionary items can be of any data type.
+
+``` python
+
+```
+
 ## Python Tuples
+- Tuple items are ordered, unchangeable, and allow duplicate values.
+- To create a tuple with only one item, you have to add a comma after the item, otherwise Python will not recognize it as a tuple.
+- Tuple items can be of any data types.
+
+``` python
+
+```
+
 ## Python Sets
+- Set items are unordered, unchangeable, and do not allow duplicate values.
+- Set items can be of any data type.
+
+More methods and functions on Python sets
+``` python
+# set
+# we can also create a set by set()
+se1 = {1, 3.0, "this"}
+se2 = set([True, "this", "is", 6.2])
+
+# add an element to the set
+se1.add("hi")
+print(se1)                      # {1, 'this', 3.0, 'hi'}
+
+# difference() returns the difference between two sets which is also a set. It doesn't modify the original sets.
+print(se1.difference(se2))      # {'hi', 3.0}
+
+# remove an element. If the element is not a member, raises a KeyError
+se1.remove('hi')
+print(se1)                      # {1, 'this', 3.0}
+
+# the pop() method randomly removes an item from a set and returns the removed item
+print(se1.pop())                # this
+print(se1)                      # {1, 3.0}
+
+# if the two sets are disjoint
+print(se1.isdisjoint(se2))      # False
+
+# if is subset
+print(se1.issubset(se2))        # False
+
+# if is superset
+print(se1.issuperset(se2))      # False
+
+# intersection
+print(se1.intersection(se2))    # {1}
+
+# The intersection_update() updates the set calling intersection_update() method with the intersection of sets.
+se1.intersection_update(se2)
+print(se1)                      # {1}
+
+# union
+print(se1.union(se2))           # {1, 'is', 6.2, 'this'}
+
+# join two sets
+se1.update(se2)
+print(se1)                      # {1, 'is', 6.2, 'this'}
+
+# discard() Removes an element from the set if it is a member. (Do nothing if the element is not in set)
+se1.discard("this")             # {1, 'is', 6.2}
+print(se1)
+
+# The Python symmetric_difference() method returns the symmetric difference of two sets.
+print(se1.symmetric_difference(se2))    # {'this'}
+```
+
 ## Python Functions
 ## Python Exceptions
 
