@@ -1068,6 +1068,66 @@ def my_function():
 # to call a function, use the function name followed by parenthesis
 my_function()
 ```
+
+**arguments**
+- data can be passed into functions as arguments
+- data we sent can be any type including list, dictionary ...
+- arguments are specified after the function name, inside the parentheses
+- we can add as many arguments as we want as long as they are corresponding to the function defination
+
+``` python
+def my_function(name):
+  print("Hello " + name)
+
+my_function("Justin")               # Hello Justin
+my_function("John")                 # Hello John
+my_function("Tony")                 # Hello Tony
+```
+
+**parameters or arguments?**
+
+From the function's perspective:
+- a parameter is the variable listed inside the parentheses in the function definition
+- an argument is the value that is sent to the function when it is called
+
+**keyword arguments**
+
+We can send arguments with the key = value syntax where the order of the arguments does not matter.
+``` python
+def my_function(child3, child2, child1):
+  print("The youngest child is " + child3)
+
+# The youngest child is Linus
+my_function(child1 = "Emil", child2 = "Tobias", child3 = "Linus")
+
+# another very good example is to print a line without a newline at the end
+print("Hello World", end="")            # this prints Hello World without a newline
+```
+
+**default parameter value**
+
+If we call the function without argument, it uses the default value
+``` python
+def my_function(country = "Norway"):
+  print("I am from " + country)
+
+my_function("Sweden")       # I am from Sweden
+my_function("India")        # I am from India
+my_function()               # I am from Norway
+my_function("Brazil")       # I am from Brazil
+```
+
+**return values**
+
+To let a function return a value, use the ```return``` statement.
+``` python
+def my_function(x):
+  return 5 * x
+    
+print(my_function(3))       # 8
+print(my_function(5))       # 10
+print(my_function(9))       # 14
+```
 ## Python Exceptions
 
 # Python advanced syntax
