@@ -102,6 +102,7 @@ Parameters:
 ```
 
 ## Python Variables
+Unlike C, we cannot have uninitialised variables
 ### Variables
 A variable is a value that can change, depending on conditions or on information passed to the program. We can understand it as a container for storing data values.
 ### Creating variables
@@ -211,6 +212,9 @@ print(3 // 2.0)         # 1.0
 # '=' is an assignment operator, it puts the value on the right hand side to the left hand side
 x = 5                   # assign 5 to variable x
 print(x)                # 5
+
+# := means assignment
+x := 5
 
 # '+='
 x += 3                  # the same as x = x + 3
@@ -791,6 +795,8 @@ else:
     print("something")
 ```
 ## Python Lists
+- lists are sequential containers of memory.
+- Values are referenced by their integer index that represents their location in an order.
 - List items are ordered, changeable, and allow duplicate values.
 - List items can be of any data type.
 
@@ -871,6 +877,8 @@ print(list(enumerate(items, start=5)))
 ```
 
 ## Python Dictionaries
+- Dictionaries are associative containers of memory.
+- Values are referenced by their string key that maps to a value.
 - Dictionaries are used to store data values in key:value pairs.
 - Dictionary items are ordered, changeable, and does not allow duplicates.
 - The values in dictionary items can be of any data type.
@@ -965,6 +973,7 @@ print(res_dict)                     # {'Ten': 10, 'Twenty': 20, 'Thirty': 30}
 ```
 
 ## Python Tuples
+- tuples are similar to lists except they are read-only once created and we should create them with ()
 - Tuple items are ordered, unchangeable, and allow duplicate values.
 - To create a tuple with only one item, you have to add a comma after the item, otherwise Python will not recognize it as a tuple.
 - Tuple items can be of any data types.
@@ -1143,7 +1152,9 @@ SyntaxError: invalid syntax
 ```
 
 ### Exceptions
-- exceptions can stop python program
+- An exception is an action that disrupts the normal flow of a program.
+- this action is often representative of an error being thrown
+- exceptions are ways that we can elegantly recover from errors
 - these exceptions can be handled using the ```try``` statement
 - the ```try``` block lets you test a block of code for errors
 - the ```except``` block lets you handle the error
