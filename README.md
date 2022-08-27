@@ -1058,6 +1058,16 @@ print(se1.symmetric_difference(se2))    # {'this'}
 ```
 
 ## Python Functions
+- A function is a block of code which only runs when it is called
+- we can pass data as paramenters into a function
+- in Python, a function is declared by the ```def``` keyword
+``` python
+def my_function():
+    print("Hello World")
+    
+# to call a function, use the function name followed by parenthesis
+my_function()
+```
 ## Python Exceptions
 
 # Python advanced syntax
@@ -1111,6 +1121,22 @@ import sys
 
 # Python topics
 ## Style and being Pythonic
+swap values of two variables
+``` python
+first = 1
+last = 5
+first, last = last, first           # swap the values of first and last
+print(first)                        # 5
+print(last)                         # 1
+```
+
+unpacking tuples
+``` python
+tup = (1, 5)
+first, last = tup
+print(first)                        # 1
+print(last)                         # 5
+```
 ## Python pip
 ## Python virtural environment
 ## [Python Memory management](https://docs.python.org/3/c-api/memory.html#:~:text=Memory%20management%20in%20Python%20involves,by%20the%20Python%20memory%20manager.)
