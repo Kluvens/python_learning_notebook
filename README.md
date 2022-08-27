@@ -17,7 +17,7 @@
     10. [Python Tuples](#python-tuples)
     11. [Python Sets](#python-sets)
     12. [Python Functions](#python-functions)
-    13. [Python Exceptions](#python-exceptions)
+    13. [Python Errors and Exceptions](#python-errors-and-exceptions)
 3. [Python advanced syntax](#python-advanced-syntax)
 4. [Python Object Oriented Programming](#python-object-oriented-programming)
 5. [Python Topics](#python-topics)
@@ -1128,9 +1128,90 @@ print(my_function(3))       # 8
 print(my_function(5))       # 10
 print(my_function(9))       # 14
 ```
-## Python Exceptions
+## Python Errors and Exceptions
+There are two distinguishable kinds of errors: syntax errors and exceptions
+### Syntax Errors
+- syntax errors, also known as parsing errors, are perhaps the most common kind of complaint.
+- syntax errors are produced by python when it is translating the source code into byte code.
+- python syntax errors can cause the code failed to compile.
+``` python
+>>> while True print('Hello world')
+  File "<stdin>", line 1
+    while True print('Hello world')
+                   ^
+SyntaxError: invalid syntax
+```
+
+### Exceptions
+- exceptions can stop python program
+- these exceptions can be handled using the ```try``` statement
+- the ```try``` block lets you test a block of code for errors
+- the ```except``` block lets you handle the error
+- the ```else``` block lets you execute code when there is no error
+- the ```finally``` block lets you execute code, regardsless of the result of the try and except blocks
+
+``` python
+try:
+  print(x)
+except:
+  print("An exception occurred")        # this piece of code only runs when there's an exception
+```
+
+**many exceptions**
+
+We can define as many exception blocks as we want and deal with it to a specific exception
+``` python
+try:
+  print(x)
+except NameError:
+  print("Variable x is not defined")    # runs when there's a NameError
+except:
+  print("Something else went wrong")    # runs when any exception other than NameError
+```
+
+**else**
+
+We can use the ```else``` keyword to define a block of code to be executed if no errors were raised
+``` python
+try:
+  print("Hello")
+except:
+  print("Something went wrong")
+else:
+  print("Nothing went wrong")       # only runs when there's no exception
+```
+
+**finally**
+
+The ```finally``` block, if specified, will be executed regardless if the try block raises an error or not.
+``` python
+try:
+  print(x)
+except:
+  print("Something went wrong")
+finally:
+  print("The 'try except' is finished")     # this line will run anyway
+```
+
+### Raise an exception
+As a Python developer, we can choose to throw an exception if a condition occurs.
+To throw an exception, use the ```raise``` keyword.
+``` python
+x = -1
+
+if x < 0:
+  raise Exception("Sorry, no numbers below zero")
+```
+We can define what kind of error to raise, and the text to print to the user.
+``` python
+x = "hello"
+
+if not type(x) is int:
+  raise TypeError("Only integers are allowed")
+```
 
 # Python advanced syntax
+## Python recursion
 ## Python Lambda
 ## Python Extended Keyword Arguments (*args, **kwargs)
 ## Python Generators
