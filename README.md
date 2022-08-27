@@ -19,6 +19,10 @@
     12. [Python Functions](#python-functions)
     13. [Python Errors and Exceptions](#python-errors-and-exceptions)
 3. [Python advanced syntax](#python-advanced-syntax)
+    1. [Python Recursion](#python-recursion)
+    2. [Python Anonymous Function](#python-anonymous-function)
+    3. [Why Python is popular](#why-python-is-popular)
+    4. [Why Python is slow](#why-python-is-slow)
 4. [Python Object Oriented Programming](#python-object-oriented-programming)
 5. [Python Topics](#python-topics)
 6. [Python with data structure and algorithms](#python-with-data-structure-and-algorithms)
@@ -1228,8 +1232,80 @@ if not type(x) is int:
 ```
 
 # Python advanced syntax
-## Python recursion
-## Python Lambda
+## Python Recursion
+Recursion means defining a problem in terms of itself.
+We alreaady known that a function can call other functions.
+It is also possible that the function calls itself and this type of construct is termed as recursive function.
+
+``` python
+def factorial(x):
+    """This is a recursive function
+    to find the factorial of an integer"""
+
+    if x == 1:
+        return 1
+    else:
+        return (x * factorial(x-1))
+
+
+num = 3
+# The factorial of 3 is 6
+print("The factorial of", num, "is", factorial(num))
+
+# in details
+factorial(3)          # 1st call with 3
+3 * factorial(2)      # 2nd call with 2
+3 * 2 * factorial(1)  # 3rd call with 1
+# our recursion ends when the number reduces to 1.
+# this is called the base condition.
+3 * 2 * 1             # return from 3rd call as number=1
+3 * 2                 # return from 2nd call
+6                     # return from 1st call
+```
+By default, the maximum depth of recursion is 1000.
+If the limit is crossed, it results in RecursionError.
+
+**Advantages of recursion**
+1. Recursive functions make the code look clean and elegant.
+2. A complex task can be broken down into simpler sub-problems using recursion.
+3. Sequence generation is easier with recursion than using some nested iteration.
+
+**Disadvantages of recursion**
+1. Sometimes the logic behind recursion is hard to follow through.
+2. Recursive calls are expensive (inefficient) as they take up a lot of memory and time.
+3. Recursive functions are hard to debug.
+
+**recursion or iteration**
+- Recursion is when a function calls itself within its code, thus repeatedly executing the instructions present inside it. 
+- Iteration is when a loop repeatedly executes the set of instructions like "for" loops and "while" loops.
+- Recursion is made for solving problems that can be broken down into smaller, repetitive problems. It is especially good for working on things that have many possible branches and are too complex for an iterative approach.
+- Recursion is particularly useful when dealing with tree structures.
+- Recursion is a useful tool, but it can increase memory usage.
+
+## Python Anonymous Function
+- In Python, an anonymous function is a function that is defined without a name.
+- while normal functions are defined using the ```def``` keyword in Python, anonymous functions are defined using the ```lambda``` keyword.
+- Hence, anonymous functions are also called lambda functions.
+- Lambda functions can have any number of arguments but only one expression.
+- Lambda functions can be used wherever function objects are required.
+
+**syntax of lambda function in Python**
+``` python
+lambda arguments: expression
+```
+Example:
+``` python
+# Program to show the use of lambda functions
+double = lambda x: x * 2
+
+print(double(5))                # 10
+'''
+The lambda function is exactly the same as:
+def double(x):
+   return x * 2
+'''
+```
+
 ## Python Extended Keyword Arguments (*args, **kwargs)
 ## Python Generators
 ## Python Iterators
