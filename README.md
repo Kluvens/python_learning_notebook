@@ -970,7 +970,34 @@ print(res_dict)                     # {'Ten': 10, 'Twenty': 20, 'Thirty': 30}
 - Tuple items can be of any data types.
 
 ``` python
+# tuple
+# tuple is immutable
+t = (1, "this", 3.6, True)
 
+# count how many elements inside the tuple
+print(len(t))                   # 4
+
+# count the number of matching item
+num = t.count(1)
+print(num)                      # 2
+
+# search the index for matching item
+match = t.index("this")
+print(match)                    # 1
+```
+
+**unpacking tuples**
+
+Unpacking tuples means assigning individual elements of a tuple to multiple variables.
+The first variable will match the first element of the tuple and so on.
+``` python
+items = [(1, 'a'), (2, 'b'), (3, 'c')]
+
+# 1, a
+# 2, b
+# 3, c
+for number, char in items:
+    print(f"{number}, {char}")
 ```
 
 ## Python Sets
