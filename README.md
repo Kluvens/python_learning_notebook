@@ -531,6 +531,12 @@ print(txt.format("Today", "Thursday"))      # Today is Thursday
 today = "Today"
 day = "Thursday"
 print(f"{today} is {day}")                  # Today is Thursday
+
+# string join
+# join elements in the list with the string together
+final_print = " ".join(["hello", "world", "good", "luck"])
+# hello world good luck
+print(final_print)
 ```
 
 ## Python Control flow
