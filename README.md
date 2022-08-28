@@ -1382,6 +1382,120 @@ import re
 Regular expressions are patterns used to match character combinations in strings.
 For example, we may want to check if an input is an email.
 Since every email must be bounded by the pattern, we can use regular expression to help us check this.
+
+### Regular Expression special characters
+- ```.```: In the default mode, this matches any character except a newline. If the DOTALL flag has been specified, this matches any character including a newline.
+- ```^```: Matches the start of the string.
+- ```$```: Matches the end of the string or just before the newline at the end of the string.
+- ```*```: Causes the resulting RE to match 0 or more repetitions of the preceding RE, as many repetitions as are possible.
+- ```+```: Causes the resulting RE to match 1 or more repetitions of the preceding RE.
+- ```?```: Causes the resulting RE to match 0 or 1 repetitions of the preceding RE.
+- ```{m}```: Specifies that exactly m copies of the previous RE should be matched; fewer matches cause the entire RE not to match.
+- ```{m ,n}```: Causes the resulting RE to match from m to n repetitions of the preceding RE, attempting to match as many repetitions as possible.
+- ```{m, n}?```: Causes the resulting RE to match from m to n repetitions of the preceding RE, attempting to match as few repetitions as possible.
+- ```\```: Either escapes special characters (permitting you to match characters like ```*```, ```?```, and so forth inside a string if we have ```\*```, ```\?``` and so fourth), or signals a special sequence.
+- ```[]```: Used to indicate a set of characters.
+    - Characters can be listed individually, e.g. [amk] will match 'a', 'm', or 'k'.
+    - Ranges of characters can be indicated by giving two characters and separating them by a '-', for example [a-z] will match any lowercase ASCII letter, [0-5][0-9] will match all the two-digits numbers from 00 to 59.
+    - Special characters lose their special meaning inside sets. For example, [(+*)] will match any of the literal characters '(', '+', '*', or ')'.
+- ```|```: A|B, where A and B can be arbitrary REs, creates a regular expression that will match either A or B.
+- ```(...)```: Matches whatever regular expression is inside the parentheses, and indicates the start and end of a group; the contents of a group can be retrieved after a match has been performed. In other words, ```()``` can extract a specific part from a string.
+
+### Python re package - useful functions
+```re.search(regex, string, flags)```
+- search for a regex match within string
+- return object with information about match or None if match fails
+- optional parameter modifies matching, e.g. make matching case-insensitive with: flags=re.I
+``` python
+
+```
+
+```re.match(regex, string, flags)```
+- only match at start of string
+- same as re.search stating with ^
+``` python
+```
+
+```re.fullmatch(regex, string, flags)```
+- only match the full string
+- same as re.search starting with ^ and ending with $
+``` python
+```
+
+```re.sub(regex, replacement, string, count, flags)```
+- return string with anywhere regex matches, substituted by replacement
+- optional parameter count, if non-zero, sets maximum number of substitutions
+``` python
+
+```
+
+```re.findall(regex, string, flags)```
+- return all non-overlapping matches of pattern in string
+- if pattern contains () return part matched by ()
+- if pattern contains multiple () return tuple
+``` python
+
+```
+
+```re.split(regex, string, maxsplit, flags)```
+- Split string everywhere regex matches
+- optional parameter maxsplit, if non-zero, set maximum number of splits
+``` python
+
+```
+
+```re.finditer(pattern, string, flags)```
+- return an iterator yielding match objects over all non-overlapping matches for the RE pattern in string.
+- the string is scanned left-to-right, and matches are returned in the order found.
+``` python
+
+```
+
+### Character classes
+Python regular expression adds character classes
+- \d - matches any digit, for ASCII: [0-9]
+- \D - matches any non-digit, for ASCII: [^0-9]
+- \w - matches any word char, for ASCII: [a-zA-Z_0-9]
+- \W - matches any non-word char, for ASCII: [^a-zA-Z_0-9]
+- \s - matches any whitespace, for ASCII: [ \t\n\r\f]
+- \S - matches any non-whitespace, for ASCII: [^ \t\n\r\f]
+- \b - matches at a word boundary
+- \B - matches except at a word boundary
+- \A - matches at the start of the string, same as ^
+- \Z - matches at the end of the string, same as $
+
+### raw strings
+- python raw-string is prefixed with an r (for raw)
+- backslashes have no special meaning in raw-string except before quotes
+- regexes often contain backslashes - using raw-strings makes them more readable
+
+``` python
+# Hello
+# Andrew
+print('Hello\nAndrew')
+
+# Hello\nAndrew
+print(r'Hello\nAndrew')
+
+print( r'Hello\nAndrew' == 'Hello\\nAndrew')                 # True
+
+len('\n')               # 1
+len(r'\n')              # 2
+```
+
+### Match objects
+- re.search, re.match, re.fullmatch return a match object if a match suceeds, None if it fails
+- Match objects always have a boolean value of True.
+- Match objects support some methods and attributes
+
+``` python
+
+```
+
+### Back-referencing
+
+### Non-Capturing Group
+
 ## Python with Database
 ## Python with Statistics
 ## Python with Math
