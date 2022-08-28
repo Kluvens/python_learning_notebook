@@ -1538,6 +1538,23 @@ print( re.sub(r'ab+?', 'X', s))   # Xbbc
 
 ## Python with Database
 ## Python with Statistics
+``` python
+import statistics
+```
+
+Averages and measures of central location
+- mean() - arithmetic mean (average) of data
+- fmean() - fast, floating point arithmetic mean
+- geometric_mean() - geometric mean of data
+- harmonic_mean() - harmonic mean of data
+- median() - median (middle value) of data
+- median_low() - low median of data
+- median_high() - high median of data
+- mode() - single mode (most common value) of discrete or nominal data
+- multimode() - list of modes of discrete or nominal data
+- quantiles() - divide data into intervals with equal probability
+
+
 ## Python with Math
 ## Python with OS
 ``` python
