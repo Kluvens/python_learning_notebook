@@ -1493,8 +1493,48 @@ len(r'\n')              # 2
 ```
 
 ### Back-referencing
+- \number can be used further on in a regex - often called a back-reference
+- back-references allow matching impossible with classical regular expressions
+- python supports up to 99 back-references, \1, \2 ... \99
+- \01 or \100 is interpreted as an octal number
+
+``` python
+>>> re.search(r'^(\d+) (\d+)$', '42 43')
+<re.Match object; span=(0, 5), match='42 43'>
+# the following returns None cause 43 does not equal to 42, the back-referencing \1 ensures the two numbers must be the same
+>>> re.search(r'^(\d+) (\1)$', '42 43')
+>>> re.search(r'^(\d+) (\1)$', '42 42')
+<re.Match object; span=(0, 5), match='42 42'>
+```
 
 ### Non-Capturing Group
+- ```()``` is a non-capturing group
+- it has the same grouping behaviour as (...)
+- it doesn't capture the part of the string matched by the group
+
+``` python
+m = re.search(r'.*(?:[aeiou]).*([aeiou]).*', 'abcde')
+print(m)                # <re.Match object; span=(0, 5), match='abcde'>
+
+print(m.groups())       # ('e',)
+
+print(m.group(1))       # e
+```
+
+### Greedy vs non-Greedy pattern matching
+- the default semantics for pattern matching is greedy
+- starts match the first place it can succeed
+- make the match as long as possible
+- the ```?``` operator changes pattern matching to non-greedy
+- also starts match the first place it can succeed
+- make the match as short as possible
+
+``` python
+s = 'abbbc'
+print(re.sub(r'ab+', 'X', s))     # Xc
+
+print( re.sub(r'ab+?', 'X', s))   # Xbbc
+```
 
 ## Python with Database
 ## Python with Statistics
