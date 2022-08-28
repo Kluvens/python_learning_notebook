@@ -21,8 +21,9 @@
 3. [Python advanced syntax](#python-advanced-syntax)
     1. [Python Recursion](#python-recursion)
     2. [Python Anonymous Function](#python-anonymous-function)
-    3. [Why Python is popular](#why-python-is-popular)
-    4. [Why Python is slow](#why-python-is-slow)
+    3. [Python map(), filter() and reduce()](#python-map-filter-and-reduce)
+    4. [Python Extended Keyword Arguments](#python-extended-keyword-arguments)
+    5. [Python Generators](#python-generators)
 4. [Python Object Oriented Programming](#python-object-oriented-programming)
 5. [Python Topics](#python-topics)
 6. [Python with data structure and algorithms](#python-with-data-structure-and-algorithms)
@@ -1275,7 +1276,7 @@ If the limit is crossed, it results in RecursionError.
 2. Recursive calls are expensive (inefficient) as they take up a lot of memory and time.
 3. Recursive functions are hard to debug.
 
-**recursion or iteration**
+**Recursion or Iteration**
 - Recursion is when a function calls itself within its code, thus repeatedly executing the instructions present inside it. 
 - Iteration is when a loop repeatedly executes the set of instructions like "for" loops and "while" loops.
 - Recursion is made for solving problems that can be broken down into smaller, repetitive problems. It is especially good for working on things that have many possible branches and are too complex for an iterative approach.
@@ -1289,7 +1290,7 @@ If the limit is crossed, it results in RecursionError.
 - Lambda functions can have any number of arguments but only one expression.
 - Lambda functions can be used wherever function objects are required.
 
-**syntax of lambda function in Python**
+**Syntax of lambda function in Python**
 ``` python
 lambda arguments: expression
 ```
@@ -1306,7 +1307,52 @@ def double(x):
 '''
 ```
 
-## Python Extended Keyword Arguments (*args, **kwargs)
+## Python map(), filter() and reduce()
+### Python map()
+The ```map()``` function applies a given function to each item of an iterable(list, tuple etc.) and returns an iterator.
+
+**Syntax for map()**
+``` python
+map(function, iterable, ...)
+```
+- The ```map()``` takes two parameters
+- function - a function that perform some action to each element of an iterable
+- iterable - an iterable like sets, lists, tuples etc
+- we can pass more than one iterable to the ```map()``` function
+- The ```map()``` function returns an object of map class.
+- The returned value can be passed to functions like list() which ocnverts to a list and set() whcih converts to a set
+``` python
+def calculateSquare(n):
+    return n*n
+
+numbers = (1, 2, 3, 4)
+result = map(calculateSquare, numbers)
+print(result)                           # <map object at 0x7f722da129e8>
+
+# converting map object to set
+numbersSquare = set(result)
+print(numbersSquare)                    # {16, 1, 4, 9}
+```
+It would be easier to achieve the same result with lambda functions
+``` python
+numbers = (1, 2, 3, 4)
+result = map(lambda x: x*x, numbers)
+print(result)                           # <map 0x7fafc21ccb00>
+
+# converting map object to set
+numbersSquare = set(result)
+print(numbersSquare)                    # {16, 1, 4, 9}
+```
+We can pass multiple iterators to map() using lambda
+``` python
+num1 = [4, 5, 6]
+num2 = [5, 6, 7]
+
+result = map(lambda n1, n2: n1+n2, num1, num2)
+# this added the matching values from the first list and second list and append them to a map class
+print(list(result))             # [9, 11, 13]
+```
+## Python Extended Keyword Arguments
 ## Python Generators
 ## Python Iterators
 ## Python Decorators
