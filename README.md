@@ -1819,8 +1819,67 @@ print(random.choices(['red', 'black', 'green'], [18, 18, 2], k=6))
 ```
 
 ## Python with JSON
+JSON standards for JavaScript Object Notation, is a lightweight data-interchange format.
+It is easy for humans to read and write.
+It is easy for machines to parse and generate.
+
+JSON is built on two structures:
+- a collection of name/value pairs. In various languages, this is realized as an object, record, struct, dictionary, hash table, keyed list or associative array.
+- an ordered list of values. In most languages, this is realized as an array, vector, list or sequence.
 ``` python
 import json
+```
+
+- ```json.dumps(obj, *, skipkeys=False, ensure_ascii=True, check_circular=True, allow_nan=True, cls=None, indent=None, separators=None, default=None, sort_keys=False, **kw)``` - serialize obj to a JSON formatted str.
+- ```json.loads(s, *, cls=None, object_hook=None, parse_float=None, parse_int=None, parse_constant=None, object_pairs_hook=None, **kw)``` - deserialize s (a str, bytes or bytearray instance containing a JSON document) to a Python object. For example, converting from string to dictionary.
+
+Note:
+- keys in key/value pairs of JSON are always of the type str.
+- when a dictionary is converted into JSON, all the keys of the dictionary are coerced to strings.
+- as a result of this, if a dictionary is converted into JSON and then back into a dictioanry, the dictionary may not equal to the original one.
+
+``` python
+import json
+
+# converting from string to object
+# some JSON:
+x =  '{ "name":"John", "age":30, "city":"New York"}'
+
+# parse x:
+y = json.loads(x)
+
+# the result is a Python dictionary:
+print(y["age"])         # 30
+
+# Converting from object to string
+# a Python object (dict):
+x = {
+  "name": "John",
+  "age": 30,
+  "city": "New York"
+}
+
+# convert into JSON:
+y = json.dumps(x)
+
+# the result is a JSON string:
+print(y)                # {"name": "John", "age": 30, "city": "New York"}
+
+x = {
+  "name": "John",
+  "age": 30,
+  "married": True,
+  "divorced": False,
+  "children": ("Ann","Billy"),
+  "pets": None,
+  "cars": [
+    {"model": "BMW 230", "mpg": 27.5},
+    {"model": "Ford Edge", "mpg": 24.1}
+  ]
+}
+
+# {"name": "John", "age": 30, "married": true, "divorced": false, "children": ["Ann", "Billy"], "pets": null, "cars": [{"model": "BMW 230", "mpg": 27.5}, {"model": "Ford Edge", "mpg": 24.1}]}
+print(json.dumps(x))
 ```
 
 ## Python with CSV
