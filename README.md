@@ -1407,19 +1407,71 @@ Since every email must be bounded by the pattern, we can use regular expression 
 - return object with information about match or None if match fails
 - optional parameter modifies matching, e.g. make matching case-insensitive with: flags=re.I
 ``` python
+string = "Hello World, I am good. My number is z1234567."
 
+# extract the part that contains Hello
+m = re.search("Hello", string)
+print(m)                    # <re.Match object; span=(0, 5), match='Hello'>
+print(m.group(0))           # Hello
+
+# extract the first word separated by whitespace that contains l
+m = re.search('\s*\S+l\s*\S+', string)
+print(m)                    # <re.Match object; span=(0, 5), match='Hello'>
+print(m.group(0))           # Hello
+
+m = re.search(r'[aiou].*[aeiou]', 'pillow')
+print(m)                    # <re.Match object; span=(1, 5), match='illo'>
+print(m.group(0))           # illo
+print(m.span())             # (1, 5)
 ```
 
 ```re.match(regex, string, flags)```
 - only match at start of string
 - same as re.search stating with ^
 ``` python
+string = "Hello World, I am good. My number is z1234567."
+
+# extract the part that contains Hello
+m = re.match("World", string)
+print(m)                    # None because the string does not start with World
+
+# search() vs match()
+# re.match() checks for a match only at the beginning of the string
+# re.search() checks for a match anywhere in the string
+print(re.match("c", "abcdef"))      # No match
+print(re.search("c", "abcdef"))     # <re.Match object; span=(2, 3), match='c'>
 ```
 
 ```re.fullmatch(regex, string, flags)```
 - only match the full string
 - same as re.search starting with ^ and ending with $
 ``` python
+string = "Hello World, I am good. My number is z1234567"
+
+m = re.search("World\D+\d+", string)
+# <re.Match object; span=(6, 45), match='World, I am good. My number is z1234567'>
+print(m)
+
+m = re.match("World\D+\d+", string)
+# None
+print(m)
+
+m = re.match("Hello\D+\d+", string)
+# <re.Match object; span=(0, 45), match='Hello World, I am good. My number is z1234567'>
+# re.match() checks from the beginning, so Hello can pass while World doesn't
+print(m)
+
+m = re.match("Hello\D+", string)
+# <re.Match object; span=(0, 38), match='Hello World, I am good. My number is z'>
+print(m)
+
+m = re.fullmatch("Hello\D+", string)
+# None because the end of the string is not non-digit
+print(m)
+
+m = re.fullmatch("Hello\D+\d+", string)
+# <re.Match object; span=(0, 45), match='Hello World, I am good. My number is z1234567'>
+print(m)
 ```
 
 ```re.sub(regex, replacement, string, count, flags)```
