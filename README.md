@@ -1373,7 +1373,16 @@ print(list(result))             # [9, 11, 13]
 
 # Python with other modules
 ## Python with Flask
+``` python
+import flask
+```
+
 ## Python with Subprocess
+The subprocess module allows you to spawn new processes, connect to their input/output/error pipes and obtain their codes.
+We can run shell commands on Python scripts via the subprocess module.
+
+```subprocess.run(args, *, stdin=None, input=None, stdout=None, stderr=None, capture_output=False, shell=False, cwd=None, timeout=None, check=False, encoding=None, errors=None, text=None, env=None, universal_newlines=None, **other_popen_kwargs)```
+
 ## Python with Regular expression
 ``` python
 import re
@@ -1771,9 +1780,83 @@ import sys
 
 ## Python with Collections
 ## Python with Random
+The random module implements pseudo-random number generators for various distributions.
+``` python
+import ranodm
+```
+- ```random.seed(a=None, version=2)``` - initialize the random number generator.
+- ```random.random()``` - return the next random floating point number in the range [0.0, 1.0).
+- ```random.uniform()``` - return a random floating point number N such that a <= N <= b for a <= b and b <= N <= a for b < a.
+- ```random.randrange(start, stop[, step])``` - generate a random integer
+- ```random.randint(a, b)``` - Return a random integer N such that a <= N <= b. Alias for randrange(a, b+1).
+- ```random.choice(seq)``` - Return a random element from the non-empty sequence seq. If seq is empty, raises IndexError.
+- ```random.choices(population, weights=None, *, cum_weights=None, k=1)``` - Return a k sized list of elements chosen from the population with replacement. If the population is empty, raises IndexError.
+- ```random.shuffle(x[, random])``` - shuffle the sequence x in place.
+- ```random.sample(population, k, *, counts=None)``` - Return a k length list of unique elements chosen from the population sequence or set. Used for random sampling without replacement.
+
+``` python
+print(random.random())              # Random float:  0.0 <= x < 1.0
+print(random.uniform(2.5, 10.0))    # Random float:  2.5 <= x <= 10.0
+print(random.randrange(10))         # Integer from 0 to 9 inclusive
+print(random.randrange(0, 101, 2))  # Even integer from 0 to 100 inclusive
+print(random.choice(['win', 'lose', 'draw']))   # Single random element from a sequence, might generate 'draw'
+
+deck = 'ace two three four'.split()
+print(deck)             # ['ace', 'two', 'three', 'four']
+random.shuffle(deck)
+print(deck)             # ['four', 'three', 'two', 'ace']
+
+# [50, 40, 30, 20]
+print(random.sample([10, 20, 30, 40, 50], k=4))
+
+# Six roulette wheel spins (weighted sampling with replacement)
+# ['red', 'green', 'black', 'black', 'red', 'black']
+print(random.choices(['red', 'black', 'green'], [18, 18, 2], k=6))
+```
+
 ## Python with JSON
+``` python
+import json
+```
+
 ## Python with CSV
+The so-called CSV(Comma Separated Values) format is the most common import and export format for spreadsheets and databases.
+CSV format was used for many years prior to attempts to describe the format in a standardized way.
+The csv module implements classes to read and write tabular data in CSV format.
+``` python
+import csv
+```
+
+- ```csv.reader(csvfile, dialect='excel', **fmtparams)``` - return a reader object which will iterate over lines in the given csvfile.
+- ```csv.writer(csvfile, dialect='excel', **fmtparams)``` - return a writer object responsible for converting the user's data into delimited strings on the given file-like object.
+
+``` python
+import sys
+import csv
+# read from standard input
+data = csv.reader(sys.stdin, delimiter='|')
+# ['COMP1511', '3360379', 'Costner, Kevin Augustus          ', '3978/1', 'M']
+# ...
+for line in data:
+    print(line)
+    course, stuid, name, progam, gender = line
+    # COMP1511/3360379/Costner, Kevin Augustus          /3978/1/M
+    print("/".join([course, stuid, name, progam, gender]))
+```
+We can also open a file
+``` python
+with open('enrollments.txt') as enrollments:
+    data = csv.reader(enrollments, delimiter="|")
+    # ['COMP1511', '3360379', 'Costner, Kevin Augustus          ', '3978/1', 'M']
+    # ...
+    for line in data:
+        print(line)
+```
+
 ## Python with Pickle
+``` python
+import pickle
+```
 
 # Python topics
 ## Style and being Pythonic
