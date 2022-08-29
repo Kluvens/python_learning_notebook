@@ -1423,6 +1423,13 @@ m = re.search(r'[aiou].*[aeiou]', 'pillow')
 print(m)                    # <re.Match object; span=(1, 5), match='illo'>
 print(m.group(0))           # illo
 print(m.span())             # (1, 5)
+
+m = re.search("hello\D+\d+", string)
+print(m)                    # None
+
+m = re.search("hello\D+\d+", string, re.I)
+# <re.Match object; span=(0, 45), match='Hello World, I am good. My number is z1234567'>
+print(m)
 ```
 
 ```re.match(regex, string, flags)```
@@ -1478,7 +1485,15 @@ print(m)
 - return string with anywhere regex matches, substituted by replacement
 - optional parameter count, if non-zero, sets maximum number of substitutions
 ``` python
+# \number can be used to refer to group number in an re.sub replacement string
+m = re.sub(r'(\d+) and (\d+)', r'\2 or \1', "The answer is 42 and 43?")
+print(m)            # The answer is 43 or 42?
 
+m = re.sub(r'ab+c', 'X', "abbabbbbbbbabbbc")
+print(m)            # abbabbbbbbbX
+
+m = re.sub(r'a.*bc', 'X', "abbabbbbbbbcabbb")
+print(m)            # Xabbb
 ```
 
 ```re.findall(regex, string, flags)```
@@ -1486,14 +1501,33 @@ print(m)
 - if pattern contains () return part matched by ()
 - if pattern contains multiple () return tuple
 ``` python
-
+# regex findall returns a list of items
+# the example below extracts a list of numbers from the string
+m = re.findall(r'\d+', "hello 42 I'm a 32 string 30")
+print(m)                    # ['42', '32', '30']
 ```
 
 ```re.split(regex, string, maxsplit, flags)```
 - Split string everywhere regex matches
 - optional parameter maxsplit, if non-zero, set maximum number of splits
 ``` python
+m = re.split(r'\W+', 'Words, words, words.')
+print(m)        # ['Words', 'words', 'words', '']
 
+m = re.split(r'(\W+)', 'Words, words, words.')
+print(m)        # ['Words', ', ', 'words', ', ', 'words', '.', '']
+
+m = re.split(r'\W+', 'Words, words, words.', 1)
+print(m)        # ['Words', 'words, words.']
+
+m = re.split('[a-f]+', '0a3B9', flags=re.I)
+print(m)        # ['0', '3', '9']
+
+# If there are capturing groups in the separator and it
+# matches at the start of the string,
+# the result will start with an empty string
+m = re.split(r'(\W+)', '...words, words...')
+print(m)        # ['', '...', 'words', ', ', 'words', '...', '']
 ```
 
 ```re.finditer(pattern, string, flags)```
@@ -1657,6 +1691,7 @@ first, last = tup
 print(first)                        # 1
 print(last)                         # 5
 ```
+
 ## Python pip
 ## Python virtural environment
 ## [Python Memory management](https://docs.python.org/3/c-api/memory.html#:~:text=Memory%20management%20in%20Python%20involves,by%20the%20Python%20memory%20manager.)
