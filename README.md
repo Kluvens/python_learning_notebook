@@ -1514,6 +1514,7 @@ print(m)                    # ['42', '32', '30']
 m = re.split(r'\W+', 'Words, words, words.')
 print(m)        # ['Words', 'words', 'words', '']
 
+# by using capturing parentheses, we are not just capturing the strings between the split patterns but also the split patterns themselves
 m = re.split(r'(\W+)', 'Words, words, words.')
 print(m)        # ['Words', ', ', 'words', ', ', 'words', '.', '']
 
@@ -1534,7 +1535,23 @@ print(m)        # ['', '...', 'words', ', ', 'words', '...', '']
 - return an iterator yielding match objects over all non-overlapping matches for the RE pattern in string.
 - the string is scanned left-to-right, and matches are returned in the order found.
 ``` python
+# a complex example
+first = "Here is <!echo practice_q9.txt>"
+second = "Next is <practice_q9.txt>"
 
+match_one = re.finditer(r"<(!?)(.*?)>", first)
+print(match_one)        # <callable_iterator object at 0x7fe76131cee0>
+for i in match_one:
+    print(i)            # <re.Match object; span=(8, 31), match='<!echo practice_q9.txt>'>
+    print(i.group(0))   # <!echo practice_q9.txt>
+    print(i.group(1))   # !
+    print(i.group(2))   # echo practice_q9.txt
+
+match_two = re.finditer(r"<(!?)(.*?)>", second)
+print(match_two)        # <callable_iterator object at 0x7f4c0d41e280>
+for i in match_two:
+    print(i)            # <re.Match object; span=(8, 25), match='<practice_q9.txt>'>
+    print(i.group(0))   # <practice_q9.txt>
 ```
 
 ### Character classes
@@ -1646,17 +1663,68 @@ import statistics
 ```
 
 Averages and measures of central location
-- mean() - arithmetic mean (average) of data
-- fmean() - fast, floating point arithmetic mean
-- geometric_mean() - geometric mean of data
-- harmonic_mean() - harmonic mean of data
-- median() - median (middle value) of data
-- median_low() - low median of data
-- median_high() - high median of data
-- mode() - single mode (most common value) of discrete or nominal data
-- multimode() - list of modes of discrete or nominal data
-- quantiles() - divide data into intervals with equal probability
+- ```mean()``` - arithmetic mean (average) of data
+- ```fmean()``` - fast, floating point arithmetic mean
+- ```geometric_mean()``` - geometric mean of data
+- ```harmonic_mean()``` - harmonic mean of data
+- ```median()``` - median (middle value) of data
+- ```median_low()``` - low median of data
+- ```median_high()``` - high median of data
+- ```mode()``` - single mode (most common value) of discrete or nominal data
+- ```multimode()``` - list of modes of discrete or nominal data
+- ```quantiles()``` - divide data into intervals with equal probability
 
+Measures of spread
+- ```pstdev()``` - population standard deviation of data
+- ```pvariance()``` - population variance of data
+- ```stdev()``` - sample standard deviation of data
+- ```variance()``` - sample variance of data
+
+Statistics for relations between two inputs
+- ```covariance()``` - sample covariance for two variables
+- ```correlation()``` - person's correlation coeeficient for two variables
+- ```linear_regression()``` - slope and intercept for simple linear regression
+
+``` python
+import statistics
+
+first_nums = [1 , 2, 3]
+second_nums = [-1.0, 2.5, 3.25, 5.75]
+third_nums = ["red", "blue", "blue", "red", "green", "red", "red"]
+
+# average of data
+print(statistics.mean(first_nums))              # 2
+print(statistics.mean(second_nums))             # 2.625
+
+# fast, floating point average
+print(statistics.fmean(first_nums))             # 2.0
+print(statistics.fmean(second_nums))            # 2.625
+
+# geometric mean of data
+print(statistics.geometric_mean(first_nums))    # 1.8171205928321397
+
+# harmonic mean of data
+print(statistics.harmonic_mean(first_nums))     # 1.6363636363636365
+
+# middle value of data
+print(statistics.median(first_nums))            # 2
+print(statistics.median(second_nums))           # 2.875
+
+# low median of data
+print(statistics.median_low(second_nums))       # 2.5
+
+# high median of data
+print(statistics.median_high(second_nums))      # 3.25
+
+# most common value of data
+print(statistics.mode(third_nums))              # red
+
+# standard deviation
+print(statistics.stdev(second_nums))            # 2.787621447279622
+
+# variance
+print(statistics.variance(second_nums))         # 7.770833333333333
+```
 
 ## Python with Math
 ## Python with OS
