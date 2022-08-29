@@ -1489,7 +1489,24 @@ len(r'\n')              # 2
 - Match objects support some methods and attributes
 
 ``` python
+# extract two words that separated by a whitespace
+m = re.match(r"(\w+) (\w+)", "Isaac Newton, physicist")
+print(m)                    # <re.Match object; span=(0, 12), match='Isaac Newton'>
+print(m.groups())           # Return a tuple containing all the subgroups of the match ('Isaac', 'Newton')
+print(m.group(0))           # The entire match                      Isaac Newton
+print(m.group(1))           # The first parenthesized subgroup.     Isaac
+print(m.group(2))           # The second parenthesized subgroup.    Newton
+print(m.group(1, 2))        # Multiple arguments give us a tuple.   ('Isaac', 'Newton')
 
+# Match object with default values
+m = re.match(r"(\d+)\.?(\d+)?", "24")
+m.groups()      # Second group defaults to None. -> ('24', None)
+m.groups('0')   # Now, the second group defaults to '0'. -> ('24', '0')
+
+# Match.groupdict(default=None)
+m = re.match(r"(?P<first_name>\w+) (?P<last_name>\w+)", "Malcolm Reynolds")
+print(m)                # <re.Match object; span=(0, 16), match='Malcolm Reynolds'>
+print(m.groupdict())    # {'first_name': 'Malcolm', 'last_name': 'Reynolds'}
 ```
 
 ### Back-referencing
