@@ -34,6 +34,9 @@
     4. [Python with Database](#python-with-database)
     5. [Python with Statistics](#python-with-statistics)
     6. [Python with Math](#python-with-math)
+    7. [Python with OS](#python-with-os)
+    8. [Python with Sys](#python-with-sys)
+    9. [Python with Collections](#python-with-collections)
 
 # Why Python
 ## Python history
@@ -1765,6 +1768,7 @@ import math
 ``` python
 import os
 ```
+
 ## Python with Sys
 ``` python
 import sys
