@@ -1727,6 +1727,31 @@ print(statistics.variance(second_nums))         # 7.770833333333333
 ```
 
 ## Python with Math
+``` python
+import math
+```
+
+- ```math.ceil(x)``` - the ceiling of x
+- ```math.comb(n, k)``` - the combination of n and k which is ```n! / (k! * (n - k)!)```
+- ```math.fabs(x)``` - the absolute value of x
+- ```math.factorial(x)``` - x factorial as an integer
+- ```math.floor(x)``` - the floor of x which is the integer less than or equal to x
+- ```math.gcd(*integers)``` - the greatest common divisor of the integer arguments
+- ```math.lcm(*integers)``` - the least common divisor of the integer arguments
+- ```math.perm(n, k=None)``` - the permutation of n and k which is ```n! / (n - k)!```
+- ```math.prod(iterable, *, start=1)``` - calculate the product of all the elements in the input iterable
+- ```math.exp(x)``` - return e raised to the power x.
+- ```math.log(x[, base])``` - return the logarithm and we can specify the base
+- ```math.pow(x, y)``` - return x raised to the power y
+- ```math.sqrt(x)``` - return the square root of x
+- ```math.cos(x)``` - cosine of x radians
+- ```math.sin(x)``` - return the sine of x radians
+- ```math.tan(x)``` - return the tangent of x radians
+- ```math.degrees(x)``` - convert angle x from radians to degrees
+- ```math.radians(x)``` - convert angle x from degrees to radians
+- ```math.pi``` - the constant π = 3.141592…
+- ```math.e``` - the constant e = 2.718281…
+
 ## Python with OS
 ``` python
 import os
@@ -1735,6 +1760,15 @@ import os
 ``` python
 import sys
 ```
+
+- ```sys.argv``` - the list of command line arguments passed to a Python script.
+- ```sys.exit([arg])``` - raise a SystemExit exception, signalling an intention to exit the interpreter.
+- ```sys.path``` - a list of strings that specifies the search path for modules.
+- ```sys.stdin``` - standard input, used for all interactive input.
+- ```sys.stdout``` - standard output, used for the output of print() and expression statements and for the prompts of input().
+- ```sys.stderr``` - the interpreter's own prompts and its error messages go to this way.
+- ```sys.version``` - a string containing the version number of the Python interpreter plus additional information on the build number and compiler used.
+
 ## Python with Collections
 ## Python with Random
 ## Python with JSON
