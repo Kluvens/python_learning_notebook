@@ -1672,9 +1672,26 @@ print( re.sub(r'ab+?', 'X', s))   # Xbbc
 ```
 
 ## Python with Database
+Psycopg is the most popular PostgreSQL database adapter for the Python programming language.
+Psycopg2 is mostly implemented in C as a libpq wrapper, resulting in being both efficient and secure.
+
+Installation:
+```$ pip install psycopg2```
+
+``` python
+import psycopg2
+```
+
 ## Python with Statistics
 ``` python
 import statistics
+```
+
+``` python
+-- connect to our desired database which is call mydb
+conn = psycopg2.connect(f"dbname='mydb'")
+-- get the cursor
+cur = conn.cursor()
 ```
 
 Averages and measures of central location
