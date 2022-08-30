@@ -34,9 +34,12 @@
     4. [Python with Database](#python-with-database)
     5. [Python with Statistics](#python-with-statistics)
     6. [Python with Math](#python-with-math)
-    7. [Python with OS](#python-with-os)
-    8. [Python with Sys](#python-with-sys)
-    9. [Python with Collections](#python-with-collections)
+    7. [Python with Sys](#python-with-sys)
+    8. [Python with Collections](#python-with-collections)
+    9. [Python with Random](#python-with-random)
+    10. [Python with JSON](#python-with-json)
+    11. [Python with CSV](#python-with-csv)
+    12. [Python with Datetime](#python-with-datetime)
 
 # Why Python
 ## Python history
@@ -1764,11 +1767,6 @@ import math
 - ```math.pi``` - the constant π = 3.141592…
 - ```math.e``` - the constant e = 2.718281…
 
-## Python with OS
-``` python
-import os
-```
-
 ## Python with Sys
 ``` python
 import sys
@@ -1783,6 +1781,7 @@ import sys
 - ```sys.version``` - a string containing the version number of the Python interpreter plus additional information on the build number and compiler used.
 
 ## Python with Collections
+
 ## Python with Random
 The random module implements pseudo-random number generators for various distributions.
 ``` python
@@ -1914,11 +1913,6 @@ with open('enrollments.txt') as enrollments:
     # ...
     for line in data:
         print(line)
-```
-
-## Python with Pickle
-``` python
-import pickle
 ```
 
 ## Python with Datetime
