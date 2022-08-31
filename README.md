@@ -1698,6 +1698,50 @@ print("After deleting an element: ", str(myPriorityQueue.arr))
 ```
 
 ### Double Ended Queue (Dequeue)
+Deque or Double Ended Queue is a type of queue in which insertion and removal of elements can either be performed from the front or the rear. 
+Thus, it does not follow FIFO rule (First In First Out).
+
+``` python
+# Deque implementaion in python
+
+class Deque:
+    def __init__(self):
+        self.items = []
+
+    def isEmpty(self):
+        return self.items == []
+
+    def addRear(self, item):
+        self.items.append(item)
+
+    def addFront(self, item):
+        self.items.insert(0, item)
+
+    def removeFront(self):
+        return self.items.pop(0)
+
+    def removeRear(self):
+        return self.items.pop()
+
+    def size(self):
+        return len(self.items)
+
+
+d = Deque()
+print(d.isEmpty())          # True
+d.addRear(8)
+d.addRear(5)
+d.addFront(7)
+d.addFront(10)
+print(d.size())             # 4
+print(d.isEmpty())          # False
+d.addRear(11)
+print(d.removeRear())       # 11
+print(d.removeFront())      # 10
+d.addFront(55)
+d.addRear(45)
+print(d.items)              # [55, 7, 8, 5, 45]
+```
 
 ## Python Trees
 
