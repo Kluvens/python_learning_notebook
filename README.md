@@ -1482,6 +1482,8 @@ So stack data strcuture allows operations at one end wich can be called top of t
 We can add elements or remove elements only form this end of the stack.
 Stack is Last in First out.
 
+For the array-based implementation of a stack, the push and pop operations take constant time O(1).
+
 ``` python
 class Stack:
     def __init__(self) -> None:
@@ -1495,20 +1497,39 @@ class Stack:
             return "No element in the Stack"
         else:
             return self.stack.pop()
+
+    def isEmpty(self):
+        if self.stack == []:
+            return True
+        else:
+            return False
+    
+    def peek(self):
+        if len(self.stack) <= 0:
+            return "No element in the Stack"
+        else:
+            return self.stack[-1]
         
 
 s = Stack()
 s.push(5)
 s.push(3)
 print(s.pop())          # 3
+print(s.peek())         # 5
 print(s.pop())          # 5
+print(s.isEmpty())      # True
 ```
 
 
 ## Python Queue
+
+### Simple Queue
 The uniqueness of queue lies in the way items are added and removed. 
 The items are allowed at on end but removed form the other end. 
 So it is a First-in-First out method.
+
+The complexity of enqueue and dequeue operations in a queue using an array is O(1).
+In Python, pop(N) might have complexity of O(n) depending on the position of the item to be popped.
 
 ``` python
 class Queue:
@@ -1518,18 +1539,165 @@ class Queue:
     def enqueue(self, val):
         self.queue.insert(0, val)
 
-    def dequue(self):
+    def dequeue(self):
         if len(self.queue) <= 0:
             return "No element in the Queue"
         else:
             return self.queue.pop()
 
-s = Queue()
-s.enqueue(5)
-s.enqueue(3)
-print(s.dequue())          # 5
-print(s.dequue())          # 3
+    def display(self):
+        print(self.queue)
+    
+    def size(self):
+        return len(self.queue)
+
+q = Queue()
+q.enqueue(1)
+q.enqueue(2)
+q.enqueue(3)
+q.enqueue(4)
+q.enqueue(5)
+q.display()         # [5, 4, 3, 2, 1]
+
+q.dequeue()
+print("After removing an element")
+q.display()         # [5, 4, 3, 2]
 ```
+
+### Circular Queue
+A circular queue is the extended version of a regular queue where the last element is connected to the first element.
+Circular Queue works by the process of circular increment i.e. when we try to increment the pointer and we reach the end of the queue, we start from the beginning of the queue.
+
+The complexity of the enqueue and dequeue operations of a circular queue is O(1) for (array implementations).
+
+``` python
+class MyCircularQueue:
+    def __init__(self, length) -> None:
+        self.length = length
+        self.queue = [None] * length
+        self.head = self.tail = -1
+
+    def enqueue(self, val):
+        if ((self.tail + 1) % self.length == self.head):
+            print("The circular queue is full")
+        elif (self.head == -1):
+            self.head = 0
+            self.tail = 0
+            self.queue[self.tail] = val
+        else:
+            self.tail = (self.tail + 1) % self.length
+            self.queue[self.tail] = val
+
+    def dequeue(self):
+        if (self.head == -1):
+            print("The circular queue is empty")
+        elif (self.head == self.tail):
+            temp = self.queue[self.head]
+            self.head = -1
+            self.tail = -1
+            return temp
+        else:
+            temp = self.queue[self.head]
+            self.head = (self.head + 1) % self.length
+            return temp
+
+    def printQueue(self):
+        if (self.head == -1):
+            print("No element in the circular queue")
+        elif (self.tail >= self.head):
+            for i in range(self.head, self.tail + 1):
+                print(self.queue[i], end=" ")
+            print()
+        else:
+            for i in range(self.head, self.length):
+                print(self.queue[i], end=" ")
+            for i in range(0, self.tail + 1):
+                print(self.queue[i], end=" ")
+            print()
+
+obj = MyCircularQueue(5)
+obj.enqueue(1)
+obj.enqueue(2)
+obj.enqueue(3)
+obj.enqueue(4)
+obj.enqueue(5)
+print("Initial queue")
+obj.printQueue()            # 1 2 3 4 5 
+
+obj.dequeue()
+print("After removing an element from the queue")
+obj.printQueue()            # 2 3 4 5
+```
+
+### Priority Queue
+A priority queue is a type of queue in which each element is associated with a priority value.
+Higher priority elements are served first.
+
+By using the heap, the time complexity of inserting and deleting are O(log n)
+
+``` python
+# Priority Queue implementation in Python
+class MyPriorityQueue:
+    def __init__(self) -> None:
+        self.arr = []
+
+    def heapify(self, n, i):
+        # find the largest among root, left child and right child
+        largest = i
+        l = 2 * i + 1
+        r = 2 * i + 2
+
+        if l < n and self.arr[i] < self.arr[l]:
+            largest = 1
+
+        if r < n and self.arr[largest] < self.arr[r]:
+            largest = r
+
+        # Swap and continue heapifying if root is not largest
+        if largest != i:
+            self.arr[i], self.arr[largest] = self.arr[largest], self.arr[i]
+            self.heapify(n, largest)
+
+    # Function to insert an element into the tree
+    def insert(self, newNum):
+        size = len(self.arr)
+        if size == 0:
+            self.arr.append(newNum)
+        else:
+            self.arr.append(newNum)
+            for i in range((size // 2) - 1, -1, -1):
+                self.heapify(size, i)
+
+    # Function to delete an element from the tree
+    def deleteNode(self, num):
+        size = len(self.arr)
+        i = 0
+        for i in range(0, size):
+            if num == self.arr[i]:
+                break
+
+        self.arr[i], self.arr[size - 1] = self.arr[size - 1], self.arr[i]
+
+        self.arr.remove(size - 1)
+
+        for i in range((len(self.arr) // 2) - 1, -1, -1):
+            self.heapify(len(self.arr), i)
+
+myPriorityQueue = MyPriorityQueue()
+myPriorityQueue.insert(3)
+myPriorityQueue.insert(4)
+myPriorityQueue.insert(9)
+myPriorityQueue.insert(5)
+myPriorityQueue.insert(2)
+
+# [9, 3, 4, 5, 2]
+print("Max-Heap array: " + str(myPriorityQueue.arr))
+myPriorityQueue.deleteNode(4)
+# [9, 3, 2, 5]
+print("After deleting an element: ", str(myPriorityQueue.arr))
+```
+
+### Double Ended Queue (Dequeue)
 
 ## Python Trees
 
