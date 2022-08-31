@@ -1389,6 +1389,20 @@ We can run shell commands on Python scripts via the subprocess module.
 
 ```subprocess.run(args, *, stdin=None, input=None, stdout=None, stderr=None, capture_output=False, shell=False, cwd=None, timeout=None, check=False, encoding=None, errors=None, text=None, env=None, universal_newlines=None, **other_popen_kwargs)```
 
+The subprocess module can make Python interact with shell.
+``` python
+# Strings of the form <pathname> should be replaced with the contents of the file named pathname.
+# Strings of the form <!command> should be replaced by the output of running command as a shell command.
+# other words remains the same
+for line in sys.stdin:
+    for command in re.finditer(r"<(!?)(.*?)>", line):
+        if command.group(1) == "!":
+            line = line.replace(command.group(0), subprocess.run(command.group(2), shell=True, capture_output=True, text=True).stdout)
+        else:
+            line = line.replace(command.group(0), subprocess.run(f"cat {command.group(2)}", shell=True, capture_output=True, text=True).stdout)
+    print(line, end="")
+```
+
 ## Python with Regular expression
 ``` python
 import re
@@ -1874,6 +1888,99 @@ import sys
 - ```sys.version``` - a string containing the version number of the Python interpreter plus additional information on the build number and compiler used.
 
 ## Python with Collections
+The collection Module in Python provides different types of containers.
+A container is an object that is used to store different objects and provide a way to access the contained objects and iterate over them.
+
+``` python
+import collections
+```
+
+### Counters
+A counter is a sub-class of the dictionary. It is used to keep the count of the elements in an iterable in the form of an unordered dictionary where the key represents the element in the iterable and value represents the count of that element in the iterable
+
+Syntax: ```class collections.Counter([iterable-or-mapping])```
+
+``` python
+# with sequence of items
+# Counter({'B': 5, 'A': 3, 'C': 2})
+print(collections.Counter(['B','B','A','B','C','A','B',
+               'B','A','C']))
+
+# with dictionary
+# Counter({'B': 5, 'A': 3, 'C': 2})
+print(collections.Counter({'A':3, 'B':5, 'C':2}))
+
+# with keyword arguments
+# Counter({'B': 5, 'A': 3, 'C': 2})
+print(collections.Counter(A=3, B=5, C=2))
+
+data = collections.Counter(A=3, B=5, C=2)
+# A - 3
+# B - 5
+# C - 2
+for i in data:
+    print(f"{i} - {data[i]}")
+```
+
+### OrderedDict
+An OrderedDict is also a sub-class of dictionary but unlike dictionary, it remembers the order in which the keys were inserted.
+
+Syntax: ```class collections.OrderDict()```
+
+``` python
+od = collections.OrderedDict() 
+od['a'] = 4
+od['b'] = 2
+od['c'] = 1
+od['d'] = 3
+    
+# a 4
+# b 2
+# c 1
+# d 3
+for key, value in od.items(): 
+    print(key, value)
+    
+# deleting element
+od.pop('a')
+  
+# Re-inserting the same
+od['a'] = 1
+
+# b 2
+# c 1
+# d 3
+# a 1
+for key, value in od.items(): 
+    print(key, value)
+```
+
+### DefaultDict
+A DefaultDict is also a sub-class to dictionary.
+It is used to provide some default values for the key that does not exist and never raises a KeyError.
+
+Syntax: ```class collections.defaultdict(default_factory)```
+
+``` python
+# Defining the dict 
+# DefaultDict objects can be initialized using DefaultDict() method 
+# by passing the data type as an argument.
+d = collections.defaultdict(int) 
+     
+L = [1, 2, 3, 4, 2, 4, 1, 2] 
+     
+# Iterate through the list 
+# for keeping the count 
+for i in L: 
+         
+    # The default value is 0 
+    # so there is no need to  
+    # enter the key first 
+    d[i] += 1
+
+# defaultdict(<class 'int'>, {1: 2, 2: 3, 3: 1, 4: 2})       
+print(d)
+```
 
 ## Python with Random
 The random module implements pseudo-random number generators for various distributions.
