@@ -1358,6 +1358,51 @@ result = map(lambda n1, n2: n1+n2, num1, num2)
 # this added the matching values from the first list and second list and append them to a map class
 print(list(result))             # [9, 11, 13]
 ```
+
+### Python filter()
+Filter() is a built-in function in Python. The filter function can be applied to an iterable such as a list or a dictionary and create a new iterator.
+This new iterator can filter out certain specific elements based on the condition that you provide very efficiently.
+
+``` python
+# with common functions
+letters = ['a', 'b', 'd', 'e', 'i', 'j', 'o']
+
+# a function that returns True if letter is vowel
+def filter_vowels(letter):
+    vowels = ['a', 'e', 'i', 'o', 'u']
+    return True if letter in vowels else False
+
+filtered_vowels = filter(filter_vowels, letters)
+
+# converting to tuple
+vowels = tuple(filtered_vowels)
+# ('a', 'e', 'i', 'o')
+print(vowels)
+
+# with lambda functions inside filter()
+numbers = [1, 2, 3, 4, 5, 6, 7]
+
+# the lambda function returns True for even numbers 
+even_numbers_iterator = filter(lambda x: (x%2 == 0), numbers)
+
+# converting to list
+even_numbers = list(even_numbers_iterator)
+
+# [2, 4, 6]
+print(even_numbers)
+```
+
+### Python reduce()
+The reduce() function facilitates a functional approach to Python programming.
+It performs a rolling-computation as specified by the passed function to the neighboring elements, by taking a function and an iterable as arguments, and returns the final computed value.
+
+``` python
+from functools import reduce
+result = reduce((lambda a, b: a + b), [1, 2, 3, 4])
+# 10
+print(result)
+```
+
 ## Python Extended Keyword Arguments
 ## Python Generators
 ## Python Iterators
