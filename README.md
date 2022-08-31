@@ -893,6 +893,28 @@ print(list(enumerate(items)))
 print(list(enumerate(items, start=5)))
 ```
 
+### List comprehension
+List comprehension offers a shorter syntax when you want to create a new list based on the values of an existing list.
+The common Python code is:
+``` python
+fruits = ["apple", "banana", "cherry", "kiwi", "mango"]
+newlist = []
+
+for x in fruits:
+  if "a" in x:
+    newlist.append(x)
+
+print(newlist)
+```
+With list comprehension, we can rewrite as:
+``` python
+fruits = ["apple", "banana", "cherry", "kiwi", "mango"]
+
+newlist = [x for x in fruits if "a" in x]
+
+print(newlist)
+```
+
 ## Python Dictionaries
 - Dictionaries are associative containers of memory.
 - Values are referenced by their string key that maps to a value.
@@ -2239,6 +2261,16 @@ tup = (1, 5)
 first, last = tup
 print(first)                        # 1
 print(last)                         # 5
+```
+
+list comprehension
+``` python
+fruits = ["apple", "banana", "cherry", "kiwi", "mango"]
+newlist = [x for x in fruits if "a" in x]
+print(newlist)
+
+newlist = [x for x in range(10) if x < 5]
+print(newlist)
 ```
 
 ## Python pip
