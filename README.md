@@ -1438,10 +1438,105 @@ print(result)
 ## Python Operator overloading
 
 # Python with data structure and algorithms
+
 ## Python Linked lists
+A linked list is a sequence of data elements, which are connected together via links. 
+Each data element contains a connection to another data element in form of a pointer.
+
+``` python
+class Node:
+   def __init__(self, dataval=None):
+      self.dataval = dataval
+      self.nextval = None
+
+class SLinkedList:
+   def __init__(self):
+      self.headval = None
+
+   def listprint(self):
+      printval = self.headval
+      while printval is not None:
+         print (printval.dataval)
+         printval = printval.nextval
+
+list = SLinkedList()
+list.headval = Node("Mon")
+e2 = Node("Tue")
+e3 = Node("Wed")
+
+# Link first Node to second node
+list.headval.nextval = e2
+
+# Link second Node to third node
+e2.nextval = e3
+
+# Mon
+# Tue
+# Wed
+list.listprint()
+```
+
+## Python Stack
+Stack stores the data elements in a similar fashion as a bunch of plates are stored one above another in the kitchen. 
+So stack data strcuture allows operations at one end wich can be called top of the stack.
+We can add elements or remove elements only form this end of the stack.
+Stack is Last in First out.
+
+``` python
+class Stack:
+    def __init__(self) -> None:
+        self.stack = []
+
+    def push(self, val) -> None:
+        self.stack.append(val)
+
+    def pop(self):
+        if len(self.stack) <= 0:
+            return "No element in the Stack"
+        else:
+            return self.stack.pop()
+        
+
+s = Stack()
+s.push(5)
+s.push(3)
+print(s.pop())          # 3
+print(s.pop())          # 5
+```
+
+
+## Python Queue
+The uniqueness of queue lies in the way items are added and removed. 
+The items are allowed at on end but removed form the other end. 
+So it is a First-in-First out method.
+
+``` python
+class Queue:
+    def __init__(self) -> None:
+        self.queue = []
+
+    def enqueue(self, val):
+        self.queue.insert(0, val)
+
+    def dequue(self):
+        if len(self.queue) <= 0:
+            return "No element in the Queue"
+        else:
+            return self.queue.pop()
+
+s = Queue()
+s.enqueue(5)
+s.enqueue(3)
+print(s.dequue())          # 5
+print(s.dequue())          # 3
+```
+
 ## Python Trees
+
 ## Python Graphs
+
 ## Python Searching algorithms
+
 ## Python Sorting algorithms
 
 # Python with other modules
