@@ -1434,6 +1434,28 @@ print(result)
 # Python program testing and debugging
 
 # Python Object Oriented Programming
+
+## Basic OOP in Python
+
+### Python classes and objects
+Python is an object oriented programming language.
+Almost everything in Python is an object, with its properties and methods.
+A class is like an object constructor, or a blueprint for creating objects.
+
+To create a class, use the keyword class:
+``` python
+class MyClass:
+  x = 5
+
+
+Use the class to create objects
+``` python
+p1 = MyClass()
+print(p1.x)
+```
+
+### The 
+
 ## Python inheritance
 ``` python
 # create a parent class
