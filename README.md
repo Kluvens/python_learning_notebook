@@ -1445,35 +1445,113 @@ Each data element contains a connection to another data element in form of a poi
 
 ``` python
 class Node:
-   def __init__(self, dataval=None):
-      self.dataval = dataval
-      self.nextval = None
+    def __init__(self, dataval=None):
+        self.dataval = dataval
+        self.nextval = None
 
 class SLinkedList:
-   def __init__(self):
-      self.headval = None
+    def __init__(self):
+        self.headval = None
+        self.size = 0
 
-   def listprint(self):
-      printval = self.headval
-      while printval is not None:
-         print (printval.dataval)
-         printval = printval.nextval
+    def display(self):
+        printval = self.headval
+        while printval is not None:
+            print (printval.dataval)
+            printval = printval.nextval
+
+    def prepend(self, val):
+        newNode = Node(val)
+
+        newNode.nextval = self.headval
+        self.headval = newNode
+        self.size += 1
+
+    def append(self, val):
+        newNode = Node(val)
+        if self.headval == None:
+            self.headval = newNode
+        else:
+            last = self.headval
+            while last.nextval:
+                last = last.nextval
+
+            last.nextval = newNode
+
+        self.size += 1
+
+    def insert(self, val, idx):
+        if idx >= self.size:
+            print("Out of bound")
+        
+        newNode = Node(val)
+
+        if idx == 0:
+            self.prepend(val)
+        else:
+            p = self.headval
+            i = 1
+            while i < idx:
+                p = p.nextval
+                i += 1
+
+            newNode.nextval = p.nextval
+            p.nextval = newNode
+
+    def search(self, val):
+        p = self.headval
+        while p:
+            if p.dataval == val:
+                return True
+            
+            p = p.nextval
+        
+        return False
+
+    def delete(self, idx):
+        if self.headval == None:
+            print("No elements")
+
+        temp = self.headval
+
+        if idx == 0:
+            self.headval = temp.nextval
+            temp = None
+            return
+
+        for i in range(idx - 1):
+            temp = temp.nextval
+            if temp == None:
+                break
+
+        if temp == None:
+            return
+
+        if temp.nextval == None:
+            return
+
+        next = temp.nextval.nextval
+
+        temp.nextval = None
+
+        temp.nextval = next
+
+    
 
 list = SLinkedList()
-list.headval = Node("Mon")
-e2 = Node("Tue")
-e3 = Node("Wed")
+list.prepend("Mon")
+list.prepend("Tue")
+list.prepend("Fri")
+list.append("Sun")
+list.append("Thu")
+list.insert("Wed", 2)
 
-# Link first Node to second node
-list.headval.nextval = e2
+list.display()                  # Fri Tue Wed Mon Sun Thu
+print(list.search("Sun"))       # True
+print(list.search("sun"))       # False
 
-# Link second Node to third node
-e2.nextval = e3
-
-# Mon
-# Tue
-# Wed
-list.listprint()
+list.delete(2)
+list.display()                  # Fri Tue Mon Sun Thu
 ```
 
 ## Python Stack
