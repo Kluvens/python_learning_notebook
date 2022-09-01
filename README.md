@@ -2062,6 +2062,18 @@ Thus, there are two types of skewed binary tree: left-skewed binary tree and rig
 #### Balanced Binary Tree
 
 ### Binary Search Tree
+The properties that separate a binary search tree from a regular binary tree is:
+1. All nodes of left subtree are less than the root node
+2. All nodes of right subtree are more than the root node
+3. Both subtrees of each node are also BSTs, that is, they have the above two properties
+
+Time complexity in worst case
+- Search - O(n)
+- Insertion - O(n)
+- Deletion - O(n)
+
+Space Complexity:
+- The space complexity for all the operations is O(n)
 
 ### AVL Tree
 
