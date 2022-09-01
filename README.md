@@ -921,6 +921,7 @@ print(newlist)
 - Dictionaries are used to store data values in key:value pairs.
 - Dictionary items are ordered, changeable, and does not allow duplicates.
 - The values in dictionary items can be of any data type.
+- In Python, dictionary basically represents the implementation of hash table.
 
 ``` python
 # dictionary
@@ -1275,7 +1276,6 @@ def factorial(x):
         return 1
     else:
         return (x * factorial(x-1))
-
 
 num = 3
 # The factorial of 3 is 6
@@ -1875,6 +1875,197 @@ print(d.items)              # [55, 7, 8, 5, 45]
 ```
 
 ## Python Trees
+
+### Tree Terminologies
+
+#### Node
+
+#### Edge
+
+#### Root
+
+#### Height of a Node
+
+#### Depth of a Node
+
+#### Height of a Tree
+
+#### Degree of a Node
+
+#### Forest
+
+### Binary Tree
+
+#### Full Binary Tree
+A full Binary tree is a special type of binary tree in which every parent node/internal node has either two or no children.
+
+Let, i = the number of internal nodes (nodes that are not leaves), n = the total number of nodes, l = the number of leaves and lambda = the number of levels.
+1. The number of leaves is i + 1
+2. The total number of nodes is 2*i + 1
+3. The number of internal nodes is (n – 1) / 2
+4. The number of leaves is (n + 1) / 2
+5. The total number of nodes is 2l – 1
+6. The number of internal nodes is l – 1
+7. The number of leaves is at most 2 ^ (lambda - 1)
+
+``` python
+# Checking if a binary tree is a full binary tree in Python
+
+# Creating a node
+class Node:
+
+    def __init__(self, item):
+        self.item = item
+        self.leftChild = None
+        self.rightChild = None
+
+
+# Checking full binary tree
+def isFullTree(root):
+
+    # Tree empty case
+    if root is None:
+        return True
+
+    # Checking whether child is present
+    if root.leftChild is None and root.rightChild is None:
+        return True
+
+    if root.leftChild is not None and root.rightChild is not None:
+        return (isFullTree(root.leftChild) and isFullTree(root.rightChild))
+
+    return False
+
+
+root = Node(1)
+root.rightChild = Node(3)
+root.leftChild = Node(2)
+
+root.leftChild.leftChild = Node(4)
+root.leftChild.rightChild = Node(5)
+root.leftChild.rightChild.leftChild = Node(6)
+root.leftChild.rightChild.rightChild = Node(7)
+
+if isFullTree(root):
+    print("The tree is a full binary tree")
+else:
+    print("The tree is not a full binary tree")
+```
+
+#### Perfect Binary Tree
+A perfect binary tree is a type of binary tree in which every internal node has exactly two child nodes and all the leaf nodes are at the same level.
+
+``` python
+# Checking if a binary tree is a perfect binary tree in Python
+
+class newNode:
+    def __init__(self, k):
+        self.key = k
+        self.right = self.left = None
+
+# Calculate the depth
+def calculateDepth(node):
+    d = 0
+    while (node is not None):
+        d += 1
+        node = node.left
+    return d
+
+# Check if the tree is perfect binary tree
+def is_perfect(root, d, level=0):
+
+    # Check if the tree is empty
+    if (root is None):
+        return True
+
+    # Check the presence of trees
+    if (root.left is None and root.right is None):
+        return (d == level + 1)
+
+    if (root.left is None or root.right is None):
+        return False
+
+    return (is_perfect(root.left, d, level + 1) and
+            is_perfect(root.right, d, level + 1))
+
+root = None
+root = newNode(1)
+root.left = newNode(2)
+root.right = newNode(3)
+root.left.left = newNode(4)
+root.left.right = newNode(5)
+
+if (is_perfect(root, calculateDepth(root))):
+    print("The tree is a perfect binary tree")
+else:
+    print("The tree is not a perfect binary tree")
+```
+
+#### Complete Binary Tree
+A complete binary tree is just like a full binary tree, but with two major differences
+1. Every level must be completely filled
+2. All the leaf elements must lean towards the left.
+3. The last leaf element might not have a right sibling i.e. a complete binary tree doesn't have to be a full binary tree.
+
+``` python
+# Checking if a binary tree is a complete binary tree in C
+
+class Node:
+
+    def __init__(self, item):
+        self.item = item
+        self.left = None
+        self.right = None
+
+# Count the number of nodes
+def count_nodes(root):
+    if root is None:
+        return 0
+    return (1 + count_nodes(root.left) + count_nodes(root.right))
+
+# Check if the tree is complete binary tree
+def is_complete(root, index, numberNodes):
+
+    # Check if the tree is empty
+    if root is None:
+        return True
+
+    if index >= numberNodes:
+        return False
+
+    return (is_complete(root.left, 2 * index + 1, numberNodes)
+            and is_complete(root.right, 2 * index + 2, numberNodes))
+
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+root.right.left = Node(6)
+
+node_count = count_nodes(root)
+index = 0
+
+if is_complete(root, index, node_count):
+    print("The tree is a complete binary tree")
+else:
+    print("The tree is not a complete binary tree")
+```
+
+#### Degenerate or Pathological Tree
+A degenerate or pathological tree is the tree having a single child either left or right.
+
+#### Skewed Binary Tree
+A skewed binary tree is a pathological tree in which the tree is either dominated by the left nodes or the right nodes.
+Thus, there are two types of skewed binary tree: left-skewed binary tree and right-skewed binary tree.
+
+#### Balanced Binary Tree
+
+### Binary Search Tree
+
+### AVL Tree
+
+### B-Tree
 
 ## Python Graphs
 
