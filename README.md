@@ -1426,10 +1426,102 @@ print(result)
 ```
 
 ## Python Extended Keyword Arguments
+*args and **kargs allows us to pass a varying number of positional arguments.
+
+args is just a name, the important things here is the unpacking operator (*). It unpacks arguments as a tuple.
+
+unpacking operator (**) unpacks keyword operators as a dictionary with keyword as keys.
+``` python
+def func(required, *args, **kwargs):
+    # 1
+    print(required)
+
+    # (2, 3, 4)
+    print(args)
+
+    # {'good': 5, 'happy': 6}
+    print(kwargs)
+
+func(1, 2, 3, 4, good=5, happy=6)
+```
+
 ## Python Generators
+
 ## Python Iterators
+
+### Iterator vs Iterable
+Lists, tuples, dictionaries and sets are all iterable objects are iterable containers which we can get an iterator from.
+
+All these objects have a iter() method which is used to get an iterator.
+
+Example: return an iterator from a tuple, and print each value:
+``` python
+mytuple = ("apple", "banana", "cherry")
+myit = iter(mytuple)
+
+print(next(myit))		# apple
+print(next(myit))		# banana
+print(next(myit))		# cherry
+```
+
+### Create an Iterator
+To create an object/class as an iterator you have to implement the methods __iter__() and __next__() to your object.
+
+The __iter__() method can do operations, but must always return the iterator object itself.
+
+The __next__() method also allows us to do operations, and must return the next item in the sequence.
+
+``` python
+class MyNumbers:
+  def __iter__(self):
+    self.a = 1
+    return self
+
+  def __next__(self):
+    x = self.a
+    self.a += 1
+    return x
+
+myclass = MyNumbers()
+myiter = iter(myclass)
+
+print(next(myiter))		# 1
+print(next(myiter))		# 2
+print(next(myiter))		# 3
+print(next(myiter))		# 4
+print(next(myiter))		# 5
+```
+
+### StopIteration
+THe example above would continue forever if we had enough next() statements, or it was used in a for loop.
+
+To prevent the iteration to go on forever, we can use the StopIteration statement.
+
+In the __next__() method, we can add a terminating condition to raise an error if the iteration is done a psecified number of times
+
+``` python
+class MyNumbers:
+  def __iter__(self):
+    self.a = 1
+    return self
+
+  def __next__(self):
+    if self.a <= 20:
+      x = self.a
+      self.a += 1
+      return x
+    else:
+      raise StopIteration
+
+myclass = MyNumbers()
+myiter = iter(myclass)
+
+for x in myiter:
+  # print from 1 to 20
+  print(x)
+```
+
 ## Python Decorators
-## Python Type checking
 
 # Python program testing and debugging
 
@@ -3004,6 +3096,51 @@ print(x.strftime("%A"))     # Tuesday
 print(x.strftime("%B"))     # August
 ```
 
+## Python with Typing
+``` python
+import typing
+```
+This module provides runtime support for type hints.
+
+The function below takes and returns a string and is annotated as follows:
+``` python
+def greeting(name: str) -> str:
+    return 'Hello ' + name
+```
+
+### Type aliases
+A type alias is defined by assigning the type to the alias. In this example, Vector and list[float] will be treated as interchangeable synonyms, we can also interchange Vector with list[int] or other types.
+``` python
+Vector = list[float]
+
+def scale(scalar: float, vector: Vector) -> Vector:
+    return [scalar * num for num in vector]
+
+# typechecks; a list of floats qualifies as a Vector.
+new_vector = scale(2.0, [1.0, -4.2, 5.4])
+```
+
+### NewType
+Use the NewType helper to create distinct types:
+``` python
+from typing import NewType
+
+UserId = NewType('UserId', int)
+some_id = UserId(524313)
+```
+
+The static type checker will treat the new type as if it were a subclass of the original type. This is useful in helping catch logical errors:
+``` python
+def get_user_name(user_id: UserId) -> str:
+    ...
+
+# typechecks
+user_a = get_user_name(UserId(42351))
+
+# does not typecheck; an int is not a UserId
+user_b = get_user_name(-1)
+```
+
 # Python topics
 ## Style and being Pythonic
 swap values of two variables
@@ -3021,6 +3158,31 @@ tup = (1, 5)
 first, last = tup
 print(first)                        # 1
 print(last)                         # 5
+```
+
+``` python
+(a, b, c) = (1, 2, 3)
+(a, b, c) = 1, 2, 3
+a, b, c = (1, 2, 3)
+a, b, c = 1, 2, 3
+```
+
+unpacking iterables
+``` python
+a, b, c = '123'
+a, b, c = [1, 2, 3]
+a, b, c = {'one': 1, 'two':2, 'three': 3}
+a, b, c = (i ** 2 for i in range(3))
+x, y, z = range(3)
+a, b, c = {'a', 'b', 'c'}
+first, *body, last = [1, 2, 3, 4]
+```
+
+unpacking with the * operator
+``` python
+*a, = 1, 2          # where a = [1, 2]
+a, *b = 1, 2, 3     # where a = 1 and b = [2, 3]
+*a, b = 1, 2, 3     # where a = [1, 2] and b = 3d
 ```
 
 list comprehension
