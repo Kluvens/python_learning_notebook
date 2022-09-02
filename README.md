@@ -40,6 +40,8 @@
     10. [Python with JSON](#python-with-json)
     11. [Python with CSV](#python-with-csv)
     12. [Python with Datetime](#python-with-datetime)
+    13. [Python with Typing](#python-with-Typing)
+    14. [Python with Argparse](#python-with-argparse)
 
 # Why Python
 ## Python history
@@ -3188,6 +3190,13 @@ class LoggedVar(Generic[T]):
     def log(self, message: str) -> None:
         self.logger.info('%s: %s', self.name, message)
 ```
+
+## Python with Argparse
+``` python
+import argparse
+```
+The argparse module makes it easy to write user-friendly command-line interfaces.
+The program defines what arguments it requires, and argparse will figure out how to parse those out of sys.argv.
 
 # Python topics
 ## Style and being Pythonic
