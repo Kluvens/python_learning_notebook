@@ -3108,6 +3108,9 @@ def greeting(name: str) -> str:
     return 'Hello ' + name
 ```
 
+### Any
+Basically Any means any type.
+
 ### Type aliases
 A type alias is defined by assigning the type to the alias. In this example, Vector and list[float] will be treated as interchangeable synonyms, we can also interchange Vector with list[int] or other types.
 ``` python
@@ -3139,6 +3142,51 @@ user_a = get_user_name(UserId(42351))
 
 # does not typecheck; an int is not a UserId
 user_b = get_user_name(-1)
+```
+
+### Generics
+Since type information about objects kept in containers cannot be statically inferred in a generic way, abstract base classes have been extended to support subscription to denote expected types for container elements.
+``` python
+from collections.abc import Mapping, Sequence
+
+def notify_by_email(employees: Sequence[Employee],
+                    overrides: Mapping[str, str]) -> None: ...
+```
+
+Generics can be parameterized by using a factory available in typing called TypeVar.
+``` python
+from collections.abc import Sequence
+from typing import TypeVar
+
+T = TypeVar('T')      # Declare type variable
+
+def first(l: Sequence[T]) -> T:   # Generic function
+    return l[0]
+```
+
+User-defined generic types
+``` python
+from typing import TypeVar, Generic
+from logging import Logger
+
+T = TypeVar('T')
+
+class LoggedVar(Generic[T]):
+    def __init__(self, value: T, name: str, logger: Logger) -> None:
+        self.name = name
+        self.logger = logger
+        self.value = value
+
+    def set(self, new: T) -> None:
+        self.log('Set ' + repr(self.value))
+        self.value = new
+
+    def get(self) -> T:
+        self.log('Get ' + repr(self.value))
+        return self.value
+
+    def log(self, message: str) -> None:
+        self.logger.info('%s: %s', self.name, message)
 ```
 
 # Python topics
