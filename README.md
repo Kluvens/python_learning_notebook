@@ -1416,6 +1416,21 @@ even_numbers = list(even_numbers_iterator)
 print(even_numbers)
 ```
 
+filter a dictionary by its values:
+``` python
+def findRepeatedDnaSequences(self, s: str) -> List[str]:
+	string = s
+
+	ss = []
+	for i in range(len(string)):
+		if i + 10 <= len(string):
+		ss.append(string[i:i+10])
+
+	dicts = collections.Counter(ss)
+	more_dicts = filter(lambda x: (dicts[x] > 1), dicts)
+	return list(more_dicts)
+```
+
 ### Python reduce()
 The reduce() function facilitates a functional approach to Python programming.
 It performs a rolling-computation as specified by the passed function to the neighboring elements, by taking a function and an iterable as arguments, and returns the final computed value.
@@ -1547,8 +1562,6 @@ Use the class to create objects
 p1 = MyClass()
 print(p1.x)
 ```
-
-### The 
 
 ## Python inheritance
 ``` python
