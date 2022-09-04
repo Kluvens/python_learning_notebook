@@ -127,6 +127,32 @@ A variable is created the moment you first assign a value to it.
 x = 5           # we are creating a variable called x and the value stored is 5
 y = "John"      # we are creating a variable called y and the value stored is "John"
 ```
+
+### Scope of variables (Global vs Local)
+Global variables are those which are not defined inside any function and have a global scope whereas local variables are those which are defined inside a function and its scope is limited to that function only.
+
+``` python
+def func():
+    # the local variable just belongs to the local scope
+    # the variable string does not exist outside of the function
+    string = "local variable"
+    print("This is a", string)
+
+def change():
+    # if we want to change the variable of global scope
+    # we need to use the global variable first
+    global string
+    string = "now has changed"
+
+string = "global scope"
+print(string)       # global scope
+# calling a func() would not change the variable in global scope
+func()              # This is a local variable
+# change() can change the variable in global scope
+change()
+print(string)       # now has changed
+```
+
 ## Python Data types
 Variables can store data of different types, and different types can do different things.
 ### Python built-in data types
