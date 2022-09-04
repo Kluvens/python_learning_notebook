@@ -1454,12 +1454,10 @@ print(even_numbers)
 filter a dictionary by its values:
 ``` python
 def findRepeatedDnaSequences(self, s: str) -> List[str]:
-	string = s
-
 	ss = []
-	for i in range(len(string)):
-		if i + 10 <= len(string):
-		ss.append(string[i:i+10])
+	for i in range(len(s)):
+		if i + 10 <= len(s):
+			ss.append(s[i:i+10])
 
 	dicts = collections.Counter(ss)
 	more_dicts = filter(lambda x: (dicts[x] > 1), dicts)
