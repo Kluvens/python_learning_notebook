@@ -4,7 +4,7 @@
     2. [Python 2 and Python 3](#python-2-and-python-3)
     3. [Why Python is popular](#why-python-is-popular)
     4. [Why Python is slow](#why-python-is-slow)
-2. [Python basic syntax](#python-basic-syntax)
+2. [Python Basic Syntax](#python-basic-syntax)
     1. [Python Comments](#python-comments)
     2. [Python Variables](#python-variables)
     3. [Python Data Types](#python-data-types)
@@ -18,7 +18,7 @@
     11. [Python Sets](#python-sets)
     12. [Python Functions](#python-functions)
     13. [Python Errors and Exceptions](#python-errors-and-exceptions)
-3. [Python advanced syntax](#python-advanced-syntax)
+3. [Python Advanced Syntax](#python-advanced-syntax)
     1. [Python Recursion](#python-recursion)
     2. [Python Anonymous Function](#python-anonymous-function)
     3. [Python map(), filter() and reduce()](#python-map-filter-and-reduce)
@@ -26,7 +26,7 @@
     5. [Python Generators](#python-generators)
 4. [Python Program Testing and Debugging](#python-program-testing-and-debugging)
 5. [Python Object Oriented Programming](#python-object-oriented-programming)
-6. [Python with data structure and algorithms](#python-with-data-structure-and-algorithms)
+6. [Python with Data Structure and Algorithms](#python-with-data-structure-and-algorithms)
 7. [Python with other modules](#python-with-other-modules)
     1. [Python with Flask](#python-with-flask)
     2. [Python with Subprocess](#python-with-subprocess)
@@ -72,7 +72,7 @@ Unlike native languages like C/C++, Python code gets interpreted at runtime inst
 
 Python code is first compiled into python Byte Code. The Byte Code interpreter conversion happens internally and most of it is hidden from the developer.Byte code is platform-independent and lower-level programming. Compilation of byte code is to ramp up the execution of source code. The source code compiled to byte code is then executed in Python’s virtual machine one by one, to carry out the operations. The virtual machine is an internal component of Python. Internally Python code is interpreted during run time rather than being compiled to native code hence it is a bit slower. 
 
-# Python basic syntax
+# Python Basic Syntax
 
 ## Python Comments
 
@@ -1298,7 +1298,7 @@ if not type(x) is int:
   raise TypeError("Only integers are allowed")
 ```
 
-# Python advanced syntax
+# Python Advanced Syntax
 ## Python Recursion
 Recursion means defining a problem in terms of itself.
 We alreaady known that a function can call other functions.
@@ -1632,7 +1632,7 @@ x.welcom()                  # Welcom Mike Jan
 ## Everything in Python is an object
 ## Python Operator overloading
 
-# Python with data structure and algorithms
+# Python with Data Structure and Algorithms
 
 ## Python Linked lists
 A linked list is a sequence of data elements, which are connected together via links. 
@@ -1792,7 +1792,6 @@ print(s.peek())         # 5
 print(s.pop())          # 5
 print(s.isEmpty())      # True
 ```
-
 
 ## Python Queue
 
