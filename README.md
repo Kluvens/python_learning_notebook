@@ -390,10 +390,12 @@ print(5 ^ 3)            # 0101 ^ 0011 => 0110 => 6
 # '~' is NOT operator, it inverts all the bits
 print(~5)               # ~00000101 => 11111010 => -6 
 
-# '>>' is Zero fill left shift, it shifts left by pushing zeros in from the right and let the leftmost bits fall off
+# '>>' is Zero fill left shift, it shifts left by pushing zeros 
+# in from the right and let the leftmost bits fall off
 print(5 >> 2 )         # 0101 >> 2 => 0001 => 1
 
-# '<<' is Signed right shift, it shifts right by pushing copies of the leftmost bit in from the left, and let the rightmost bits fall off
+# '<<' is Signed right shift, it shifts right by pushing copies 
+# of the leftmost bit in from the left, and let the rightmost bits fall off
 print(5 << 1  )        # 0101 << 1 => 1010 => 10
 ```
 
@@ -464,7 +466,8 @@ substr = substr + 'harry' + 'potter'
 print(substr)                               # hiharrypotter
 
 # id() function returns the identity of the object.
-print(id(string))                           # 140378634129696 (but every time you run this command, we get a different result)
+# 140378634129696 (but every time you run this command, we get a different result)
+print(id(string))
 
 # change the string to upper case
 print(string.upper())                       # HELLO HELLO HELLO_AND$OK123
@@ -513,13 +516,17 @@ print(string)                               # string itself is not modified
 # reverse a string
 print(string[::-1])                         # 321kO$dna_oLLeH olleh olleH
 
-# strip() method is to remove the leading and the trailing characters based on the string argument passed
+# strip() method is to remove the leading and 
+# the trailing characters based on the string argument passed
 new_string = "    cool and i like it      \n"
 print(new_string.strip())                   # cool and i like it
+
 # rstrip() only removes the trailing characters
 print(new_string.rstrip())                  #     cool and i like it
+
 # lstrip() only removes the leading characters
-print(new_string.lstrip())                  # cool and i like it      \n (\n is interpreted as a newline)
+# cool and i like it      \n (\n is interpreted as a newline)
+print(new_string.lstrip())
 # we can specify a character
 new_string = "HHHHHcool and i like itHHHHH"
 print(new_string.strip("H"))                # cool and i like it
@@ -563,10 +570,12 @@ print(final_print)
 a = 5
 b = 6
 if a > b:
-    print("5 is greater than 6")    # we will not see this line because the condition is False and the line will not be executed
+	# we will not see this line because the condition is False and the line will not be executed
+    print("5 is greater than 6")    
 
 if a < b:
-    print("5 is less than 6")       # we can see this line because the condition is True
+	# we can see this line because the condition is True
+    print("5 is less than 6")
 ```
 
 **elif**
