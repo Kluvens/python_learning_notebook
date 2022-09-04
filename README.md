@@ -24,9 +24,10 @@
     3. [Python map(), filter() and reduce()](#python-map-filter-and-reduce)
     4. [Python Extended Keyword Arguments](#python-extended-keyword-arguments)
     5. [Python Generators](#python-generators)
-4. [Python Object Oriented Programming](#python-object-oriented-programming)
-5. [Python with data structure and algorithms](#python-with-data-structure-and-algorithms)
-6. [Python with other modules](#python-with-other-modules)
+4. [Python Program Testing and Debugging](#python-program-testing-and-debugging)
+5. [Python Object Oriented Programming](#python-object-oriented-programming)
+6. [Python with data structure and algorithms](#python-with-data-structure-and-algorithms)
+7. [Python with other modules](#python-with-other-modules)
     1. [Python with Flask](#python-with-flask)
     2. [Python with Subprocess](#python-with-subprocess)
     3. [Python with Regular expression](#python-with-regular-expression)
@@ -1574,7 +1575,7 @@ for x in myiter:
 
 ## Python Decorators
 
-# Python program testing and debugging
+# Python Program Testing and Debugging
 
 # Python Object Oriented Programming
 
