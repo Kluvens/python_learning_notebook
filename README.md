@@ -2811,15 +2811,67 @@ def quickSort(arr, low, high):
 ```
 
 ### Shell sort
+Shell sort is a generalized version of the insertion sort algorithm. It first sorts elements that are far apart from each other and successively reduces the interval between the elements to be sorted.
+
+The time complexities in best and average case are O(n * log n).
+The time complexity in worst case is O(n^2).
+The space complexity of shell sort is O(1).
+Shell sort is not stable.
 
 ``` python
+def shellSort(arr):
+    size = len(arr)
 
+    interval = size // 2
+    while interval > 0:
+        for i in range(interval, size):
+            temp = arr[i]
+            j = i
+            while j >= interval and arr[j - interval] > temp:
+                arr[j] = arr[j - interval]
+                j -= interval
+
+            arr[j] = temp
+        interval //= 2
 ```
 
 ### Heap sort
+Heap Sort is a popular and efficient sorting algorithm in computer programming.
+It uses arrays and heap data structure.
+
+Working of heap sort:
+1. Since the tree satisfies Max-Heap property, then the largest item is stored at the root node.
+2. Swap: Remove the root element and put at the end of the array (nth position) Put the last item of the tree (heap) at the vacant place.
+3. Remove: Reduce the size of the heap by 1.
+4. Heapify: Heapify the root element again so that we have the highest element at root.
+5. The process is repeated until all the items of the list are sorted.
 
 ``` python
+def heapify(arr, size, i):
+    largest = i
+    l = 2 * i + 1
+    r = 2 * i + 2
 
+    if l < size and arr[i] < arr[l]:
+        largest = l
+
+    if r < size and arr[largest] < arr[r]:
+        largest = r
+
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
+        heapify(arr, size, largest)
+
+def heapSort(arr):
+    size = len(arr)
+
+    for i in range(size//2, -1, -1):
+        heapify(arr, size, i)
+
+    for i in range(size - 1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]
+
+        heapify(arr, i, 0)
 ```
 
 ### Counting sort
