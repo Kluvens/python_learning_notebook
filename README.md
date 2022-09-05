@@ -2661,6 +2661,61 @@ else:
 
 ## Python Sorting algorithms
 
+### Bubble sort
+Bubble sort is a sorting algorithm that compares two adjacent elements and swaps them until they are in the intended order.
+
+The time complexity in worse case is O(n^2).
+The space complexity is O(1) because an extra variable is used for swapping.
+
+``` python
+def bubbleSort(arr):
+    for i in range(len(arr)):
+        for j in range(len(arr) - i - 1):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+```
+
+### Selection sort
+Selection sort is a sorting algorithm that selects the smallest element from an unsorted list in each iteration and places that element at the beginning of the unsorted list.
+
+The time complexity of selection sort is O(n^2).
+The space complexity of selection sort is O(1).
+
+``` python
+def selectionSort(arr):
+    size = len(arr)
+
+    for step in range(size):
+        min_idx = step
+
+        for i in range(step + 1, size):
+            if arr[i] < arr[min_idx]:
+                min_idx = i
+        
+        arr[step], arr[min_idx] = arr[min_idx], arr[step]
+```
+
+### Insertion sort
+Insertion sort is a sorting algorithm that places an unsorted element at its suitable place in each iteration.
+
+Insertion sort works similarly as we sort cards in our hand in a card game.
+
+The time complexity of insertion sort is O(n^2).
+The space complexity of insertion sort is O(1).
+
+``` python
+def insertionSort(arr):
+    for step in range(1, len(arr)):
+        key = arr[step]
+        j = step - 1
+
+        while j >= 0 and key < arr[j]:
+            arr[j + 1] = arr[j]
+            j = j - 1
+
+        arr[j + 1] = key
+```
+
 # Python with other modules
 
 ## Python with Flask
