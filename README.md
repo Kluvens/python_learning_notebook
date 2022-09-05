@@ -27,6 +27,13 @@
 4. [Python Program Testing and Debugging](#python-program-testing-and-debugging)
 5. [Python Object Oriented Programming](#python-object-oriented-programming)
 6. [Python with Data Structure and Algorithms](#python-with-data-structure-and-algorithms)
+    1. [Python Linked Lists](#python-linked-lists)
+    2. [Python Stack](#python-stack)
+    3. [Python Queue](#python-queue)
+    4. [Python Trees](#python-trees)
+    5. [Python Graphs](#python-graphs)
+    6. [Python Searching Algorithms](#python-searching-algorithms)
+    7. [Python Sorting Algorithms](#python-sorting-algorithms)
 7. [Python with other modules](#python-with-other-modules)
     1. [Python with Flask](#python-with-flask)
     2. [Python with Subprocess](#python-with-subprocess)
@@ -40,7 +47,7 @@
     10. [Python with JSON](#python-with-json)
     11. [Python with CSV](#python-with-csv)
     12. [Python with Datetime](#python-with-datetime)
-    13. [Python with Typing](#python-with-Typing)
+    13. [Python with Typing](#python-with-typing)
     14. [Python with Argparse](#python-with-argparse)
 
 # Why Python
@@ -2553,7 +2560,7 @@ print()
 
 ## Python Graphs
 
-## Python Searching algorithms
+## Python Searching Algorithms
 
 ### Linear Search
 Linear search is a sequential searching algorithm where we start from one end and every element of the list until the desired element is found.
@@ -2715,6 +2722,85 @@ def insertionSort(arr):
 
         arr[j + 1] = key
 ```
+
+### Merge sort
+Merge Sort is one of the most popular sorting algorithms that is based on the principle of Divide and Conquer Algorithm.
+It repeatedly divides the array into two halves until we reach a stage where we try to perform MergeSort on a subarray of size 1.
+After that, the merge function comes into play and combines the sorted arrays into larger arrays until the whole array is merged.
+
+The time complexity of merge sort is O(n * log n).
+The space complexity of merge sort is O(n).
+Merge sort is stable.
+
+``` python
+def mergeSort(arr):
+    if len(arr) > 1:
+        r = len(arr) // 2
+        l = arr[:r]
+        m = arr[r:]
+
+        mergeSort(l)
+        mergeSort(m)
+
+        i = j = k = 0
+
+        while (i < len(l) and j < len(m)):
+            if l[i] < m[j]:
+                arr[k] = l[i]
+                i += 1
+            else:
+                arr[k] = m[j]
+                j += 1
+            k += 1
+
+        while i < len(l):
+            arr[k] = l[i]
+            i += 1
+            k += 1
+
+        while j < len(m):
+            arr[k] = m[j]
+            j += 1
+            k += 1
+```
+
+### Quick sort
+Quicksort is a sorting algorithm based on the divide and conquer approach where
+1. An array is divided into subarrays by selecting a pivot element (element selected from the array). While dividing the array, the pivot element should be positioned in such a way that elements less than pivot are kept on the left side and elements greater than pivot are on the right side of the pivot.
+2. The left and right subarrays are also divided using the same approach. This process continues until each subarray contains a single element.
+3. At this point, elements are already sorted. Finally, elements are combined to form a sorted array.
+
+The time complexity in worst case is O(n^2) while in best and average are O(n * log n).
+The space complexity of quick sort is O(log n).
+Quick sort is not stable.
+
+``` python
+def partition(arr, low, high):
+    pivot = arr[high]
+
+    i = low - 1
+
+    for j in range(low, high):
+        if arr[j] <= pivot:
+            i = i + 1
+            arr[i], arr[j] = arr[j], arr[i]
+
+    arr[i + 1], arr[high] = arr[high], arr[i + 1]
+
+    return i + 1
+
+def quickSort(arr, low, high):
+    if low < high:
+        pi = partition(arr, low, high)
+
+        quickSort(arr, low, pi - 1)
+
+        quickSort(arr, pi + 1, high)
+```
+
+### Shell sort
+
+### Heap sort
 
 # Python with other modules
 
