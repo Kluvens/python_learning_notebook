@@ -1582,6 +1582,12 @@ for x in myiter:
 
 # Python Program Testing and Debugging
 
+## Linting and pylint
+
+```$ pylint file.py```
+
+## Unit test and pytest
+
 # Python Object Oriented Programming
 
 ## Basic OOP in Python
@@ -2558,6 +2564,12 @@ print()
 
 ### B-Tree
 
+### Red-Black Tree
+
+## Python Heaps
+
+## Python Tries
+
 ## Python Graphs
 
 ## Python Searching Algorithms
@@ -2800,7 +2812,37 @@ def quickSort(arr, low, high):
 
 ### Shell sort
 
+``` python
+
+```
+
 ### Heap sort
+
+``` python
+
+```
+
+### Counting sort
+
+``` python
+
+```
+
+### Bucket sort
+
+``` python
+
+```
+
+### Radix sort
+
+``` python
+
+```
+
+## Greeday Algorithms
+
+## Dynamic Programming
 
 # Python with other modules
 
