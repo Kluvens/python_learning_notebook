@@ -1779,8 +1779,7 @@ class Stack:
         if len(self.stack) <= 0:
             return "No element in the Stack"
         else:
-            return self.stack[-1]
-        
+            return self.stack[-1] 
 
 s = Stack()
 s.push(5)
@@ -1996,7 +1995,6 @@ class Deque:
     def size(self):
         return len(self.items)
 
-
 d = Deque()
 print(d.isEmpty())          # True
 d.addRear(8)
@@ -2086,7 +2084,6 @@ def isFullTree(root):
         return (isFullTree(root.leftChild) and isFullTree(root.rightChild))
 
     return False
-
 
 root = Node(1)
 root.rightChild = Node(3)
@@ -2630,7 +2627,6 @@ Do binary search recursively:
 ``` python
 # Binary Search in python
 
-
 def binarySearch(array, x, low, high):
 
     if high >= low:
@@ -2652,7 +2648,6 @@ def binarySearch(array, x, low, high):
     else:
         return -1
 
-
 array = [3, 4, 5, 6, 7, 8, 9]
 x = 4
 
@@ -2667,6 +2662,7 @@ else:
 ## Python Sorting algorithms
 
 # Python with other modules
+
 ## Python with Flask
 ``` python
 import flask
