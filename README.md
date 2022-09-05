@@ -33,7 +33,11 @@
     4. [Python Trees](#python-trees)
     5. [Python Graphs](#python-graphs)
     6. [Python Searching Algorithms](#python-searching-algorithms)
+	    1. [Linear Search](#linear-search)
+	    2. [Binary Search](#binary-search)
     7. [Python Sorting Algorithms](#python-sorting-algorithms)
+		1. [Bubble Sort](#bubble-sort)
+	    2. [Selection Sort](#selection-sort)
 7. [Python with other modules](#python-with-other-modules)
     1. [Python with Flask](#python-with-flask)
     2. [Python with Subprocess](#python-with-subprocess)
@@ -2875,6 +2879,11 @@ def heapSort(arr):
 ```
 
 ### Counting sort
+Counting sort is a sorting algorithm that sorts the elements of an array by counting the number of occurrences of each unique element in the array. The count is stored in an auxiliary array and the sorting is done by mapping the count as an index of the auxiliary array.
+
+The time complexity of counting sort is O(n+k).
+The space complexity is O(max).
+Counting sort is stable.
 
 ``` python
 
