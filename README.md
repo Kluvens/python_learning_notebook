@@ -868,6 +868,28 @@ else:
 - List items are ordered, changeable, and allow duplicate values.
 - List items can be of any data type.
 
+Time complexity of list operations on Average and Worst cases:
+| Operation | Average | Worst |
+| --------- | ------- | ----- |
+| Copy | O(n) | O(n) |
+| Append | O(1) | O(1) |
+| Pop last | O(1) | O(1) |
+| Pop intermediate | O(n) | O(n) |
+| Insert | O(n) | O(n) |
+| Get item | O(1) | O(1) |
+| Set item | O(1) | O(1) |
+| Delete item | O(n) | O(n) |
+| Iteration | O(n) | O(n) |
+| Get slice | O(k) | O(k) |
+| Set slice | O(k+n) | O(k+n) |
+| Del slice | O(n) | O(n) |
+| Extend | O(k) | O(k) |
+| Sort | O(n log n) | O(n log n) |
+| Multiply | O(nk) | O(nk) |
+| x in s | O(n) | O(n) |
+| min(s), max(x) |  O(n) | O(n) |
+| Get length | O(1) | O(1) |
+
 More functions and methods on Python list:
 ``` python
 # list
@@ -973,6 +995,16 @@ print(newlist)
 - Dictionary items are ordered, changeable, and does not allow duplicates.
 - The values in dictionary items can be of any data type.
 - In Python, dictionary basically represents the implementation of hash table.
+
+Time complexity of dict operations in average and worst cases
+| Operation | Average | Worst |
+| --------- | ------- | ----- |
+| k in d | O(1) | O(n) |
+| Copy | O(n) | O(n) |
+| Get item | O(1) | O(n) |
+| Set item | O(1) | O(n) |
+| Delete item | O(1) | O(n) |
+| iteration | O(n) | O(n) |
 
 ``` python
 # dictionary
