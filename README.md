@@ -2621,6 +2621,195 @@ print()
 ## Python Tries
 
 ## Python Graphs
+A graph data structure is a collection of nodes that have data and are connected to other nodes.
+
+More precisely, a graph is a data structure (V, E) that consists of
+- a collection of vertices V
+- a collection of edges E, represented as ordered pairs of vertices (u, v)
+
+### Graph Terminology
+- Adjacency: A vertex is said to be adjacent to another vertex if there is an edge connecting them. Vertices 2 and 3 are not adjacent because there is no edge between them.
+- Path: A sequence of edges that allows you to go from vertex A to vertex B is called a path. 0-1, 1-2 and 0-2 are paths from vertex 0 to vertex 2.
+- Directed Graph: A graph in which an edge (u,v) doesn't necessarily mean that there is an edge (v, u) as well. The edges in such a graph are represented by arrows to show the direction of the edge.
+
+### Graph representation
+There are several ways that we could represent graph:
+1. Adjacency Matrix
+An adjacency matrix is a 2D array of V x V vertices. Each row and column represent a vertex.
+If the value of any element a[i][j] is 1, it represents that there is an edge connecting vertex i and vertex j.
+2. Adjacency List
+An adjacency list represents a graph as an array of linked lists.
+The index of the array represents a vertex and each element in its linked list represents the other vertices that form an edge with the vertex.
+An adjacency list is efficient in terms of storage because we only need to store the values for the edges. For a graph with millions of vertices, this can mean a lot of saved space.
+
+### Spanning Tree and Minimum Spanning Tree
+
+#### Undirected graph
+An undirected graph is a graph in which the edges do not point in any direction (ie. the edges are bidirectional).
+
+#### Connected graph
+A connected graph is a graph in which there is always a path from a vertex to any other vertex.
+
+#### Spanning tree
+A spanning tree is a sub-graph of an undirected connected graph, which includes all the vertices of the graph with a minimum possible number of edges. 
+If a vertex is missed, then it is not a spanning tree.
+
+#### Minimum Spanning Tree
+A minimum spanning tree is a spanning tree in which the sum of the weight of the edges is as minimum as possible.
+
+### Minimum Spanning Tree Algorithms
+
+#### Prim's Algorithm
+Prim's algorithm is a minimum spanning tree algorithm that takes a graph as input and finds the subset of the edges of that graph which
+- form a tree that includes every vertex
+- has the minimum sum of weights among all the trees that can be formed from the graph
+
+#### How Prim's algorithm works
+It falls under a class of algorithms called greedy algorithms that find the local optimum in the hopes of finding a global optimum.
+
+We start from one vertex and keep adding edges with the lowest weight until we reach our goal.
+
+The steps for implementing Prim's algorithm are as follows:
+1. Initialize the minimum spanning tree with a vertex chosen at random.
+2. Find all the edges that connect the tree to new vertices, find the minimum and add it to the tree
+3. Keep repeating step 2 until we get a minimum spanning tree
+
+The time complexity of Prim's Algorithm is O(E log V).
+
+``` python
+# Prim's Algorithm in Python
+
+INF = 9999999
+# number of vertices in graph
+V = 5
+# create a 2d array of size 5x5
+# for adjacency matrix to represent graph
+G = [[0, 9, 75, 0, 0],
+     [9, 0, 95, 19, 42],
+     [75, 95, 0, 51, 66],
+     [0, 19, 51, 0, 31],
+     [0, 42, 66, 31, 0]]
+# create a array to track selected vertex
+# selected will become true otherwise false
+selected = [0, 0, 0, 0, 0]
+# set number of edge to 0
+no_edge = 0
+# the number of egde in minimum spanning tree will be
+# always less than(V - 1), where V is number of vertices in
+# graph
+# choose 0th vertex and make it true
+selected[0] = True
+# print for edge and weight
+print("Edge : Weight\n")
+while (no_edge < V - 1):
+    # For every vertex in the set S, find the all adjacent vertices
+    #, calculate the distance from the vertex selected at step 1.
+    # if the vertex is already in the set S, discard it otherwise
+    # choose another vertex nearest to selected vertex  at step 1.
+    minimum = INF
+    x = 0
+    y = 0
+    for i in range(V):
+        if selected[i]:
+            for j in range(V):
+                if ((not selected[j]) and G[i][j]):  
+                    # not in selected and there is an edge
+                    if minimum > G[i][j]:
+                        minimum = G[i][j]
+                        x = i
+                        y = j
+    print(str(x) + "-" + str(y) + ":" + str(G[x][y]))
+    selected[y] = True
+    no_edge += 1
+```
+
+#### Kruskal's Algorithm
+Kruskal's algorithm is a minimum spanning tree algorithm that takes a graph as input and finds the subset of the edges of that graph which
+- form a tree that includes every vertex
+- has the minimum sum of weights among all the trees that can be formed from the graph
+
+#### How Kruskal's algorithm works
+It falls under a class of algorithms called greedy algorithms that find the local optimum in the hopes of finding a global optimum.
+
+We start from the edges with the lowest weight and keep adding edges until we reach our goal.
+
+The steps for implementing Kruskal's algorithm are as follows:
+1. Sort all the edges from low weight to high
+2. Take the edge with the lowest weight and add it to the spanning tree. If adding the edge created a cycle, then reject this edge.
+3. Keep adding edges until we reach all vertices.
+
+The time complexity of Kruskal's Algorithm is O(E log E).
+
+``` python
+# Kruskal's algorithm in Python
+
+class Graph:
+    def __init__(self, vertices):
+        self.V = vertices
+        self.graph = []
+
+    def add_edge(self, u, v, w):
+        self.graph.append([u, v, w])
+
+    # Search function
+
+    def find(self, parent, i):
+        if parent[i] == i:
+            return i
+        return self.find(parent, parent[i])
+
+    def apply_union(self, parent, rank, x, y):
+        xroot = self.find(parent, x)
+        yroot = self.find(parent, y)
+        if rank[xroot] < rank[yroot]:
+            parent[xroot] = yroot
+        elif rank[xroot] > rank[yroot]:
+            parent[yroot] = xroot
+        else:
+            parent[yroot] = xroot
+            rank[xroot] += 1
+
+    #  Applying Kruskal algorithm
+    def kruskal_algo(self):
+        result = []
+        i, e = 0, 0
+        self.graph = sorted(self.graph, key=lambda item: item[2])
+        parent = []
+        rank = []
+        for node in range(self.V):
+            parent.append(node)
+            rank.append(0)
+        while e < self.V - 1:
+            u, v, w = self.graph[i]
+            i = i + 1
+            x = self.find(parent, u)
+            y = self.find(parent, v)
+            if x != y:
+                e = e + 1
+                result.append([u, v, w])
+                self.apply_union(parent, rank, x, y)
+        for u, v, weight in result:
+            print("%d - %d: %d" % (u, v, weight))
+
+
+g = Graph(6)
+g.add_edge(0, 1, 4)
+g.add_edge(0, 2, 4)
+g.add_edge(1, 2, 2)
+g.add_edge(1, 0, 4)
+g.add_edge(2, 0, 4)
+g.add_edge(2, 1, 2)
+g.add_edge(2, 3, 3)
+g.add_edge(2, 5, 2)
+g.add_edge(2, 4, 4)
+g.add_edge(3, 2, 3)
+g.add_edge(3, 4, 3)
+g.add_edge(4, 2, 4)
+g.add_edge(4, 3, 3)
+g.add_edge(5, 2, 2)
+g.add_edge(5, 4, 3)
+g.kruskal_algo()
+```
 
 ## Python Searching Algorithms
 
