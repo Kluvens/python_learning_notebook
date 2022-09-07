@@ -70,6 +70,7 @@ There are several major differences between Python 2 and Python 3:
 - Python 3 exceptions should be enclosed in parenthesis while Python 2 exceptions should be enclosed in notations.
 - Python 3 rules of ordering comparisons are simplified whereas Python 2 rules of ordering comparison are complex.
 - Python 3 offers Range() function to perform iterations whereas, In Python 2, the xrange() is used for iterations.
+
 ## Why Python is popular
 1. Python is easy to learn and use which means Python can have higher productivity
 2. Python is handy for web development purposes
@@ -77,7 +78,9 @@ There are several major differences between Python 2 and Python 3:
 4. Python has multiple libraries and frameworks
 5. Python can be used in ML tool
 6. Python has a highly supportive community
-7. Python programs or portable
+7. Python works on different platforms (Windows, Mac, Linux ...)
+8. Python has procedural, object-orientated and functional properties
+
 ## Why Python is slow
 Unlike native languages like C/C++, Python code gets interpreted at runtime instead of being compiled to native code at compile time. Python is an interpreted language, which means that the Python code we write must go through many, many stages of abstraction before it can become executable machine code.
 
@@ -3744,6 +3747,81 @@ for i in L:
 
 # defaultdict(<class 'int'>, {1: 2, 2: 3, 3: 1, 4: 2})       
 print(d)
+```
+
+### Deque
+A deque is similar to all of the other sequential data structures but
+has some implemenation details that are different from other sequences like a list.
+This module highlights those differences and shows how a deque can be used as a LIFO stack and a FIFO queue.
+
+Deque objects support the following methods:
+- ```append(x)``` - add x to the right side of the deque.
+- ```appendleft(x)``` - add x to the left side of the deque.
+- ```clear()``` - remove all elements from the deque leaving it with length 0.
+- ```copy()``` - create a shallow copy of the deque.
+- ```count(x)``` - count the number of deque elements equal to x.
+- ```extend(iterable)``` - extend the right side of the deque by appending elements from the iterable argument.
+- ```extendleft(iterable)``` - extend the left side of the deque by appending elements from iterable.
+- ```index(x[, start[, stop]])``` - Return the position of x in the deque (at or after index start and before index stop). Returns the first match or raises ValueError if not found.
+- ```insert(i, x)``` - insert x into the deque at position i.
+- ```pop()``` - remove and return an element from the right side of the deque.
+- ```popleft()``` - remove and return an element from the left side of the deque.
+- ```remove(value)``` - remove the first occurence of value. If not found, raises a ValueError.
+- ```reverse()``` - reverse the elements of the deque in-place and then return None.
+- ```rotate(n=1)``` - rotate the deque n steps to the right. If n is negative, rotate to the left.
+- ```maxlen``` - maximum size of a deque or None if unbounded.
+
+``` python
+import collections
+
+d = collections.deque('good')   # create a new deque with four items
+for element in d:
+    print(element)              # iterate over and print deque's elements
+
+d.append('h')
+print(d)                        # deque(['g', 'o', 'o', 'd', 'h'])
+
+d.appendleft('f')
+print(d)                        # deque(['f', 'g', 'o', 'o', 'd', 'h'])
+
+d.pop()
+print(d)                        # deque(['f', 'g', 'o', 'o', 'd'])
+
+d.popleft()
+print(d)                        # deque(['f', 'g', 'o', 'o', 'd'])
+
+print(list(d))                  # ['g', 'o', 'o', 'd']
+
+d.rotate(1)
+print(d)                        # deque(['d', 'g', 'o', 'o'])
+
+d.rotate(-1)
+print(d)                        # deque(['g', 'o', 'o', 'd'])
+
+new_d = d.copy()
+print(new_d)                    # deque(['g', 'o', 'o', 'd'])
+
+print(d.count('o'))             # 2
+
+d.extend("hello")
+print(d)                        # deque(['g', 'o', 'o', 'd', 'h', 'e', 'l', 'l', 'o'])
+
+new_d.extendleft("hey")
+print(new_d)                    # deque(['y', 'e', 'h', 'g', 'o', 'o', 'd'])
+
+d = collections.deque('good')
+print(d.index('o'))             # 1
+
+d.insert(2, 'h')
+print(d)                        # deque(['g', 'o', 'h', 'o', 'd'])
+
+d.remove('o')
+print(d)                        # deque(['g', 'h', 'o', 'd'])
+
+d.reverse()
+print(d)                        # deque(['d', 'o', 'h', 'g'])
+
+print(d.maxlen)                 # None (means unbounded)
 ```
 
 ## Python with Random
