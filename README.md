@@ -19,6 +19,7 @@
     12. [Python Functions](#python-functions)
     13. [Python Errors and Exceptions](#python-errors-and-exceptions)
     14. [Python User-Defined Modules](#python-user-defined-modules)
+    15. [Python Properties to Note](#python-properties-to-note)
 3. [Python Advanced Syntax](#python-advanced-syntax)
     1. [Python Recursion](#python-recursion)
     2. [Python Anonymous Function](#python-anonymous-function)
@@ -581,6 +582,12 @@ print(string.startswith("Hello"))           # True
 # print specific number of digits
 f = 3.1415926
 print("{:.3f}".format(f))                   # 3.142
+
+num = 1234546
+print(f"{num:10}")                          # '   1234546'
+print(f"{num:10,}")                         # ' 1,234,546'
+print(f"{str(num):10}")                     # '1234546   '
+
 # insert a value to the placeholder
 txt = "For only {price:.2f} dollars!"
 print(txt.format(price = 49))               # For only 49.00 dollars!
@@ -1396,6 +1403,11 @@ if __name__ == "__main__":
 # the code will not run in the file which imports the module
 ```
 
+## Python Properties to Note
+- Everything in Python is an object
+- Every object in Python has a type
+- type and class are synonymous
+
 # Python Advanced Syntax
 ## Python Recursion
 Recursion means defining a problem in terms of itself.
@@ -1951,8 +1963,6 @@ x = Student("Mike", "Jan", 95)
 print(x.grade)              # 95
 x.welcom()                  # Welcom Mike Jan
 ```
-
-## Everything in Python is an object
 
 ## Python Operator overloading
 To overload the + operator, we will need to implement __add__() function in the class.
@@ -4239,6 +4249,32 @@ import csv
 - ```csv.reader(csvfile, dialect='excel', **fmtparams)``` - return a reader object which will iterate over lines in the given csvfile.
 - ```csv.writer(csvfile, dialect='excel', **fmtparams)``` - return a writer object responsible for converting the user's data into delimited strings on the given file-like object.
 
+### Parameters
+* `'dialect'` - Master parameter that sets the default values. String or a Dialect object.
+* `'delimiter'` - A one-character string used to separate fields.
+* `'quotechar'` - Character for quoting fields that contain special characters.
+* `'doublequote'` - Whether quotechars inside fields are/get doubled or escaped.
+* `'skipinitialspace'` - Is space character at the start of the field stripped by the reader.
+* `'lineterminator'` - How writer terminates rows. Reader is hardcoded to '\n', '\r', '\r\n'.
+* `'quoting'` - 0: As necessary, 1: All, 2: All but numbers which are read as floats, 3: None.
+* `'escapechar'` - Character for escaping quotechars if doublequote is False.
+
+### Read Rows from CSV File
+```python
+def read_csv_file(filename, dialect='excel'):
+    with open(filename, encoding='utf-8', newline='') as file:
+        return list(csv.reader(file, dialect))
+```
+
+### Write Rows to CSV File
+```python
+def write_to_csv_file(filename, rows, dialect='excel'):
+    with open(filename, 'w', encoding='utf-8', newline='') as file:
+        writer = csv.writer(file, dialect)
+        writer.writerows(rows)
+```
+
+Coding Example:
 ``` python
 import sys
 import csv
