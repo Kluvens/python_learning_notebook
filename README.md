@@ -24,9 +24,8 @@
     3. [Python map(), filter() and reduce()](#python-map-filter-and-reduce)
     4. [Python Extended Keyword Arguments](#python-extended-keyword-arguments)
     5. [Python Generators](#python-generators)
-4. [Python Program Testing and Debugging](#python-program-testing-and-debugging)
-5. [Python Object Oriented Programming](#python-object-oriented-programming)
-6. [Python with Data Structure and Algorithms](#python-with-data-structure-and-algorithms)
+4. [Python Object Oriented Programming](#python-object-oriented-programming)
+5. [Python with Data Structure and Algorithms](#python-with-data-structure-and-algorithms)
     1. [Python Linked Lists](#python-linked-lists)
     2. [Python Stack](#python-stack)
     3. [Python Queue](#python-queue)
@@ -38,7 +37,7 @@
     7. [Python Sorting Algorithms](#python-sorting-algorithms)
 		1. [Bubble Sort](#bubble-sort)
 	    2. [Selection Sort](#selection-sort)
-7. [Python with other modules](#python-with-other-modules)
+6. [Python with other modules](#python-with-other-modules)
     1. [Python with Flask](#python-with-flask)
     2. [Python with Subprocess](#python-with-subprocess)
     3. [Python with Regular expression](#python-with-regular-expression)
@@ -53,6 +52,7 @@
     12. [Python with Datetime](#python-with-datetime)
     13. [Python with Typing](#python-with-typing)
     14. [Python with Argparse](#python-with-argparse)
+7. [Python Program Testing and Debugging](#python-program-testing-and-debugging)
 
 # Why Python
 ## Python history
@@ -1618,14 +1618,235 @@ for x in myiter:
 ```
 
 ## Python Decorators
+A decorator is a design pattern in Python that allows a user to add new functionality to an existing object without modifying its structure.
+Decorators are usually called before the definition of a function you want to decorate.
 
-# Python Program Testing and Debugging
+### Assigning Functions to Variables
+We can assign the function to a variable and use this variable to call the function.
+``` python
+def plus_one(number):
+    return number + 1
 
-## Linting and pylint
+add_one = plus_one
+add_one(5)		# 6
+```
 
-```$ pylint file.py```
+### Defining Functions Inside other Functions
+``` python
+def plus_one(number):
+    def add_one(number):
+        return number + 1
 
-## Unit test and pytest
+
+    result = add_one(number)
+    return result
+plus_one(4)		# 5
+```
+
+### Passing Functions as Arguments to other Functions
+Functions can also be passed as parameters to other functions.
+``` python
+def plus_one(number):
+    return number + 1
+
+def function_call(function):
+    number_to_add = 5
+    return function(number_to_add)
+
+function_call(plus_one)		# 6
+```
+
+### Functions Returning other Functions
+A function can also generate another function.
+``` python
+def hello_function():
+    def say_hi():
+        return "Hi"
+    return say_hi
+hello = hello_function()
+hello()			# 'Hi'
+```
+
+### Nested Functions have access to the Enclosing Functions' Variable Scope
+Python allows a nested function to access the outer scope of the enclosing function.
+``` python
+def print_message(message):
+    "Enclosong Function"
+    def message_sender():
+        "Nested Function"
+        print(message)
+
+    message_sender()
+
+print_message("Some random message")	# Some random message
+```
+
+### Creating Decorators
+``` python
+def uppercase_decorator(function):
+    def wrapper():
+        func = function()
+        make_uppercase = func.upper()
+        return make_uppercase
+
+    return wrapper
+
+def say_hi():
+    return 'hello there'
+
+decorate = uppercase_decorator(say_hi)
+decorate()		# 'HELLO THERE'
+```
+
+Python also provides a much easier way for us to apply decorators.
+We simply use the @ symbol before the function we would like to decorate.
+``` python
+def uppercase_decorator(function):
+    def wrapper():
+        func = function()
+        make_uppercase = func.upper()
+        return make_uppercase
+
+    return wrapper
+
+@uppercase_decorator
+def say_hi():
+    return 'hello there'
+
+say_hi()		# 'HELLO THERE'
+```
+
+### Applying Multiple Decorators to a Single Function
+We can use multiple decorators to a single function.
+However, the decorators will be applied in the order that we've called them.
+
+``` python
+def uppercase_decorator(function):
+    def wrapper():
+        func = function()
+        make_uppercase = func.upper()
+        return make_uppercase
+
+    return wrapper
+    
+def split_string(function):
+    def wrapper():
+        func = function()
+        splitted_string = func.split()
+        return splitted_string
+
+    return wrapper
+    
+@split_string
+@uppercase_decorator
+def say_hi():
+    return 'hello there'
+say_hi()		# ['HELLO', 'THERE']
+```
+
+### Accepting Arguments in Decorator Functions
+Sometimes we might need to define a decorator that accepts arguments.
+We achieve this by passing the arguments to the wrapper function.
+``` python
+def decorator_with_arguments(function):
+    def wrapper_accepting_arguments(arg1, arg2):
+        print("My arguments are: {0}, {1}".format(arg1,arg2))
+        function(arg1, arg2)
+    return wrapper_accepting_arguments
+
+
+@decorator_with_arguments
+def cities(city_one, city_two):
+    print("Cities I love are {0} and {1}".format(city_one, city_two))
+
+cities("Sydney", "New York")
+
+# My arguments are: Sydney, New York
+# Cities I love are Sydney and New York
+```
+
+### Defining General Purpose Decorators
+To define a general purpose decorator that can be applied to any function, we use *args and **kwargs.
+*args and **kwargs collect all positional and keyword arguments and stores them in the args and kwargs variables.
+*args and **kwargs can deal with a varyig number of arguments.
+
+``` python
+def a_decorator_passing_arbitrary_arguments(function_to_decorate):
+    def a_wrapper_accepting_arbitrary_arguments(*args,**kwargs):
+        print('The positional arguments are', args)
+        print('The keyword arguments are', kwargs)
+        function_to_decorate(*args)
+    return a_wrapper_accepting_arbitrary_arguments
+
+@a_decorator_passing_arbitrary_arguments
+def function_with_no_argument():
+    print("No arguments here.")
+
+function_with_no_argument()
+
+# The positional arguments are ()
+# The keyword arguments are {}
+# No arguments here.
+```
+
+use the decorator with positional arguments
+``` python
+@a_decorator_passing_arbitrary_arguments
+def function_with_arguments(a, b, c):
+    print(a, b, c)
+
+function_with_arguments(1,2,3)
+
+# The positional arguments are (1, 2, 3)
+# The keyword arguments are {}
+# 1 2 3
+```
+
+use the decorator with keyword arguments
+``` python
+@a_decorator_passing_arbitrary_arguments
+def function_with_keyword_arguments():
+    print("This has shown keyword arguments")
+
+function_with_keyword_arguments(first_name="Derrick", last_name="Mwiti")
+
+# The positional arguments are ()
+# The keyword arguments are {'first_name': 'Derrick', 'last_name': 'Mwiti'}
+# This has shown keyword arguments
+```
+
+### Passing Arguments to the Decorator
+``` python
+def decorator_maker_with_arguments(decorator_arg1, decorator_arg2, decorator_arg3):
+    def decorator(func):
+        def wrapper(function_arg1, function_arg2, function_arg3) :
+            "This is the wrapper function"
+            print("The wrapper can access all the variables\n"
+                  "\t- from the decorator maker: {0} {1} {2}\n"
+                  "\t- from the function call: {3} {4} {5}\n"
+                  "and pass them to the decorated function"
+                  .format(decorator_arg1, decorator_arg2,decorator_arg3,
+                          function_arg1, function_arg2,function_arg3))
+            return func(function_arg1, function_arg2,function_arg3)
+
+        return wrapper
+
+    return decorator
+
+pandas = "Pandas"
+@decorator_maker_with_arguments(pandas, "Numpy","Scikit-learn")
+def decorated_function_with_arguments(function_arg1, function_arg2,function_arg3):
+    print("This is the decorated function and it only knows about its arguments: {0}"
+           " {1}" " {2}".format(function_arg1, function_arg2,function_arg3))
+
+decorated_function_with_arguments(pandas, "Science", "Tools")
+
+# The wrapper can access all the variables
+#     - from the decorator maker: Pandas Numpy Scikit-learn
+#     - from the function call: Pandas Science Tools
+# and pass them to the decorated function
+# This is the decorated function, and it only knows about its arguments: Pandas Science Tools
+```
 
 # Python Object Oriented Programming
 
@@ -4150,6 +4371,14 @@ import argparse
 ```
 The argparse module makes it easy to write user-friendly command-line interfaces.
 The program defines what arguments it requires, and argparse will figure out how to parse those out of sys.argv.
+
+# Python Program Testing and Debugging
+
+## Linting and pylint
+
+```$ pylint file.py```
+
+## Unit test and pytest
 
 # Python topics
 ## Style and being Pythonic
