@@ -4624,6 +4624,54 @@ for i in files:
     print(i)
 ```
 
+## Python with OS
+- `getcwd()` - get current working directory
+- `chdir(x)` - change current working directory to x
+- `mkdir(x)` - create a new direcrory x
+- `makedirs(x)` - create directory x recursively (can make leaf directory if any intermediate directory is missing)
+- `listdir(x)` - list all files and directories in path x
+- `remove()` - used to delete a file by a file path
+- `rmdir()` - used to delete a directory by a directory path
+- `rename(old, new)` - used to rename a file
+- `path.exists(x)` - check if file x exists
+- `path.getsize(x)` - get the size of the file x in bytes
+- `name` - gives the name of the operating system dependent module imported
+
+``` python
+import os
+
+# get current working directory
+cwd = os.getcwd()
+print(cwd)
+
+# delete a directory
+os.rmdir('newPython')
+
+# create a directory
+os.mkdir('newPython')
+
+# create a directory recursively
+os.makedirs('hey/new')
+
+# changing the current working directory
+os.chdir('../')
+print(os.getcwd())
+
+# get the list of all files and directories
+print(os.listdir())
+
+file = 'file.txt'
+path = os.path.join(cwd, file)
+
+# get size of a file
+print(os.path.getsize(path))
+
+# delete a file by the file path
+os.remove(path)
+
+print(os.name)      # posix
+```
+
 # Python Program Testing and Debugging
 
 ## Linting and pylint
