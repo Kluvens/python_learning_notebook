@@ -4681,7 +4681,18 @@ print(os.name)      # posix
 # Python Program Testing and Debugging
 
 ## Linting and pylint
+Linting is the automated checking of your source code for programmatic and stylistic errors.
+This is done by using a lint tool (known as linter).
 
+Pylint is a static code analyser for Python.
+
+Pylint analyses your code without actually running it.
+It checks for errors, enforces a coding standard, looks for code smells and can make suggestions about how the code could be refactored.
+
+Install
+`pip install pylint`
+
+Run Pylint and check files
 ```$ pylint file.py```
 
 ## Unit test and pytest
