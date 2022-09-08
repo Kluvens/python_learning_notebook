@@ -4460,6 +4460,143 @@ import argparse
 The argparse module makes it easy to write user-friendly command-line interfaces.
 The program defines what arguments it requires, and argparse will figure out how to parse those out of sys.argv.
 
+### Getting started
+``` python
+# Import the library
+import argparse
+
+# Create the parser
+parser = argparse.ArgumentParser()
+
+# Add an argument
+# --name specifies that the name of the varaible
+# type=str specifies that the type of the argument is string
+# required=True means we must give an argument to the variable
+
+# python3 prac.py (doesn't work)
+# python3 prac.py myName (doesn't work)
+# python3 prac.py --name myName (works)
+parser.add_argument('--name', type=str, required=True)
+
+# Parse the argument
+args = parser.parse_args()
+
+# Print "Hello" + the user input argument
+# In this case, we have Hello, myName
+print('Hello,', args.name)
+```
+
+### Positional Arguments
+Sometimes we don't want to use the flag's name in the argument.
+We can use a positional argument to eliminate the needto specify the --name flag before inputting the actural value.
+
+required is invalid for positional arguments
+
+``` python
+import argparse
+
+parser = argparse.ArgumentParser()
+# just x without --x
+parser.add_argument('x', type=int)
+parser.add_argument('y', type=int)
+args = parser.parse_args()
+
+product = args.x * args.y
+print('Product:', product)
+
+>> python3 prac.py 4 5
+Product: 20
+```
+
+We can use the help parameter in add_argument() to specify more details about the argument.
+``` python
+parser.add_argument('x', type=int, help='The first value to multiply')
+parser.add_argument('y', type=int, help='The second value to multiply')
+
+>> python3 prac.py -h
+usage: prac.py [-h] x y
+positional argumetns:
+x	The first value to multiply
+y       The second value to multiply
+```
+
+### Optional Arguments
+Optional arguments are useful if we want to give the user a choice to enable certain features.
+
+``` python
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--name', type=str, required=True)
+parser.add_argument('--age', type=int)
+args = parser.parse_args()
+
+if args.age:
+  print(args.name, 'is', args.age, 'years old.')
+else:
+  print('Hello,', args.name + '!')
+
+# >> python3 prac.py --name myName --age 16
+# myName is 16 years old.
+
+# >> python3 prac.py --name myName
+# Hello, myName!
+```
+
+### Multiple Input Arguments
+Using the nargs parameter in add_argument(), we can sepecify the number of inputs the argument should expect.
+
+``` python
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--values', type=int, nargs=3)
+args = parser.parse_args()
+
+sum = sum(args.values)
+print('Sum:', sum)
+
+>> python3 prac.py --values 1 2 3
+Sum: 6
+```
+
+We can also set nargs='+', whcih will allow the argument to take in any number of values.
+``` python
+>> python3 prac.py --values 1 2 3 4 5 6 7 8 9 10
+Sum: 55
+```
+
+### Mutually Exclusive Arguments
+There are times that, depending on one argument, you want to restrict the use of another. 
+This could be because the user should only need to use one of the arguments, or that the arguments conflict with each other. 
+The method add_mutually_exclusive_group() let’s us do exactly that — add a group of arguments that are mutually exclusive.
+
+``` python
+import argparse
+
+parser = argparse.ArgumentParser()
+group = parser.add_mutually_exclusive_group()
+# argument if mentioned stores true value
+group.add_argument('--add', action='store_true')
+group.add_argument('--subtract', action='store_true')
+parser.add_argument('x', type=int)
+parser.add_argument('y', type=int)
+args = parser.parse_args()
+
+if args.add:
+    sum = args.x + args.y
+    print('Sum:', sum)
+elif args.subtract:
+    difference = args.x - args.y
+    print('Difference:', difference)
+
+# >> python3 prac.py --add 1 2
+# Sum: 3
+
+# >> python3 prac.py --add 4 3
+# Difference: 1
+```
+
 # Python Program Testing and Debugging
 
 ## Linting and pylint
