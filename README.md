@@ -18,12 +18,15 @@
     11. [Python Sets](#python-sets)
     12. [Python Functions](#python-functions)
     13. [Python Errors and Exceptions](#python-errors-and-exceptions)
+    14. [Python User-Defined Modules](#python-user-defined-modules)
 3. [Python Advanced Syntax](#python-advanced-syntax)
     1. [Python Recursion](#python-recursion)
     2. [Python Anonymous Function](#python-anonymous-function)
     3. [Python map(), filter() and reduce()](#python-map-filter-and-reduce)
     4. [Python Extended Keyword Arguments](#python-extended-keyword-arguments)
     5. [Python Generators](#python-generators)
+    6. [Python Iterators](#python-iterators)
+    7. [Python Decorators](#python-decorators)
 4. [Python Object Oriented Programming](#python-object-oriented-programming)
 5. [Python with Data Structure and Algorithms](#python-with-data-structure-and-algorithms)
     1. [Python Linked Lists](#python-linked-lists)
@@ -1342,6 +1345,55 @@ x = "hello"
 
 if not type(x) is int:
   raise TypeError("Only integers are allowed")
+```
+
+## Python User-Defined Modules
+
+### What is a module
+Modules refer to a file containing Python statements and definitions.
+
+A file containing Python code, for example: example.py, is called a module, and its module name would be example.
+
+We use modules to break down large programs into small manageable and organized files.
+We can define our most used functions in a module and import it, instead of copying their definitions into different programs.
+
+### How to import modules in Python
+We can import the definitions inside a module to another module or the interactive interpreter in Python.
+
+We use the import keyword to do this. To import our previously defined module example, we type the following in the Python prompt.
+
+``` python
+# if there is file called example.py
+import example
+```
+
+### Import with renaming
+We can import a module by renaming it as follows:
+``` python
+# import module by renaming it
+
+import math as m
+print("The value of pi is", m.pi)
+```
+
+### Python from...import statement
+We can import specific names from a module without importing the module as a whole.
+``` python
+# import only pi from math module
+
+from math import pi
+print("The value of pi is", pi)
+```
+
+***Notice**: when importing a module, basically it imports every code in the file. So codes in the main function will also run after imported. To avoid the issue, we bound the main function by ```if __name__ == '__main__':```.
+
+Example:
+``` python
+if __name__ == "__main__":
+    print("Hello, World!")
+    
+# the code only runs when we execute the file
+# the code will not run in the file which imports the module
 ```
 
 # Python Advanced Syntax
