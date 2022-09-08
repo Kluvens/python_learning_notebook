@@ -4597,6 +4597,33 @@ elif args.subtract:
 # Difference: 1
 ```
 
+A more structured example:
+``` python
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('-i', action='store_true')
+parser.add_argument('-n', action='store_true')
+parser.add_argument('-f', nargs=1)
+parser.add_argument('files', type=str, nargs='+')
+args = parser.parse_args()
+
+if args.i:
+    print('have more operations')
+
+if args.n:
+    print('don\'t print any line')
+
+file = args.f[0]
+with open(file) as f:
+    for line in f:
+        print(line.strip('\n'))
+
+files = args.files
+for i in files:
+    print(i)
+```
+
 # Python Program Testing and Debugging
 
 ## Linting and pylint
