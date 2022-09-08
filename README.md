@@ -41,6 +41,15 @@
     7. [Python Sorting Algorithms](#python-sorting-algorithms)
 		1. [Bubble Sort](#bubble-sort)
 	    2. [Selection Sort](#selection-sort)
+		3. [Insertion Sort](#insertion-sort)
+		4. [Merge Sort](#merge-sort)
+		5. [Quick Sort](#quick-sort)
+		6. [Shell Sort](#shell-sort)
+		7. [Heap Sort](#heap-sort)
+		8. [Counting Sort](#counting-sort)
+		9. [Bucket Sort](#bucket-sort)
+		10. [Radix Sort](#radix-sort)
+	8. [Greedy Algorithms](#greedy-algorithms)
 6. [Python with other modules](#python-with-other-modules)
     1. [Python with Flask](#python-with-flask)
     2. [Python with Subprocess](#python-with-subprocess)
@@ -3450,12 +3459,14 @@ Counting sort is stable.
 ```
 
 ### Radix sort
+Radix sort is a sorting algorithm that sorts the lements by first grouping the individual digits of the same place value.
+Then sort the elements according to their increasing/decreasing order.
 
 ``` python
 
 ```
 
-## Greeday Algorithms
+## Greedy Algorithms
 
 ## Dynamic Programming
 
