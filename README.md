@@ -56,6 +56,7 @@
     12. [Python with Datetime](#python-with-datetime)
     13. [Python with Typing](#python-with-typing)
     14. [Python with Argparse](#python-with-argparse)
+    15. [Python with OS](#python-with-os)
 7. [Python Program Testing and Debugging](#python-program-testing-and-debugging)
 
 # Why Python
@@ -4625,6 +4626,11 @@ for i in files:
 ```
 
 ## Python with OS
+``` python
+import os
+```
+
+Frequently used methods in os module:
 - `getcwd()` - get current working directory
 - `chdir(x)` - change current working directory to x
 - `mkdir(x)` - create a new direcrory x
