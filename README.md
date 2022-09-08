@@ -4597,7 +4597,7 @@ elif args.subtract:
 # Difference: 1
 ```
 
-A more structured example:
+### A more structured example
 ``` python
 import argparse
 
