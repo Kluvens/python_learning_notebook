@@ -29,6 +29,7 @@
     6. [Python Iterators](#python-iterators)
     7. [Python Decorators](#python-decorators)
 4. [Python Object Oriented Programming](#python-object-oriented-programming)
+	1. [Python Classes and Objects](#python-classes-and-objects)
 5. [Python with Data Structure and Algorithms](#python-with-data-structure-and-algorithms)
     1. [Python Linked Lists](#python-linked-lists)
     2. [Python Stack](#python-stack)
@@ -1924,6 +1925,13 @@ decorated_function_with_arguments(pandas, "Science", "Tools")
 
 # Python Object Oriented Programming
 
+## Basic OOP concepts
+There are four fundamental concepts in object-oriented programming:
+- Abstraction
+- Encapsulation
+- Inheritance
+- Polymorphism
+
 ## Python Classes and Objects
 Everything in Python is an object.
 An object has states and behaviours.
@@ -1960,12 +1968,12 @@ class Person:
 ```
 The `person` object now has the `name` and `age` attributes.
 
-To access an instance attribute, we use the dot(.) notation.
+To access an instance attribute, we use the dot(`.`) notation.
 ``` python
 person.name
 ```
 
-### __init__ method
+### \_\_init\_\_ method
 Unlike regular method, the `__init()__` method has two underscores on each side.
 Therefore, the method is often called dunder init.
 
@@ -1992,7 +2000,7 @@ class Person:
         return f"Hi, it's {self.name}."
 ```
 
-To call an instance method, we use the dot(.) notation.
+To call an instance method, we use the dot(`.`) notation.
 ``` python
 person = Person('John', 25)
 print(person.greet())
@@ -2088,6 +2096,122 @@ To call a static method, you use the ClassName.static_method_name() syntax.
 f = TemperatureConverter.celsius_to_fahrenheit(30)
 print(f)  # 86
 ```
+
+### Private attributes
+Private attributes can be only accessible from the methods of the class.
+In other words, they cannot be accessible from outside of the class.
+
+However, Python doesn't really have a concept of private attributes.
+That is, all attributes are still accessible from the outside of a class.
+
+By convension, we define a private attribute by prefixing a single underscore(`_`):
+``` python
+class Counter:
+    def __init__(self):
+        self._current = 0
+
+    def increment(self):
+        self._current += 1
+
+    def value(self):
+        return self._current
+
+    def reset(self):
+        self._current = 0
+```
+
+### Name magling with double underscores
+Python will automatically change the name of the `__attribute` to `_class__attribute` which is called the name mangling in Python.
+
+By doing this, we can't call __attribute outside of a class.
+However, we still can call it with `_class__attribute`
+
+### Special methods
+Some of the special methods can be referred as operator overloading.
+
+#### `__str__()`
+To make an object printable.
+When we use the `print()` function to print out an instance of the `Person` class, Python calls the `__str__` method automatically.
+``` python
+class Person:
+    def __init__(self, first_name, last_name, age):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
+
+    def __str__(self):
+        return f'Person({self.first_name},{self.last_name},{self.age})'
+```
+calls the mthod
+``` python
+person = Person('John', 'Doe', 25)
+print(person)
+
+# Person(John,Doe,25)
+```
+
+#### '__repr__()'
+The `__repr__` dunder method defines behaviour when you pass an instance of a class to the `repr()`
+
+The `__repr__` method returns the string representation of an object.
+Typically, the `__repr__()` returns a string that can be executed and yield the same value as the object.
+
+``` python
+class Person:
+    def __init__(self, first_name, last_name, age):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
+
+    def __repr__(self):
+        return f'Person("{self.first_name}","{self.last_name}",{self.age})'
+```
+calls the method
+``` python
+person = Person("John", "Doe", 25)
+print(repr(person))
+
+# Person("John","Doe",25)
+```
+
+#### `__bool__()`
+The `__bool` method will return a boolean vlaue by the condition we have defined.
+
+``` python
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def __bool__(self):
+        if self.age < 18 or self.age > 65:
+            return False
+        return True
+
+if __name__ == '__main__':
+    person = Person('Jane', 16)
+    print(bool(person))  # False
+```
+
+#### `__hash__`
+The `hash()` function accepts an object and returns the hash value as an integer.
+
+If a class overrides the `__eq__` method, the objects of the class become unhashable. This means that you won’t able to use the objects in a mapping type. For example, you will not able to use them as keys in a dictionary or elements in a set.
+
+To make the `Person` class hashable, we needto implement the `__hash__` method
+``` python
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def __eq__(self, other):
+        return isinstance(other, Person) and self.age == other.age
+
+    def __hash__(self):
+        return hash(self.age)
+```
+Now, we have the `Person` class that supports equality based on `age` and is hashable.
 
 ## Python inheritance
 ``` python
