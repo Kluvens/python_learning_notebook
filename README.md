@@ -31,6 +31,7 @@
 4. [Python Object Oriented Programming](#python-object-oriented-programming)
 	1. [Basic OOP concepts](#basic-oop-concepts)
 	2. [Python Classes and Objects](#python-classes-and-objects)
+	3. [Python Property](#python-property)
 5. [Python with Data Structure and Algorithms](#python-with-data-structure-and-algorithms)
     1. [Python Linked Lists](#python-linked-lists)
     2. [Python Stack](#python-stack)
@@ -2213,6 +2214,103 @@ class Person:
         return hash(self.age)
 ```
 Now, we have the `Person` class that supports equality based on `age` and is hashable.
+
+## Python Property
+### Getters and Setters
+The getter and setter methods provide an interface for accessing an instance attribute:
+- The getter returns the value of an attribute
+- The setter sets a new value for an attribute
+
+Getters and setters are used to protect your data, particularly when creating classes.
+
+In the `set_age()` method
+``` python
+def set_age(self, age):
+    if age <= 0:
+        raise ValueError('The age must be positive')
+    self._age = age
+```
+
+In the `get_age()` method
+``` python
+def get_age(self):
+    return self._age
+```
+Then in `__init__()` method, we call the `set_age()` setter to initialize the `_age` attribute
+``` python
+def __init__(self, name, age):
+    self.set_name(name)
+    self.set_age(age)
+```
+
+### The Python propery class
+The property class returns a `property` object.
+
+The `property()` class has the following syntax:
+``` python
+property(fget=None, fset=None, fdel=None, doc=None)
+```
+
+The `property()` has the following parameters:
+- `fget` - is a function to get the value of the attribute, or the getter method.
+- `fset` - is a function to set the value of the attribute, or the setter method.
+- 'fdel` - is a function to delete the attribute.
+- 'doc` - is a docstring i.e., a comment.
+
+The following uses the `property()` function to define the `age` property for the `Person` class.
+``` python
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def set_age(self, age):
+        if age <= 0:
+            raise ValueError('The age must be positive')
+        self._age = age
+
+    def get_age(self):
+        return self._age
+
+    # the age now is a class attribute, not an instance attribute
+    age = property(fget=get_age, fset=set_age)
+```
+
+### Python Property Decorator
+We can use decorators to create a property
+``` python
+class MyClass:
+    def __init__(self, attr):
+        self.prop = attr
+
+    @property
+    def prop(self):
+        return self.__attr
+
+    @prop.setter
+    def prop(self, value):
+        self.__attr = value
+```
+
+### Python read-only property
+To define a readonly property, you need to create a property with only the getter. However, it is not truly read-only because you can always access the underlying attribute and change it.
+
+The read-only properties are useful in some cases such as for computed properties.
+
+``` python
+import math
+
+class Circle:
+    def __init__(self, radius):
+        self.radius = radius
+
+    @property
+    def area(self):
+        return math.pi * self.radius ** 2
+
+c = Circle(10)
+print(c.area)
+```
 
 ## Python inheritance
 ``` python
