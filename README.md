@@ -625,7 +625,8 @@ print(final_print)
 
 ## Python Control flow
 ### Python If statement
-**if**
+
+#### if
 - An if statement is written by using the ```if``` keyword.
 - Python relies on indentation (whitespace at the beginning of a line) to define scope in the code.
 - The code with indentation under if statement will run if the condition is True.
@@ -642,7 +643,7 @@ if a < b:
     print("5 is less than 6")
 ```
 
-**elif**
+#### elif
 
 The ```elif``` keyword is pythons way of saying if the previous conditions were false, then try to check this condition.
 ``` python
@@ -654,7 +655,7 @@ elif a == b:
   print("a and b are equal")        # passed this check and print the line
 ```
 
-**else**
+#### else
 
 The ```else``` keyword catches anything which isn't caught by the preceding conditions.
 ``` python
@@ -668,7 +669,7 @@ else:
   print("a is greater than b")      # run this line anyway
 ```
 
-**Short hand if**
+#### short hand if
 
 if you have only one statement to execute, you can put it on the same line as the if statement
 ``` python
@@ -678,7 +679,7 @@ if a > b: print("a is greater than b")
 #     print("a is greater than b")
 ```
 
-**Short hand if ..else**
+#### short hand if .. else
 ``` python
 a = 2
 b = 330
@@ -692,7 +693,7 @@ print("A") if a > b else print("B")
 
 The above technique is known as **Ternary Operators**, or **Conditional Expressions**.
 
-**nested if**
+#### nested if
 
 We can have ```if``` statement inside ```if``` statement, this is called nested ```if``` statement.
 ``` python
@@ -707,7 +708,7 @@ if x < 60:
     print("and also less than 20.")
 ```
 
-**pass**
+#### pass
 
 The ```pass``` statement basically means do nothing.
 ```if``` statements cannot be empty, but if we don't want to do anything and also make sure our code compile, we can use ```pass``` statement to avoid getting an error.
@@ -734,7 +735,7 @@ while i < 6:
   i += 1                    # remember to increment i, this is a common mistake for beginners
 ```
 
-**break**
+#### break
 
 With the ```break``` statement, we can stop the loop even if the while condition is true.
 ``` python
@@ -748,7 +749,7 @@ while i < 6:
   i += 1
 ```
 
-**continue**
+#### continue
 
 With the ```continue``` statement we can stop the current iteration, and jump to the next iteration.
 ``` python
@@ -763,7 +764,7 @@ while i < 6:
     i += 1
 ```
 
-**else**
+#### else
 
 With the ```else``` statement, we can run a block of code once when the condition no longer is True.
 ``` python
@@ -823,7 +824,7 @@ else:
     print("printed all fruits")     # this line will be printed
 ```
 
-**The range() Function**
+#### The range() Function
 
 The ```range()``` function returns a sequence of numbers, starting from 0 by default, and increments by by default, and ends at a specified number not including. We can specify by range(start, end, increment).
 ``` python
@@ -839,7 +840,7 @@ for i in range(len(items)):
     print(items[i])
 ```
 
-**nested loops**
+#### nested loops
 
 A nested loop is a loop inside a loop
 ``` python
@@ -863,6 +864,8 @@ for x in adj:
 ```
 ### Python Switch statement
 Python ```switch``` statement is only available for Python 3.10 and above.
+
+Switch statment is simply another form of writing if .. else statements.
 
 ``` python
 match argument:
@@ -977,7 +980,7 @@ l.clear()
 print(l)                    # []
 ```
 
-**enumerate()**
+### enumerate()
 
 Enumerate() method adds a counter to an iterable and returns it in a form of enumberating object. The syntax is enumberate(iterable, start=0) where iterable is any object that supports iteration, and start means the index value from which the counter is to be started, by default it is 0.
 ``` python
@@ -1142,7 +1145,7 @@ match = t.index("this")
 print(match)                    # 1
 ```
 
-**unpacking tuples**
+### unpacking tuples
 
 Unpacking tuples means assigning individual elements of a tuple to multiple variables.
 The first variable will match the first element of the tuple and so on.
@@ -1225,7 +1228,7 @@ def my_function():
 my_function()
 ```
 
-**arguments**
+### arguments
 - data can be passed into functions as arguments
 - data we sent can be any type including list, dictionary ...
 - arguments are specified after the function name, inside the parentheses
@@ -1240,13 +1243,13 @@ my_function("John")                 # Hello John
 my_function("Tony")                 # Hello Tony
 ```
 
-**parameters or arguments?**
+### parameters or arguments?
 
 From the function's perspective:
 - a parameter is the variable listed inside the parentheses in the function definition
 - an argument is the value that is sent to the function when it is called
 
-**keyword arguments**
+### keyword arguments
 
 We can send arguments with the key = value syntax where the order of the arguments does not matter.
 ``` python
@@ -1260,7 +1263,7 @@ my_function(child1 = "Emil", child2 = "Tobias", child3 = "Linus")
 print("Hello World", end="")            # this prints Hello World without a newline
 ```
 
-**default parameter value**
+### default parameter value
 
 If we call the function without argument, it uses the default value
 ``` python
@@ -1273,7 +1276,7 @@ my_function()               # I am from Norway
 my_function("Brazil")       # I am from Brazil
 ```
 
-**return values**
+### return values
 
 To let a function return a value, use the ```return``` statement.
 ``` python
@@ -1284,8 +1287,10 @@ print(my_function(3))       # 8
 print(my_function(5))       # 10
 print(my_function(9))       # 14
 ```
+
 ## Python Errors and Exceptions
 There are two distinguishable kinds of errors: syntax errors and exceptions
+
 ### Syntax Errors
 - syntax errors, also known as parsing errors, are perhaps the most common kind of complaint.
 - syntax errors are produced by python when it is translating the source code into byte code.
@@ -1315,7 +1320,7 @@ except:
   print("An exception occurred")        # this piece of code only runs when there's an exception
 ```
 
-**many exceptions**
+### many exceptions
 
 We can define as many exception blocks as we want and deal with it to a specific exception
 ``` python
@@ -1327,7 +1332,7 @@ except:
   print("Something else went wrong")    # runs when any exception other than NameError
 ```
 
-**else**
+### else
 
 We can use the ```else``` keyword to define a block of code to be executed if no errors were raised
 ``` python
@@ -1339,9 +1344,10 @@ else:
   print("Nothing went wrong")       # only runs when there's no exception
 ```
 
-**finally**
+### finally
 
 The ```finally``` block, if specified, will be executed regardless if the try block raises an error or not.
+
 ``` python
 try:
   print(x)
@@ -1360,6 +1366,7 @@ x = -1
 if x < 0:
   raise Exception("Sorry, no numbers below zero")
 ```
+
 We can define what kind of error to raise, and the text to print to the user.
 ``` python
 x = "hello"
