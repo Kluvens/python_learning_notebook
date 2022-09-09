@@ -29,7 +29,8 @@
     6. [Python Iterators](#python-iterators)
     7. [Python Decorators](#python-decorators)
 4. [Python Object Oriented Programming](#python-object-oriented-programming)
-	1. [Python Classes and Objects](#python-classes-and-objects)
+	1. [Basic OOP concepts](#basic-oop-concepts)
+	2. [Python Classes and Objects](#python-classes-and-objects)
 5. [Python with Data Structure and Algorithms](#python-with-data-structure-and-algorithms)
     1. [Python Linked Lists](#python-linked-lists)
     2. [Python Stack](#python-stack)
@@ -2126,8 +2127,8 @@ Python will automatically change the name of the `__attribute` to `_class__attri
 By doing this, we can't call __attribute outside of a class.
 However, we still can call it with `_class__attribute`
 
-### Special methods
-Some of the special methods can be referred as operator overloading.
+### Magic methods
+Called magic mehtods or dunder methods because they have double underscores on both sides of the method name.
 
 #### `__str__()`
 To make an object printable.
@@ -2150,7 +2151,7 @@ print(person)
 # Person(John,Doe,25)
 ```
 
-#### '__repr__()'
+#### `__repr__()`
 The `__repr__` dunder method defines behaviour when you pass an instance of a class to the `repr()`
 
 The `__repr__` method returns the string representation of an object.
