@@ -2353,6 +2353,18 @@ The `Student` class derives from, extends, or subclasses the `Person` class.
 
 The relationship between the `Student` class and `Person` class is IS-A relationship. In other words, an employee is a person.
 
+### isinstance
+To check if an object is an instance of a class, we use the `isinstance()` method.
+``` python
+person = Person('Jane')
+print(isinstance(person, Person))  # True
+
+employee = Employee('John', 'Python Developer')
+print(isinstance(employee, Person))  # True
+print(isinstance(employee, Employee))  # True
+print(isinstance(person, Employee))  # False
+```
+
 ### issubclass
 To check if a class is a subclass of another class, we use the `issubclass()` function.
 ``` python
