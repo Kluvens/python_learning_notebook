@@ -3444,12 +3444,33 @@ def heapSort(arr):
 ### Counting sort
 Counting sort is a sorting algorithm that sorts the elements of an array by counting the number of occurrences of each unique element in the array. The count is stored in an auxiliary array and the sorting is done by mapping the count as an index of the auxiliary array.
 
+Generally speaking, counting sort is incapable of sorting negative numbers.
+
 The time complexity of counting sort is O(n+k).
 The space complexity is O(max).
 Counting sort is stable.
 
 ``` python
+def countingSort(arr):
+    size = len(arr)
+    output = [0] * size
 
+    count = [0] * (max(arr) + 1)
+
+    for i in range(size):
+        count[arr[i]] += 1
+    
+    for i in range(1, max(arr)+1):
+        count[i] += count[i - 1]
+        
+    i = size - 1
+    while i >= 0:
+        output[count[arr[i]] - 1] = arr[i]
+        count[arr[i]] -= 1
+        i -= 1
+
+    for i in range(size):
+        arr[i] = output[i] 
 ```
 
 ### Bucket sort
@@ -3462,8 +3483,41 @@ Counting sort is stable.
 Radix sort is a sorting algorithm that sorts the lements by first grouping the individual digits of the same place value.
 Then sort the elements according to their increasing/decreasing order.
 
-``` python
+The time complexity of radix sort in best, average and worst cases are O(n+k).
+The space complexity is O(max).
+Radix sort is stable.
 
+``` python
+def countingSortforRadix(arr, place):
+    size = len(arr)
+    output = [0] * size
+    max_len = max(arr) + 1
+    count = [0] * max_len
+
+    for i in range(size):
+        index = arr[i] // place
+        count[index % 10] += 1
+
+    for i in range(1, max_len):
+        count[i] += count[i - 1]
+
+    i = size - 1
+    while i >= 0:
+        index = arr[i] // place
+        output[count[index % 10] - 1] = arr[i]
+        count[index % 10] -= 1
+        i -= 1
+
+    for i in range(size):
+        arr[i] = output[i]
+
+def radixSort(arr):
+    max_element = max(arr)
+
+    place = 1
+    while max_element // place > 0:
+        countingSortforRadix(arr, place)
+        place *= 10
 ```
 
 ## Greedy Algorithms
