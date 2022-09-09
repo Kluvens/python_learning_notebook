@@ -3250,8 +3250,8 @@ else:
 ### Bubble sort
 Bubble sort is a sorting algorithm that compares two adjacent elements and swaps them until they are in the intended order.
 
-The time complexity in worse case is O(n^2).
-The space complexity is O(1) because an extra variable is used for swapping.
+- The time complexity in worse case is O(n^2).
+- The space complexity is O(1) because an extra variable is used for swapping.
 
 ``` python
 def bubbleSort(arr):
@@ -3264,8 +3264,8 @@ def bubbleSort(arr):
 ### Selection sort
 Selection sort is a sorting algorithm that selects the smallest element from an unsorted list in each iteration and places that element at the beginning of the unsorted list.
 
-The time complexity of selection sort is O(n^2).
-The space complexity of selection sort is O(1).
+- The time complexity of selection sort is O(n^2).
+- The space complexity of selection sort is O(1).
 
 ``` python
 def selectionSort(arr):
@@ -3286,8 +3286,8 @@ Insertion sort is a sorting algorithm that places an unsorted element at its sui
 
 Insertion sort works similarly as we sort cards in our hand in a card game.
 
-The time complexity of insertion sort is O(n^2).
-The space complexity of insertion sort is O(1).
+- The time complexity of insertion sort is O(n^2).
+- The space complexity of insertion sort is O(1).
 
 ``` python
 def insertionSort(arr):
@@ -3307,9 +3307,9 @@ Merge Sort is one of the most popular sorting algorithms that is based on the pr
 It repeatedly divides the array into two halves until we reach a stage where we try to perform MergeSort on a subarray of size 1.
 After that, the merge function comes into play and combines the sorted arrays into larger arrays until the whole array is merged.
 
-The time complexity of merge sort is O(n * log n).
-The space complexity of merge sort is O(n).
-Merge sort is stable.
+- The time complexity of merge sort is O(n * log n).
+- The space complexity of merge sort is O(n).
+- Merge sort is stable.
 
 ``` python
 def mergeSort(arr):
@@ -3349,9 +3349,9 @@ Quicksort is a sorting algorithm based on the divide and conquer approach where
 2. The left and right subarrays are also divided using the same approach. This process continues until each subarray contains a single element.
 3. At this point, elements are already sorted. Finally, elements are combined to form a sorted array.
 
-The time complexity in worst case is O(n^2) while in best and average are O(n * log n).
-The space complexity of quick sort is O(log n).
-Quick sort is not stable.
+- The time complexity in worst case is O(n^2) while in best and average are O(n * log n).
+- The space complexity of quick sort is O(log n).
+- Quick sort is not stable.
 
 ``` python
 def partition(arr, low, high):
@@ -3380,10 +3380,10 @@ def quickSort(arr, low, high):
 ### Shell sort
 Shell sort is a generalized version of the insertion sort algorithm. It first sorts elements that are far apart from each other and successively reduces the interval between the elements to be sorted.
 
-The time complexities in best and average case are O(n * log n).
-The time complexity in worst case is O(n^2).
-The space complexity of shell sort is O(1).
-Shell sort is not stable.
+- The time complexities in best and average case are O(n * log n).
+- The time complexity in worst case is O(n^2).
+- The space complexity of shell sort is O(1).
+- Shell sort is not stable.
 
 ``` python
 def shellSort(arr):
@@ -3446,9 +3446,9 @@ Counting sort is a sorting algorithm that sorts the elements of an array by coun
 
 Generally speaking, counting sort is incapable of sorting negative numbers.
 
-The time complexity of counting sort is O(n+k).
-The space complexity is O(max).
-Counting sort is stable.
+- The time complexity of counting sort is O(n+k).
+- The space complexity is O(max).
+- Counting sort is stable.
 
 ``` python
 def countingSort(arr):
@@ -3474,18 +3474,49 @@ def countingSort(arr):
 ```
 
 ### Bucket sort
+Bucket Sort is a sorting algorithm that divides the unsorted array elements into several groups called buckets. 
+Each bucket is then sorted by using any of the suitable sorting algorithms or recursively applying the same bucket algorithm.
+Finally, the sorted buckets are combined to form a final sorted array.
+
+Can be used to sort decimals.
+
+- The time complexity in average case is O(n) and O(n^2) in worst case.
+- The space complexity is O(n+k)
+- Bucket sort is stable
 
 ``` python
+def bucketSort(array):
+    bucket = []
 
+    # Create empty buckets
+    for i in range(len(array)):
+        bucket.append([])
+
+    # Insert elements into their respective buckets
+    for j in array:
+        index_b = int(10 * j)
+        bucket[index_b].append(j)
+
+    # Sort the elements of each bucket
+    for i in range(len(array)):
+        bucket[i] = sorted(bucket[i])
+
+    # Get the sorted elements
+    k = 0
+    for i in range(len(array)):
+        for j in range(len(bucket[i])):
+            array[k] = bucket[i][j]
+            k += 1
+    return array
 ```
 
 ### Radix sort
 Radix sort is a sorting algorithm that sorts the lements by first grouping the individual digits of the same place value.
 Then sort the elements according to their increasing/decreasing order.
 
-The time complexity of radix sort in best, average and worst cases are O(n+k).
-The space complexity is O(max).
-Radix sort is stable.
+- The time complexity of radix sort in best, average and worst cases are O(n+k).
+- The space complexity is O(max).
+- Radix sort is stable.
 
 ``` python
 def countingSortforRadix(arr, place):
