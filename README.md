@@ -1924,23 +1924,169 @@ decorated_function_with_arguments(pandas, "Science", "Tools")
 
 # Python Object Oriented Programming
 
-## Basic OOP in Python
+## Python Classes and Objects
+Everything in Python is an object.
+An object has states and behaviours.
+To create an object, we have to define a class first.
+Then, from the class, we can create one or more objects.
+The objects are instances of a class.
 
-### Python classes and objects
-Python is an object oriented programming language.
-Almost everything in Python is an object, with its properties and methods.
-A class is like an object constructor, or a blueprint for creating objects.
-
-To create a class, use the keyword class:
+### Define a class
+To define a class, we use the `class` keyword followed by the class name.
 ``` python
-class MyClass:
-  x = 5
+class Person:
+    pass
+```
 
-
-Use the class to create objects
+### Create an object
+To create an object from the `Person` class, we use the class name followed by `()`.
 ``` python
-p1 = MyClass()
-print(p1.x)
+person = Person()
+```
+In this example, the `person` is an instance of the `Person` class.
+
+### Define instance attributes
+Python is dynamic. It means that you can add an attribute to an instance of a class dynamically at runtime.
+``` python
+person.name = 'John'
+```
+
+To define and initialize an attribute for all instances of a class, we use the __init__ method.
+``` python
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+```
+The `person` object now has the `name` and `age` attributes.
+
+To access an instance attribute, we use the dot(.) notation.
+``` python
+person.name
+```
+
+### __init__ method
+Unlike regular method, the `__init()__` method has two underscores on each side.
+Therefore, the method is often called dunder init.
+
+The double underscores at both sides of the method indicate that Python will use the method internally.
+In other words, we should not explicitly call this method.
+
+When we create a `Person` object, Python automatically calls the `__init__` method to initialize the instance attributes.
+
+In the `__init__` method, the `self` is the instance of the `Person` class.
+
+``` python
+person = Person('John', 25)
+```
+
+### Define instance methods
+We can adds more methods in the class.
+``` python
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def greet(self):
+        return f"Hi, it's {self.name}."
+```
+
+To call an instance method, we use the dot(.) notation.
+``` python
+person = Person('John', 25)
+print(person.greet())
+
+# Hi, it's John
+```
+
+### Define class attributes
+Unlike instance attributes, class attributes are shared by all instances of the class.
+``` python
+class Person:
+    counter = 0
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def greet(self):
+        return f"Hi, it's {self.name}."
+```
+
+We can access the `counter` attribute from the `Person` class:
+``` python
+Person.counter
+```
+or 
+``` python
+person = Person('John',25)
+person.counter
+```
+
+We can also use the class attribute in class methods.
+``` python
+class Person:
+    counter = 0
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+        Person.counter += 1
+
+    def greet(self):
+        return f"Hi, it's {self.name}."
+```
+
+### Define class method
+Like a class attribute, a class method is shared by all instances of the class.
+
+The first argument of a class method is the clas itself.
+By convention, its name is `cls`.
+
+Use the `@classmethod` decorator to decorate a class method.
+``` python
+class Person:
+    counter = 0
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+        Person.counter += 1
+
+    def greet(self):
+        return f"Hi, it's {self.name}."
+
+    @classmethod
+    def create_anonymous(cls):
+        return Person('Anonymous', 22)
+```
+
+Then call the `create_anonymous()` class method
+``` python
+anonymous = Person.create_anonymous()
+print(anonymous.name)  # Anonymous
+```
+
+### Define a static method
+A static method is not bound to a class or any instances of the class.
+
+To define a static method, we use the `@staticmethod` decorator.
+``` python
+class TemperatureConverter:
+    @staticmethod
+    def celsius_to_fahrenheit(c):
+        return 9 * c / 5 + 32
+
+    @staticmethod
+    def fahrenheit_to_celsius(f):
+        return 5 * (f - 32) / 9
+```
+
+To call a static method, you use the ClassName.static_method_name() syntax.
+``` python
+f = TemperatureConverter.celsius_to_fahrenheit(30)
+print(f)  # 86
 ```
 
 ## Python inheritance
@@ -4852,3 +4998,9 @@ print(newlist)
 ## [Python Memory management](https://docs.python.org/3/c-api/memory.html#:~:text=Memory%20management%20in%20Python%20involves,by%20the%20Python%20memory%20manager.)
 ## Python virtural machine
 ## Python interpreter
+
+# Acknowledgement
+Some of the sources are from UNSW lecture notes.
+
+Some are from online resources.
+- [Object-Oriented Programming](https://www.pythontutorial.net/python-oop/)
