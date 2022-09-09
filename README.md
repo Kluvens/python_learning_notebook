@@ -32,6 +32,7 @@
 	1. [Basic OOP concepts](#basic-oop-concepts)
 	2. [Python Classes and Objects](#python-classes-and-objects)
 	3. [Python Property](#python-property)
+	4. [Python Inheritance](#python-inheritance)
 5. [Python with Data Structure and Algorithms](#python-with-data-structure-and-algorithms)
     1. [Python Linked Lists](#python-linked-lists)
     2. [Python Stack](#python-stack)
@@ -2313,6 +2314,8 @@ print(c.area)
 ```
 
 ## Python inheritance
+Inheritance allows a class to reuse the logic of an existing class.
+The following is a single inheritance because the `Student` inherits from a single class `Person`.
 ``` python
 # create a parent class
 class Person:
@@ -2341,6 +2344,19 @@ class Student(Person):
 x = Student("Mike", "Jan", 95)
 print(x.grade)              # 95
 x.welcom()                  # Welcom Mike Jan
+```
+
+### Inheritance Terminology
+The `Person` class is the parent class, the base class, or the super class of the `Student` class. And the `Student` class is a child class, a derived class, or a subclass of the `Person` class.
+
+The `Student` class derives from, extends, or subclasses the `Person` class.
+
+The relationship between the `Student` class and `Person` class is IS-A relationship. In other words, an employee is a person.
+
+### issubclass
+To check if a class is a subclass of another class, we use the `issubclass()` function.
+``` python
+print(issubclass(Student, Person)) # True
 ```
 
 ## Python Operator overloading
