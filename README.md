@@ -3506,6 +3506,44 @@ print()
 ```
 
 ### B-Tree
+B-Tree is a special type of self-balancing search tree in which each node can contain more than one key and cna have more than two children.
+It is a generalized form of the binary search tree.
+It is also known as a height-balanced m-way tree.
+
+#### Why do we need a B-tree data strcuture
+The need for B-tree arose with the rise in the need for lesser time in accessing the physical storage media like a hard disk.
+The secondary storage devices are slower with a larger capacity.
+There was a need for such types of data structures that minimize the disk accesses.
+
+Other data structures such as a binary search tree, AVL tree, red-black tree, etc can store only one key in one node.
+If we have to store a large number of keys, then the height of such trees becomes very large and the access tie increases.
+
+However, B-tree can store many keys in a single node and can have multiple child nodes.
+This decreases the height significantly allowing faster disk accesses.
+
+The specific form of B-tree is 2-3-4 Tree.
+
+#### B-tree properties
+1. For each noe x, the keys are stored in increasing order.
+2. In each node, there is a boolean value x.leaf which is true if x is a leaf.
+3. If n is the order of the tree, each internal node can contain at most n - 1 keys along wich a pointer to each child.
+4. Each node except root can have at most n children and at least n/2 children.
+5. All leaves have the same depth
+6. THe root has at least 2 children and contains a minimum of 1 key.
+7. If n >= 1, then for any n-key B-tree of height h and mimimum degree t >= 2, h >= log t (n+1)/2
+
+#### B-tree operations time complexity
+- Time complexity for searching is O(log n) in best, average and worst cases
+- Space complexity for searching is O(n) in average and worst cases
+- Time complexity for deleting is O(log n) in best case
+- Space complexity for deleting is O(n)
+
+#### Code Example
+``` python
+
+```
+
+### B+ Tree
 
 ### Red-Black Tree
 
@@ -5417,6 +5455,16 @@ print(newlist)
 ## [Python Memory management](https://docs.python.org/3/c-api/memory.html#:~:text=Memory%20management%20in%20Python%20involves,by%20the%20Python%20memory%20manager.)
 ## Python virtural machine
 ## Python interpreter
+
+# TODO
+- code example for b tree
+- b+ tree
+- heaps
+- tries
+- breadth first search
+- depth first search
+- flask module
+- pytest
 
 # Acknowledgement
 Some of the sources are from UNSW lecture notes.
