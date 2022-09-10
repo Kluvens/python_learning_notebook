@@ -883,13 +883,13 @@ match argument:
 which is the same as:
 ``` python
 if argument == 0:
-    print("zero")
+    return "zero"
 elif argument == 1: 
-    print("one")
+    return "one"
 elif argument == 2:
-    print("two")
+    return "two"
 else:
-    print("something")
+    return "something"
 ```
 ## Python Lists
 - lists are sequential containers of memory.
