@@ -5451,16 +5451,62 @@ print(newlist)
 ```
 
 ## Python pip
+A package is a collection of files.
+
+There are about 390000 packages available on PyPI which is a website that allows us to search for and register our own packages.
+
+Any packages listed on the index can be installed via `pip`.
+
+- `pip` is the standard package manager for Python
+- `pip` can install any package on PyPI
+
+To install a package, we can use the following command:
+```
+$ python3 -m pip install <package_name>
+```
+
+`pip` also updates and uninstalls package
+```
+$ python3 -m pip install --upgrade <package_name>
+$ python3 -m pip uninstall <package_name>
+```
+
+`pip` can install package from a `requirements.txt` file directly
+```
+$ pip install -r requirements.txt
+```
+
 ## Python virtural environment
-## [Python Memory management](https://docs.python.org/3/c-api/memory.html#:~:text=Memory%20management%20in%20Python%20involves,by%20the%20Python%20memory%20manager.)
-## Python virtural machine
-## Python interpreter
+By default, Python installs package in the global Python environment.
+This is usually messy.
+
+It is preferable to keep our package within the project that is using them.
+This can be done by creating a virtual environment.
+
+In Python, a virtual environment is a directory that contains a copy of the Python interpreter.
+It can be used to isolate our project from the rest of the system.
+It's common to simply name our virtual environment venv.
+
+To create a virtual environment, use the following command:
+```
+$ python3 -m venv <venv_name>
+```
+
+Once we have a virtural environment, we can activate it by running the following command:
+```
+$ . <venv_name>/bin/activate
+```
+without activating a virtual environment, we are still in the global environment.
+
+Once activated, the python, python3, pip etc commands will be run from within the virtual environment.
 
 # TODO
 - code example for b tree
 - b+ tree
+- read-black tree
 - heaps
 - tries
+- hashTable
 - breadth first search
 - depth first search
 - flask module
