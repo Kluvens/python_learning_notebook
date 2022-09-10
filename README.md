@@ -19,7 +19,8 @@
     12. [Python Functions](#python-functions)
     13. [Python Errors and Exceptions](#python-errors-and-exceptions)
     14. [Python User-Defined Modules](#python-user-defined-modules)
-    15. [Python Properties to Note](#python-properties-to-note)
+    15. [Python File Handling and with Statement](#python-file-handling-and-with-statement)
+    16. [Python Properties to Note](#python-properties-to-note)
 3. [Python Advanced Syntax](#python-advanced-syntax)
     1. [Python Recursion](#python-recursion)
     2. [Python Anonymous Function](#python-anonymous-function)
@@ -5421,4 +5422,6 @@ print(newlist)
 Some of the sources are from UNSW lecture notes.
 
 Some are from online resources.
+- [File Handling](https://www.programiz.com/python-programming/file-operation)
 - [Object-Oriented Programming](https://www.pythontutorial.net/python-oop/)
+- [Python Modules](https://docs.python.org/3/py-modindex.html)
