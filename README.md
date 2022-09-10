@@ -3609,7 +3609,10 @@ Heap is a special tree structure in which each parent node is less than or equal
 
 def heapify(arr, size, i):
     largest = i
+    
+    # l is the left child
     l = 2 * i + 1
+    # r is the right child
     r = 2 * i + 2
 
     if l < size and arr[i] < arr[l]:
@@ -3661,6 +3664,104 @@ print(arr)      # [9, 5, 2, 3]
 ```
 
 ## Python Tries
+Trie is a tree-like data structure made up of nodes.
+Nodes can be used to store data.
+Each node may have none, one or more children.
+
+A trie is a data strucute for representing a set of strings.
+It supports string matching queries in O(L) time where L is the length of the string being searched for
+
+Each node in a trie:
+- contains one part of a key (typically one character)
+- may have up to 26 children
+- may be tagged as a finishing node
+- but even finishing nodes may have children
+- may contain other data for application
+
+``` python
+from typing import Tuple
+
+class TrieNode(object):
+    """
+    Our trie node implementation. Very basic. but does the job
+    """
+    
+    def __init__(self, char: str):
+        self.char = char
+        self.children = []
+        # Is it the last character of the word.`
+        self.word_finished = False
+        # How many times this character appeared in the addition process
+        self.counter = 1
+    
+
+def add(root, word: str):
+    """
+    Adding a word in the trie structure
+    """
+    node = root
+    for char in word:
+        found_in_child = False
+        # Search for the character in the children of the present `node`
+        for child in node.children:
+            if child.char == char:
+                # We found it, increase the counter by 1 to keep track that another
+                # word has it as well
+                child.counter += 1
+                # And point the node to the child that contains this char
+                node = child
+                found_in_child = True
+                break
+        # We did not find it so add a new chlid
+        if not found_in_child:
+            new_node = TrieNode(char)
+            node.children.append(new_node)
+            # And then point node to the new child
+            node = new_node
+    # Everything finished. Mark it as the end of a word.
+    node.word_finished = True
+
+
+def find_prefix(root, prefix: str) -> Tuple[bool, int]:
+    """
+    Check and return 
+      1. If the prefix exsists in any of the words we added so far
+      2. If yes then how may words actually have the prefix
+    """
+    node = root
+    # If the root node has no children, then return False.
+    # Because it means we are trying to search in an empty trie
+    if not root.children:
+        return False, 0
+    for char in prefix:
+        char_not_found = True
+        # Search through all the children of the present `node`
+        for child in node.children:
+            if child.char == char:
+                # We found the char existing in the child.
+                char_not_found = False
+                # Assign node as the child containing the char and break
+                node = child
+                break
+        # Return False anyway when we did not find a char.
+        if char_not_found:
+            return False, 0
+    # Well, we are here means we have found the prefix. Return true to indicate that
+    # And also the counter of the last node. This indicates how many words have this
+    # prefix
+    return True, node.counter
+
+if __name__ == "__main__":
+    root = TrieNode('*')
+    add(root, "hackathon")
+    add(root, 'hack')
+
+    print(find_prefix(root, 'hac'))         # (True, 2)
+    print(find_prefix(root, 'hack'))        # (True, 2)
+    print(find_prefix(root, 'hackathon'))   # (True, 1)
+    print(find_prefix(root, 'ha'))          # (True, 2)
+    print(find_prefix(root, 'hammer'))      # (False, 0)
+```
 
 ## Python Graphs
 A graph data structure is a collection of nodes that have data and are connected to other nodes.
@@ -5505,7 +5606,97 @@ Install
 Run Pylint and check files
 ```$ pylint file.py```
 
-## Unit test and pytest
+## Verification and Validation
+
+### Verification
+Verification in a system life cycle context is a set of activities that compares a product of the system life cycle against the required characteristics for that product. This may include, but is not limited to, specified requirements, design description and the system itself.
+
+System has been built right.
+
+#### Verification Types
+Static verification (known as linting)
+
+Dynamic verification (known as testing)
+
+Static verification is usually considered a more robust and reliable form of teseting.
+However, in many cases we need to dynamically verify code too.
+
+#### Static Verification
+- (Linting) Style checking
+- (Linting) Type checking
+- (Linting) Logic checking. Includes anti-pattern detection and potential warnings
+- key metric checking. Includes coupling and cyclomatic complexity
+- formal verification
+- informal reasoning
+
+#### Dynamic Verification
+- Verification performed during the execution of software
+- Often known as the "test" phase
+- Typically falls into one of three categories:
+	- Testing in the small
+	- Testing in the large
+	- Acceptance tests
+
+### Validation
+Validation in a system life cycle context is a set of activities ensuring and gaining confidence that a system is able to accomplish its intended use, goals and objectives.
+
+The right system has been built
+
+## Unit Test
+A unit test is a way of testing a unit - the smallest piece of code that can be logically isolated in a system.
+
+``` python
+
+```
+
+## Property Based Test
+- A method of testing where tests are defined as general properties (i.e. parameterised predicates)
+- Test input is generated automatically by supplying a strategy for generating that input
+- The testing framework runs the test many times to ensure the properties are true for each input
+- In the event of a test failure, the framework will shrink the generated input to find the smallest value that still fails the test
+- Property based testing was first introduced by QuickCheck framework in Haskell
+- Hypothesis is the name of the property-based testing framework for Python
+
+``` python
+
+```
+
+## System Test
+System testing, also referred to as system-level tests or system-integration testing, is the process in which a quality assurance (QA) team evaluates how the various components of an application interact together in the full, integrated system or application.
+
+System testing falls under Black box testing as it includes testing of the external working of the software.
+
+System Testing includes the following steps:
+1. Verification of input functions of the application to test whether it is producing the expected output or not.
+2. Testing of integrated software by including external peripherals to check the interaction of various components with each other.
+3. Testing of the whole system for End to End testing.
+4. Behavior testing of the application via auser's experience
+
+## Black box testing and White box testing
+
+## Code Coverage
+Test Coverage: a measure of how much of the feature set is covered with test (this is often left to human judgement)
+
+Code Coverage: a measure of how much code is executed during testing (this can be computed and quantified)
+
+### Checking code coverage
+Run Coverage.py for your pytests:
+```
+coverage run --source=. -m pytest
+```
+View the coverage report:
+```
+coverage report
+```
+Generate HTML to see a breakdown (puts report in htmlcov/)
+```
+coverage html
+```
+
+### Branch Coverage Checking
+- For lines that can potentially jump to more than one other line (e.g. if statements), check how many of the possible branches were taken during execution
+- Can be done with the --branch option in Coverage.py
+- Sometimes referred to as edge coverage
 
 # Python topics
 ## Style and being Pythonic
@@ -5565,7 +5756,6 @@ print(newlist)
 - code example for b tree
 - b+ tree
 - read-black tree
-- heaps
 - tries
 - hashTable
 - breadth first search
@@ -5580,3 +5770,4 @@ Some are from online resources.
 - [File Handling](https://www.programiz.com/python-programming/file-operation)
 - [Object-Oriented Programming](https://www.pythontutorial.net/python-oop/)
 - [Python Modules](https://docs.python.org/3/py-modindex.html)
+- [Trie Strcture code example](https://towardsdatascience.com/implementing-a-trie-data-structure-in-python-in-less-than-100-lines-of-code-a877ea23c1a1)
