@@ -5770,3 +5770,6 @@ Some are from online resources.
 - [Object-Oriented Programming](https://www.pythontutorial.net/python-oop/)
 - [Python Modules](https://docs.python.org/3/py-modindex.html)
 - [Trie Strcture code example](https://towardsdatascience.com/implementing-a-trie-data-structure-in-python-in-less-than-100-lines-of-code-a877ea23c1a1)
+
+# Disclaimer
+The purpose of this notebook is to help people have some Python background knowledge, some of the contents are from lecture notes and some are from the Internect. If you don't want your work showing up in the notebook please contact me and I will delete them.
