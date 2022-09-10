@@ -3597,10 +3597,6 @@ The specific form of B-tree is 2-3-4 Tree.
 
 ```
 
-### B+ Tree
-
-### Red-Black Tree
-
 ## Python Heaps
 Heap is a special tree structure in which each parent node is less than or equal to its child node. Then it is called a Min Heap. If each parent node is greater than or equal to its child node then it is called a max heap.
 
@@ -5754,14 +5750,17 @@ print(newlist)
 
 # TODO
 - code example for b tree
-- b+ tree
-- read-black tree
-- tries
 - hashTable
 - breadth first search
 - depth first search
 - flask module
 - pytest
+
+# What I will update in the future
+- mainly focus on algorithms including greedy algorithms and dynamic programming
+- Python socket module for networking
+- More on python testing and debugging
+- Leetcode examples done by Python
 
 # Acknowledgement
 Some of the sources are from UNSW lecture notes.
