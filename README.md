@@ -4,7 +4,7 @@
     2. [Python 2 and Python 3](#python-2-and-python-3)
     3. [Why Python is popular](#why-python-is-popular)
     4. [Why Python is slow](#why-python-is-slow)
-2. [Python Basic Syntax](#python-basic-syntax)
+2. [Python Basics](#python-basics)
     1. [Python Comments](#python-comments)
     2. [Python Variables](#python-variables)
     3. [Python Data Types](#python-data-types)
@@ -21,14 +21,15 @@
     14. [Python User-Defined Modules](#python-user-defined-modules)
     15. [Python File Handling and with Statement](#python-file-handling-and-with-statement)
     16. [Python Properties to Note](#python-properties-to-note)
-3. [Python Advanced Syntax](#python-advanced-syntax)
-    1. [Python Recursion](#python-recursion)
-    2. [Python Anonymous Function](#python-anonymous-function)
-    3. [Python map(), filter() and reduce()](#python-map-filter-and-reduce)
-    4. [Python Extended Keyword Arguments](#python-extended-keyword-arguments)
-    5. [Python Generators](#python-generators)
-    6. [Python Iterators](#python-iterators)
-    7. [Python Decorators](#python-decorators)
+3. [Advanced Python](#advanced-python)
+	1. [pip and Virtual Environment](#pip-and-virtual-environment)
+    2. [Python Recursion](#python-recursion)
+    3. [Python Anonymous Function](#python-anonymous-function)
+    4. [Python map(), filter() and reduce()](#python-map-filter-and-reduce)
+    5. [Python Extended Keyword Arguments](#python-extended-keyword-arguments)
+    6. [Python Generators](#python-generators)
+    7. [Python Iterators](#python-iterators)
+    8. [Python Decorators](#python-decorators)
 4. [Python Object Oriented Programming](#python-object-oriented-programming)
 	1. [Basic OOP concepts](#basic-oop-concepts)
 	2. [Python Classes and Objects](#python-classes-and-objects)
@@ -105,7 +106,7 @@ Unlike native languages like C/C++, Python code gets interpreted at runtime inst
 
 Python code is first compiled into python Byte Code. The Byte Code interpreter conversion happens internally and most of it is hidden from the developer.Byte code is platform-independent and lower-level programming. Compilation of byte code is to ramp up the execution of source code. The source code compiled to byte code is then executed in Python’s virtual machine one by one, to carry out the operations. The virtual machine is an internal component of Python. Internally Python code is interpreted during run time rather than being compiled to native code hence it is a bit slower. 
 
-# Python Basic Syntax
+# Python Basics
 
 ## Python Comments
 
@@ -1590,7 +1591,60 @@ print(f.readlines())
 - Every object in Python has a type
 - type and class are synonymous
 
-# Python Advanced Syntax
+# Advanced Python
+
+## pip and Virtual Environment
+
+### Python pip
+A package is a collection of files.
+
+There are about 390000 packages available on PyPI which is a website that allows us to search for and register our own packages.
+
+Any packages listed on the index can be installed via `pip`.
+
+- `pip` is the standard package manager for Python
+- `pip` can install any package on PyPI
+
+To install a package, we can use the following command:
+```
+$ python3 -m pip install <package_name>
+```
+
+`pip` also updates and uninstalls package
+```
+$ python3 -m pip install --upgrade <package_name>
+$ python3 -m pip uninstall <package_name>
+```
+
+`pip` can install package from a `requirements.txt` file directly
+```
+$ pip install -r requirements.txt
+```
+
+### Python virtural environment
+By default, Python installs package in the global Python environment.
+This is usually messy.
+
+It is preferable to keep our package within the project that is using them.
+This can be done by creating a virtual environment.
+
+In Python, a virtual environment is a directory that contains a copy of the Python interpreter.
+It can be used to isolate our project from the rest of the system.
+It's common to simply name our virtual environment venv.
+
+To create a virtual environment, use the following command:
+```
+$ python3 -m venv <venv_name>
+```
+
+Once we have a virtural environment, we can activate it by running the following command:
+```
+$ . <venv_name>/bin/activate
+```
+without activating a virtual environment, we are still in the global environment.
+
+Once activated, the python, python3, pip etc commands will be run from within the virtual environment.
+
 ## Python Recursion
 Recursion means defining a problem in terms of itself.
 We alreaady known that a function can call other functions.
@@ -3548,6 +3602,63 @@ The specific form of B-tree is 2-3-4 Tree.
 ### Red-Black Tree
 
 ## Python Heaps
+Heap is a special tree structure in which each parent node is less than or equal to its child node. Then it is called a Min Heap. If each parent node is greater than or equal to its child node then it is called a max heap.
+
+``` python
+# Max-Heap data strucute in Python
+
+def heapify(arr, size, i):
+    largest = i
+    l = 2 * i + 1
+    r = 2 * i + 2
+
+    if l < size and arr[i] < arr[l]:
+        largest = l
+    
+    if r < size and arr[largest] < arr[r]:
+        largest = r
+
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
+        heapify(arr, size, largest)
+
+def insert(arr, num):
+    size = len(arr)
+    if size == 0:
+        arr.append(num)
+    else:
+        arr.append(num)
+        for i in range((size//2)-1, -1, -1):
+            heapify(arr, size, i)
+
+def delete(arr, num):
+    size = len(arr)
+    i = 0
+    for i in range(size):
+        if num == arr[i]:
+            break
+    
+    arr[i], arr[size-1] = arr[size-1], arr[i]
+
+    arr.remove(num)
+
+    for i in range((len(arr)//2)-1, -1, -1):
+        heapify(arr, len(arr), i)
+
+arr = []
+
+insert(arr, 3)
+insert(arr, 4)
+insert(arr, 9)
+insert(arr, 5)
+insert(arr, 2)
+
+print(arr)      # [9, 5, 4, 3, 2]
+
+delete(arr, 4)
+
+print(arr)      # [9, 5, 2, 3]
+```
 
 ## Python Tries
 
@@ -5449,56 +5560,6 @@ print(newlist)
 newlist = [x for x in range(10) if x < 5]
 print(newlist)
 ```
-
-## Python pip
-A package is a collection of files.
-
-There are about 390000 packages available on PyPI which is a website that allows us to search for and register our own packages.
-
-Any packages listed on the index can be installed via `pip`.
-
-- `pip` is the standard package manager for Python
-- `pip` can install any package on PyPI
-
-To install a package, we can use the following command:
-```
-$ python3 -m pip install <package_name>
-```
-
-`pip` also updates and uninstalls package
-```
-$ python3 -m pip install --upgrade <package_name>
-$ python3 -m pip uninstall <package_name>
-```
-
-`pip` can install package from a `requirements.txt` file directly
-```
-$ pip install -r requirements.txt
-```
-
-## Python virtural environment
-By default, Python installs package in the global Python environment.
-This is usually messy.
-
-It is preferable to keep our package within the project that is using them.
-This can be done by creating a virtual environment.
-
-In Python, a virtual environment is a directory that contains a copy of the Python interpreter.
-It can be used to isolate our project from the rest of the system.
-It's common to simply name our virtual environment venv.
-
-To create a virtual environment, use the following command:
-```
-$ python3 -m venv <venv_name>
-```
-
-Once we have a virtural environment, we can activate it by running the following command:
-```
-$ . <venv_name>/bin/activate
-```
-without activating a virtual environment, we are still in the global environment.
-
-Once activated, the python, python3, pip etc commands will be run from within the virtual environment.
 
 # TODO
 - code example for b tree
