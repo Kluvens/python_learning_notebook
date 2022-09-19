@@ -3950,6 +3950,20 @@ g.add_edge(5, 4, 3)
 g.kruskal_algo()
 ```
 
+## Time complexities of different data structures in worst case
+| Data structure | Access | Search | Insertion | Deletion
+| -------------- | ------ | ------ | --------- | --------
+| Array | O(1) | O(N) | O(N) | O(N)
+| Stack | O(N) | O(N) | O(1) | O(1)
+| Queue | O(N)| O(N) | O(1) | O(1)
+| Singly Linked list | O(N) | O(N) | O(1) | O(1)
+| Doubly Linked List | O(N) | O(N) | O(1) | O(1)
+| Hash Table | O(N) | O(N) | O(N) | O(N)
+| Binary Search Tree | O(N) | O(N) | O(N) | O(N)
+| AVL Tree | O(log N) | O(log N) | O(log N) | O(log N)
+| Binary Tree | O(N) | O(N) | O(N) | O(N)
+| Red Black Tree | O(log N) | O(log N) | O(log N) | O(log N)
+
 ## Python Searching Algorithms
 
 ### Linear Search
