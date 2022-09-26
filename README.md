@@ -5599,6 +5599,82 @@ os.remove(path)
 print(os.name)      # posix
 ```
 
+## Python with Socket
+A network socket is a software structure within a network node of a computer network that serves as an endpoint for sending and receiving data across the network.
+
+Socket programming is a way of connecting two nodes on a network to communicate with each other. 
+One socket(node) listens on a particular port at an IP, while the other socket reaches out to the other to form a connection. The server forms the listener socket while the client reaches out to the server. 
+
+``` python
+import socket
+```
+
+Initialise a socket
+``` python
+# in this case, s is a socket object
+# socket is a method to create a socket
+# AF_INET refers to the address-family ipv4.
+# Alternatively AF_INET6 to the address-family ipv6
+# The SOCK_STREAM means connection-oriented TCP protocol. 
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+```
+
+Find the IP of the server
+``` python
+try:
+    host_ip = socket.gethostbyname('www.google.com')
+except socket.gaierror:
+ 
+    # this means could not resolve the host
+    print ("there was an error resolving the host")
+    sys.exit()
+```
+
+Socket for server:
+A server has a bind() method which binds it to a specific IP and port so that it can listen to incoming requests on that IP and port.
+A server has a listen() method which puts the server into listening mode. This allows the server to listen to incoming connections.
+A server has an accept() and close() method. The accept method initiates a connection with the client and the close method closes the connection with the client. 
+``` python
+import socket
+
+s = socket.socket()
+
+# port number can be any, 8080 in this case
+port = 8080
+
+# Next bind to the port
+# we have not typed any ip in the ip field
+# instead we have inputted an empty string
+# this makes the server listen to requests
+# coming from other computers on the network
+# if we passed a specific address, then it would have listened 
+# to only those calls made within the local computer
+# the address is basically a tuple
+s.bind(('', port))
+
+# put the socket into listening mode
+# 5 means that 5 connections are kept waiting if the server is busy
+# and if a 6th socket tries to connect then the connection is refused
+s.listen(5)
+
+# a forever loop until we interrupt it or
+# an error occurs
+while True:
+ 
+# Establish connection with client.
+  c, addr = s.accept()    
+  print ('Got connection from', addr )
+ 
+  # send a thank you message to the client. encoding to send byte type.
+  c.send('Thank you for connecting'.encode())
+ 
+  # Close the connection with the client
+  c.close()
+   
+  # Breaking once connection closed
+  break
+```
+
 # Python Program Testing and Debugging
 
 ## Linting and pylint
