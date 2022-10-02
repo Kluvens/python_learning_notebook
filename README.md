@@ -5675,6 +5675,51 @@ while True:
   break
 ```
 
+### Socket Programming with UDP
+The client program is called UDPClient.py, and the server program is called UDPServer.py.
+For this application, we have arbitrarily chosen 12000 for the server port number.
+
+Here is the code for the client side of the application:
+``` python
+# the socket module forms the basis of all network communications in Python.
+# By including this line, we will be able to create sockets within our program.
+from socket import *
+
+# The first line sets the variable serverName to the string 'hostname'. 
+# Here, we provide a string containg either the IP address of the server or the hostname of the server.
+# The second line sets the integer vairable serverPort to 12000.
+serverName = 'hostname'
+serverPort = 12000
+
+# This line creates the client's socket, called clientSocket.
+# The first parameter indicates the address family.
+# AF_INET indicates that the underlying network is using IPv4.
+# The second parameter indicates that the socket is of type SOCK_DGRAM , which means it is a UDP socket (rather than a TCP socket).
+clientSocket = socket(AF_INET, SOCK_DGRAM)
+
+# When this command is executed, the user at the client is promted with the words.
+# The user then uses here keyboard to input a line, which is put into the variable message.
+message = raw_input('Input lowercase sentence:')
+
+# We first convert the message from string type to byte type, as we need to send bytes into a socket.
+# The method sendto() attches the destination address (serverName, serverPort) to the message and sends the resulting packet into the process's socket.
+# After sending the packet, the client waits to receive data from the server.
+clientSocket.sendto(message.encode(),(serverName, serverPort))
+
+# when a packet arrives from the Internet at the client's socket, the packet's data is put into the variable modifiedMessage and the packet's source address is put into the variable serverAddress.
+# The variable serverAddress contains both the server's IP address and the server's port number.
+# The method recvfrom also takes the buffer size 2048 as input
+modifiedMessage, serverAddress = clientSocket.recvfrom(2048)
+
+# This line prints out modifiedMessage on the user's display.
+# It should be the original line that the user typed, but now capitalized.
+print(modifiedMessage.decode())
+
+# This line closes the socket.
+# The process then terminates.
+clientSocket.close()
+```
+
 # Python Program Testing and Debugging
 
 ## Linting and pylint
