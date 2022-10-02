@@ -5633,7 +5633,8 @@ except socket.gaierror:
 Socket for server:
 A server has a bind() method which binds it to a specific IP and port so that it can listen to incoming requests on that IP and port.
 A server has a listen() method which puts the server into listening mode. This allows the server to listen to incoming connections.
-A server has an accept() and close() method. The accept method initiates a connection with the client and the close method closes the connection with the client. 
+A server has an accept() and close() method. 
+The accept method initiates a connection with the client and the close method closes the connection with the client. 
 ``` python
 import socket
 
@@ -5694,7 +5695,8 @@ serverPort = 12000
 # This line creates the client's socket, called clientSocket.
 # The first parameter indicates the address family.
 # AF_INET indicates that the underlying network is using IPv4.
-# The second parameter indicates that the socket is of type SOCK_DGRAM , which means it is a UDP socket (rather than a TCP socket).
+# The second parameter indicates that the socket is of type SOCK_DGRAM , 
+# which means it is a UDP socket (rather than a TCP socket).
 clientSocket = socket(AF_INET, SOCK_DGRAM)
 
 # When this command is executed, the user at the client is promted with the words.
@@ -5702,11 +5704,14 @@ clientSocket = socket(AF_INET, SOCK_DGRAM)
 message = raw_input('Input lowercase sentence:')
 
 # We first convert the message from string type to byte type, as we need to send bytes into a socket.
-# The method sendto() attches the destination address (serverName, serverPort) to the message and sends the resulting packet into the process's socket.
+# The method sendto() attches the destination address (serverName, serverPort) 
+# to the message and sends the resulting packet into the process's socket.
 # After sending the packet, the client waits to receive data from the server.
 clientSocket.sendto(message.encode(),(serverName, serverPort))
 
-# when a packet arrives from the Internet at the client's socket, the packet's data is put into the variable modifiedMessage and the packet's source address is put into the variable serverAddress.
+# when a packet arrives from the Internet at the client's socket, 
+# the packet's data is put into the variable modifiedMessage 
+# and the packet's source address is put into the variable serverAddress.
 # The variable serverAddress contains both the server's IP address and the server's port number.
 # The method recvfrom also takes the buffer size 2048 as input
 modifiedMessage, serverAddress = clientSocket.recvfrom(2048)
@@ -5719,6 +5724,44 @@ print(modifiedMessage.decode())
 # The process then terminates.
 clientSocket.close()
 ```
+
+The server side of the application:
+``` python
+# similar to the client side
+from socket import *
+serverPort = 12000
+serverSocket = socket(AF_INET, SOCK_DGRAM)
+
+# This line binds the port number 12000 to the server's socket.
+# Thus in UDPServer, the code is explicitly assigning a port number to the socket.
+# When anyone sends a packet to port 12000 at the IP address of the server,
+# that packet will be directed to this socket.
+# UDPServer then enters a while loop
+# the while loop will allow UDPServer to receive and process packets from clients indefinitely.
+# In the while loop, UDPServer waits for a packet to arrive.
+serverSocket.bind((’’, serverPort))
+print(”The server is ready to receive”)
+while True:
+	# when a packet arrives at the server's socket,
+	# the packet's data is put into the variable message and the packet's
+	# source address is put into the variable clientAddress
+	message, clientAddress = serverSocket.recvfrom(2048)
+	# It takes the line sent by the client and,
+	# after converting the message to a string,
+	# uses the method upper() to capitalize it
+	modifiedMessage = message.decode().upper()
+	# This line attaches the client's address to the capitalized message
+	# and sends the resulting packet into the server's socket
+	serverSocket.sendto(modifiedMessage.encode(), clientAddress)
+```
+
+To test the pair of programs, we can run UDPClient.py on one host and UDPServer.py on another host.
+Be sure to include the proper hostname or IP address of the server in UDPClient.py.
+Next, you execute UDPServer.py, the compiled server program,  in the server host.
+This creates a process in the server that idles until it is contacted by some client.
+Then we execute UDPClient.py, the compiled client program, in the client.
+This creates a process in the client.
+Finally, to use the application at the client, we type a sentence followed by a carriage return.
 
 # Python Program Testing and Debugging
 
