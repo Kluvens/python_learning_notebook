@@ -6109,6 +6109,93 @@ Then we execute UDPClient.py, the compiled client program, in the client.
 This creates a process in the client.
 Finally, to use the application at the client, we type a sentence followed by a carriage return.
 
+### Socket Programming with TCP
+Unlike UDP, TCP is a connection-oriented protocol.
+This means that before the client and server can start to send data to each other, 
+they first need to handshake and establish a TCP connection.
+When creating the TCP connection, we associate with it the client socket address and the server socket address.
+With the TCP connection established, when one side wants to send data to the other side, it just drops the data into the TCP connection via its socket.
+This is different from UDP,
+for which the server must attach a destination address to the packet before dropping it into the socket.
+
+The client has the job of initiating contact with the server.
+In order for the server to be able to react to the client's initial contact, the server has to be ready.
+This implies two things.
+First, the TCP server must be running as a process before the client attempts to initiate contact.
+Second, the server program must have a special socket that welcomes some initial contact from a client process running on an arbitrary host.
+
+With the server process running, the client process can initiate a TCP connection to the server.
+This is done in the client program by creating a TCP socket.
+When the client creates its TCP socket, it specifies the address of the welcoming socket in the server, 
+namely, the IP address of the server host and the port number of the socket.
+After creating its socket, the client initiates a three-way handshake and establishes a TCP connection with the server.
+The three-way handshake, which takes place within the transport layer, is completely invisible to the client and server programs.
+
+However, from the application's perspective, the client's socket and the server's connection socket are directly connected by a pipe.
+The client process not only sends bytes into but also receives bytes from its socket;
+similarly, the server process not only receives bytes from but also sends bytes into its connection socket.
+
+![image](https://user-images.githubusercontent.com/95273765/193695735-9ab414e5-9068-4532-a342-9037fc74829a.png)
+
+Here is the code for the client side of the application:
+``` python
+from socket import * 
+serverName = 'servername'
+
+# This line creates the client's socket, called clientSocket
+# The second parameter indicates that the socket is of type SOCK_STREAM
+# which means it is a TCP socket
+serverPort = 12000 clientSocket = socket(AF_INET, SOCK_STREAM)
+
+# A TCP connection must first be established between the client and server.
+# This line initiates the TCP connection between the client and server.
+# After this line of code executed
+# the three-way handshake is performed and a TCP connection is established between the client and server.
+clientSocket.connect((serverName, serverPort))
+
+sentence = raw_input(’Input lowercase sentence:’) 
+
+# This line sends the sentence through the client's socket and into the TCP connection.
+# The client program simply drops the bytes in the string sentence into the TCP connection.
+# The client then waits to receive bytes from the server
+clientSocket.send(sentence.encode()) 
+
+# When characters arrive from the server, they get placed into the string modifiedSentence.
+# Characters continue to accumulate in modifiedSentence until the line ends with a carriage return character.
+modifiedSentence = clientSocket.recv(1024) 
+print(’From Server: ’, modifiedSentence.decode()) 
+clientSocket.close()
+```
+
+Here is the server program:
+``` python
+from socket import * 
+serverPort = 12000 
+serverSocket = socket(AF_INET, SOCK_STREAM) 
+serverSocket.bind((’’, serverPort)) 
+
+# After establishing the welcoming door, we will wait and listen from some client to knock on the door
+# This line has the server listen for TCP connection requests from the client
+# The parameter specifies the maximum number of queued connections (at least 1)
+serverSocket.listen(1) 
+
+print(’The server is ready to receive’) 
+while True:
+	# When a client knocks on this door, the program invokes the accept() method for serverSocket
+	# which creates a new socket in the server, called connectionSocket
+	# dedicated to this particular client.
+	# The client and server then complete the handshaking, creating a TCP connection between the client's clientSocket and the server's connectionSocket.
+	connectionSocket, addr = serverSocket.accept()    
+	
+	sentence = connectionSocket.recv(1024).decode()    
+	capitalizedSentence = sentence.upper()    
+	connectionSocket.send(capitalizedSentence.encode())    
+	
+	# we close the clientSocket, but the serverSocket remains open
+	# another client can now knock on the door and send the server a sentence to modify
+	connectionSocket.close()
+```
+
 # Python Program Testing and Debugging
 
 ## Linting and pylint
