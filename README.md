@@ -4614,6 +4614,114 @@ Sort-and-Count(L)
 The Sort-and-Count algorithm correctly sorts the input list and counts the number of inversions:
 it runs in O(n logn) time for a list with n elements.
 
+### Finding the Closest Pair of Points
+Given n points in the plane, find the pair that is closest together.
+
+This can be solved by O(n^2) using brute force, but it can be done faster by O(n logn).
+
+We begin with a bit of notation. Let us denote the set of points by P = {p1, . . . , pn}, 
+where pi has coordinates (xi , yi); and for two points pi , pj ∈ P,
+we use d(pi , pj) to denote the standard Euclidean distance between them. 
+Our goal is to find a pair of points pi , pj that minimizes d(pi , pj).
+
+We can have a warmup by thinking about the one-dimentional version of this problem.
+We'd first sort them, in O(n logn) time, and then we'd walk through the sorted list,
+computing the distance from each point to the one that comes after it.
+It is easy to see that one of these distances must be the minimum one.
+
+Then we will dive into the two-dimentional version, our plan is to apply the style of divide and conquer used in Mergesort:
+we find the closest pair among the points in the left half of P and the closest pair among the points in the right half of P;
+and then we use this information to get the overall solution in linear time.
+Then the solution of our basic recurrence will give us an O(n logn) running time.
+
+First, before any of the recursion begins, we sort the points in P by x-coordinate and again by y-coordinate, producing lists Px and Py.
+Attached to each entry in each list is a record of the position of that point in both lists.
+
+Then we define Q to be the set of points in the first ceiling(n/2) positions of the list Px (left half) and R to be the set of points in the final floor(n/2) positions of the list Px (right half).
+By a single pass through each of Px and Py in O(n) time, we can create the following four lists:
+Qx, consisting of the points in Q sorted by increasing x-coordinate;
+Qy, consisting of the points in Q sorted by increasing y-coordinate;
+and analogous lists Rx and Ry.
+For each entry of each of these lists, as before, we record the position of the point in both lists it belongs to.
+
+We now recursively determine a closest pair of points in Q (with access
+to the lists Qx and Qy). Suppose that q∗0 and q∗1 are (correctly) returned as a
+closest pair of points in Q. 
+Similarly, we determine a closest pair of points in R, obtaining r∗0 and r∗1.
+
+Let δ be the minimum of d(q∗0,q∗1) and d(r∗0 ,r∗1). 
+The real question is: Are
+there points q ∈ Q and r ∈ R for which d(q, r) < δ? If not, then we have already
+found the closest pair in one of our recursive calls. 
+But if there are, then the closest such q and r form the closest pair in P.
+
+Let x∗ denote the x-coordinate of the rightmost point in Q, and let L denote
+the vertical line described by the equation x = x∗. This line L “separates” Q
+from R. 
+Here is a simple fact.
+
+If there exists q ∈ Q and r ∈ R for which d(q, r) < δ, then each of q and r lies within a distance δ of L.
+
+So if we want to find a close q and r, we can restrict our search to the narrow band consisting only of points in P within δ of L. 
+Let S ⊆ P denote this set, and let Sy denote the list consisting of the points in S sorted by increasing y-coordinate. 
+By a single pass through the list Py, we can construct Sy in O(n)
+time.
+
+So there exist q ∈ Q and r ∈ R for which d(q, r) < δ if and only if there
+exist s, s' ∈ S for which d(s, s') < δ.
+
+Furthermore, If s, s' ∈ S have the property that d(s, s') < δ, then s and s' are within
+15 positions of each other in the sorted list Sy.
+
+We notice an important thing that there's an absolute constant.
+
+Consequently, we can conclude that we make one pass through Sy, and for each s ∈ Sy, we compute its distance to each of the next 15 points in Sy.
+In doing so, we will have computed the distance of each pair of points in S that are at distance less than δ from each other.
+So having done this, we can compare the smallest such distance to δ, and we can report one of two things:
+1. the closest pair of points in S, if their distance is less than δ
+2. the correct conclusion that no pairs of points in S are within δ of each other
+
+In case 1, this pair is the closest pair in P;
+in case 2, the closest pair found by our recursive calls is the closest pair in P.
+
+This concludes the description of the combing part of the algorithm, since
+we have now determined whether the minimum distance between a point in Q and a point in R is less than δ, and if so, we have found the closest such pair.
+
+Summary of the Algorithm:
+``` 
+Closest-Pair(P)
+	Construct Px and Py (O(n log n) time)
+	(p∗0, p∗1) = Closest-Pair-Rec(Px,Py)
+	
+Closest-Pair-Rec(Px, Py)
+	If |P| ≤ 3 then
+		find closest pair by measuring all pairwise distances
+	Endif
+	
+	Construct Qx, Qy, Rx, Ry (O(n) time)
+	(q∗0,q∗1) = Closest-Pair-Rec(Qx, Qy)
+	(r∗0,r∗1) = Closest-Pair-Rec(Rx, Ry)
+	
+	δ = min(d(q∗0,q∗1), d(r∗0,r∗1))
+	x∗ = maximum x-coordinate of a point in set Q
+	L = {(x,y) : x = x∗}
+	S = points in P within distance δ of L.
+
+	Construct Sy (O(n) time)
+	For each point s ∈ Sy, compute distance from s
+		to each of next 15 points in Sy
+		Let s, s' be pair achieving minimum of these distances
+		(O(n) time)
+
+	If d(s,s') < δ then
+		Return (s,s')
+	Else if d(q∗0,q∗1) < d(r∗0,r∗1) then
+		Return (q∗0,q∗1)
+	Else
+		Return (r∗0,r∗1)
+	Endif
+```
+
 ## Greedy Algorithms
 
 ## Dynamic Programming
