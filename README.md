@@ -4550,6 +4550,70 @@ Thus we have
 
 Therefore, any function T(.) satisfying the above structure with q = 1 is bounded by O(n).
 
+### Counting Inversions
+We are given a sequence of n numbers a1 ... an;
+we will assume that all the numbers are distinct.
+We want to define a measure that tells us how far this list is from being in ascending order;
+the value of the measure should be 0 if a1 < a2 < ... < an, 
+and should increase as the numbers become more scrambled.
+
+A natural way to quantify this notion is by counting the number of inversions.
+We say that two indices i < j form an inversion if ai > aj,
+that is, if the two elements ai and aj are out of order.
+We will seek to determine the number of inversions in the sequence a1 ... an.
+
+The brute force algorithm takes O(n^2) time.
+
+We can be better in O(n logn) time.
+The basic idea is to split the input into two pieces.
+We first count the number of inversions in each of these two halves separately.
+Then we count the nuber of inversions (ai, aj), where the two numbers belong to different halves;
+the trick is that we must do this part in O(n) time.
+Note that these first-half/second-half inversions have a particularly nice form:
+they are precisely the paris (ai, aj), where ai is in the first half, aj is in the second half, and ai < aj.
+
+To help with counting the number of inversions between the two halves,
+we will make the algorithm recursively sort the numbers in the two halves as well.
+
+By now, it is clear that the crucial routine in this process is Merge-and-Count.
+
+To summarize, we have the following algorithm:
+```
+Merge-and-Count(A,B)
+	Maintain a Current pointer into each list, initialized to
+		point to the front elements
+	Maintain a variable Count for the number of inversions,
+		initialized to 0
+	While both lists are nonempty:
+		Let ai and bj be the elements pointed to by the Current pointer
+		Append the smaller of these two to the output list
+		If bj is the smaller element then
+			Increment Count by the number of elements remaining in A
+		Endif
+		Advance the Current pointer in the list from which the
+			smaller element was selected.
+	EndWhile
+	Once one list is empty, append the remainder of the other list to the output
+	Return Count and the merged list
+```
+```
+Sort-and-Count(L)
+	If the list has one element then
+		there are no inversions
+	Else
+		Divide the list into two halves:
+			A contains the first ceiling(n/2) elements
+			B contains the remaining floor(n/2) elements
+		(rA, A) = Sort-and-Count(A)
+		(rB, B) = Sort-and-Count(B)
+		(r , L) = Merge-and-Count(A, B)
+	Endif
+	Return r = rA + rB + r, and the sorted list L
+```
+
+The Sort-and-Count algorithm correctly sorts the input list and counts the number of inversions:
+it runs in O(n logn) time for a list with n elements.
+
 ## Greedy Algorithms
 
 ## Dynamic Programming
