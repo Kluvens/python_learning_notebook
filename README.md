@@ -1,3 +1,6 @@
+# Preface
+The notebook covers the basic and advanced syntax about Python, useful Python modules, data structure and algorithm design implemented by Python, testing in Python.
+
 # Table of Contents
 1. [Why Python](#why-python)
     1. [Python history](#python-history)
@@ -55,7 +58,9 @@
 		8. [Counting Sort](#counting-sort)
 		9. [Bucket Sort](#bucket-sort)
 		10. [Radix Sort](#radix-sort)
-	8. [Greedy Algorithms](#greedy-algorithms)
+	8. [Divide and Conquer](#divide-and-conquer)
+	9. [Greedy Algorithms](#greedy-algorithms)
+	10. [Dynamic Programming](#dynamic-programming)
 6. [Python with other modules](#python-with-other-modules)
     1. [Python with Flask](#python-with-flask)
     2. [Python with Subprocess](#python-with-subprocess)
@@ -72,6 +77,7 @@
     13. [Python with Typing](#python-with-typing)
     14. [Python with Argparse](#python-with-argparse)
     15. [Python with OS](#python-with-os)
+    16. [Python with Socket](#python-with-socket)
 7. [Python Program Testing and Debugging](#python-program-testing-and-debugging)
 
 # Why Python
@@ -4482,21 +4488,22 @@ Thus, we can get, for some constant c,
 when n > 2, and T(2) ≤ c.
 
 #### The case of q > 2 subproblems
+By unrolling:
 - Analyzing the first few levels: We show an example of this for the case q = 3 in Figure 5.2. 
 At the first level of recursion, we have a single problem of size n, which takes time at most cn plus the time spent in all subsequent recursive calls. 
 At the next level, we have q problems, each
 of size n/2. Each of these takes time at most cn/2, for a total of at most
 (q/2)cn, again plus the time in subsequent recursive calls. 
-The next level yields q2 problems of size n/4 each, for a total time of (q2/4)cn. 
+The next level yields q^2 problems of size n/4 each, for a total time of `(q^2/4)cn`. 
 Since q > 2, we see that the total work per level is increasing as we proceed through the recursion.
 - Identifying a pattern: At an arbitrary level j, we have q^j distinct instances,
 each of size n/2^j. 
-Thus the total work performed at level j is (q^j)*(cn/2j) = ((q/2)^j)*cn.
+Thus the total work performed at level j is `(q^j)*(cn/2j) = ((q/2)^j)*cn`.
 - Summing over all levels of recursion:
 As before, there are log2 n levels of recursion, and the total amount of work performed is the sum over all these:
 ![image](https://user-images.githubusercontent.com/95273765/193502130-83e8b398-081a-48c3-8f1d-f2378be70fb7.png)
 
-This is a geometric sum, consisting of powers of r = q/2.
+This is a geometric sum, consisting of powers of `r = q/2`.
 We can use the formula for a geometric sum when r > 1, which gives us the formula
 ![image](https://user-images.githubusercontent.com/95273765/193502267-31ff9ef6-524c-4ab7-9f35-3d9321056cdc.png)
 
@@ -4506,7 +4513,7 @@ we can pull out the factor of r - 1 fro the denominator, and write the last expr
 ![image](https://user-images.githubusercontent.com/95273765/193502398-f7ea85ec-4eb9-41ee-b112-9349358bae3c.png)
 
 Finally, we need to figure out what r^(log2 n) is.
-Here we use a very handy identity, which says that, for any a > 1 and b > 1, we have a^(log b) = b^(log a).
+Here we use a very handy identity, which says that, for any a > 1 and b > 1, we have `a^(log b) = b^(log a)`.
 
 Thus
 
@@ -6115,6 +6122,7 @@ Some are from online resources.
 - [Object-Oriented Programming](https://www.pythontutorial.net/python-oop/)
 - [Python Modules](https://docs.python.org/3/py-modindex.html)
 - [Trie Strcture code example](https://towardsdatascience.com/implementing-a-trie-data-structure-in-python-in-less-than-100-lines-of-code-a877ea23c1a1)
+- Divide and Conquer refers to the book Algorithm design by Jon Kleinberg Eva Tardos
 
 # Disclaimer
 The purpose of this notebook is to help people have some Python background knowledge, some of the contents are from lecture notes and some are from the Internect. If you don't want your work showing up in the notebook please contact me and I will delete them.
