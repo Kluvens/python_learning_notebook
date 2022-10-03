@@ -4376,6 +4376,173 @@ def radixSort(arr):
         place *= 10
 ```
 
+## Divide and Conquer
+Divide and conquer refers to a class of algorithmic techniques in which one breaks the input into several parts, solves the problem in each part recursively, and then combines the solutions to these subproblems into an overall solution.
+
+Analyzing the running time of a divide and conquer algorithm generally involves solving a recurrence relation that bounds  the running time recursively in terms of the running time on smaller instances.
+
+The divide and conquer is usually used to improve on brute-force search in solving a problem.
+
+### A first recurrence - The merge sort algorithm
+The Python source code for merge sort is written in the sorting algorithms part.
+
+Mergesort sorts a given list of numbers by first dividing them into two equal halves, sorting each half separately by recursion, and then combining the results of these recursive calls.
+
+The divide and conquer technique can be abstracted as follows:
+Divide the input into two pieces of equal size;
+solve the two subproblems on these pieces separately by recursion;
+and then combine the two results into an overall solution,
+spending only linear time for the initial division and final recombining.
+
+In any algorithm that fits this style, we need a base case for the recursion, typically having it on inputs of some constant size.
+
+In the case of Mergesort, when the input size has been reduced to 2, we stop the recursion and sort the two elements by simply comparing them to each other.
+
+Consider any algorithm that fits the pattern in the above abstraction, and let `T(n)` denote its worst-case running time on input instances of size n.
+Supposing that n is even, the algorithm spends O(n) time to divide the input into two pieces of size n/2 each;
+it then spends time T(n/2) to solve each one;
+and finally it spends O(n) time to combine the solutions from the two recursive calls.
+Thus, the running time T(n) satisfies the following recurrence relation.
+
+For some constant c, `T(n) <= 2*T(n/2) + cn` when n > 2, and T(2) <= c.
+
+The above structure is typical of what recurrences will look like:
+there's an inequality or equation that bounds T(n) in terms of an expression involving T(k) for smaller values k;
+and there's a base case that generally says that T(n) is equal to a constant when n is a constant.
+This structure can also be written informally as `T(n) <= 2T(n/2) + O(n)`.
+
+However, we have assumed that n is even.
+There's a more general format that `T(n) <= T(ceiling(n/2)) + T(floor(n/2)) + cn` for n >= 2.
+
+However, this still does not explicitly provide an asymptotic bound on the growth rate of the function T.
+To obtain an explicit bound, we need to solve the recurrence relation so that T appears only on the left-hand side of the inequality, not the right-hand side as well.
+
+#### Approaches to Solving Recurrences
+*Unrolling the Mergesort Recurrence*
+
+- Analyzing the first few levels:
+At the first level of recursion, we have a single problem of size n,
+which takes time at most cn plus the time spent in all subsequent recusive calls.
+At the next level, we have two problems each of size n/2.
+Each of these takes time at most cn/2, for a total of at most cn, again plus the time in subsequent recursive calls.
+At the third level, we have four problmes each of size n/4, each taking time at most cn/4, for a total of at most cn.
+- Identifying a pattern: At level j of the recursion, the number of subproblems has doubled j times, so there are now a total of 2^j.
+Each has correspondingly shrunk in size by a factor of two j times, and so each has size n/c^j, and hence each takes time at most cn/2^j.
+Thus level j contributes a total of at most `2^j*(cn/2^j) = cn` to the total running time.
+- Summing over all levels of recursion: 
+We've found that the recurrence has the property that the same upper bound of cn applies to total amount of work performed at each level.
+The number of times the input must be halved in order to reduce its size from n to 2 is `log2 n`.
+So summing the cn work over logn levels of recursion, we get a total running time of `o(n logn)`.
+
+![image](https://user-images.githubusercontent.com/95273765/193483440-fa465757-2a15-4b59-8d66-be5d6983b9e4.png)
+
+*Substituting a Solution into the Mergesort Recurrence*
+
+Suppose we believe that `T(n) <= cn*log2` n for all n >= 2, and we want to check whether this is indeed true.
+This clearly holds for n = 2, since in this case `cn*log2 n = 2c`,and the recurrence explicitly tells us that `T(2) <= c`.
+Now suppose, by induction, that `T(m) <= cm*log2 m` for all values of m less than n, and we want to establish this for T(n).
+We do this by writing the recurrence for T(n) and plugging in the inequality `T(n/2) <= c(n/2) log2(n/2)`.
+We then simplify the resulting expression by noticing that `log2(n/2) = (log2 n) − 1`.
+The full calculation is
+```
+T(n) ≤ 2T(n/2) + cn
+	≤ 2c(n/2) log2(n/2) + cn
+	= cn[(log2 n) − 1] + cn
+	= (cn log2 n) − cn + cn
+	= cn log2 n
+```
+
+This establish the bound we want for T(n), assuming it holds for smaller values m < n, and thus it completes the induction argument.
+
+*An Approach Using Partial Substitut*
+
+Specifically, suppose we believe that T(n) = O(n logn), but we're not sure of the constant inside the O(.) notation.
+We can use the substitution method even without being sure of this constant, as follows.
+We first write `T(n) <= kn logb n` for some constant k and base b that we'll determine later.
+Now we'd like to know whether there is any choice of k and b that will work in an inductive argument.
+So we try out one level of the induction as follows.
+`T(n) ≤ 2T(n/2) + cn ≤ 2k(n/2) logb(n/2) + cn`.
+It's now very tempting to choose the base b = 2 for the logarithm, since we see that this will let us apply the simplification `log2(n/2) = (log2 n) − 1`.
+Proceeding with this choice, we have 
+```
+T(n) <= 2k(n/2) log2(n/2) + cn
+	= 2k(n/2)[(log2 n) − 1] + cn
+	= kn[(log2 n) − 1] + cn
+	= (kn log2 n) − kn + cn.
+```
+Finally, there a choice of k that will cause this last expression to be bounded by `kn*log2 n`.
+We need to choose any k that is at least as large as c, and we get
+`T(n) <= (kn log2 n) − kn + cn <= kn log2 n`, which completes the induction.
+
+### Further Recurrence Relations
+A more general class of algorithms is obtained by considering divide-and-conquer algorithms taht create recursive calls on q subproblems of size n/2 each and then combine the results in O(n) time.
+
+Thus, we can get, for some constant c,
+`T(n) ≤ qT(n/2) + cn`
+when n > 2, and T(2) ≤ c.
+
+#### The case of q > 2 subproblems
+- Analyzing the first few levels: We show an example of this for the case q = 3 in Figure 5.2. 
+At the first level of recursion, we have a single problem of size n, which takes time at most cn plus the time spent in all subsequent recursive calls. 
+At the next level, we have q problems, each
+of size n/2. Each of these takes time at most cn/2, for a total of at most
+(q/2)cn, again plus the time in subsequent recursive calls. 
+The next level yields q2 problems of size n/4 each, for a total time of (q2/4)cn. 
+Since q > 2, we see that the total work per level is increasing as we proceed through the recursion.
+- Identifying a pattern: At an arbitrary level j, we have q^j distinct instances,
+each of size n/2^j. 
+Thus the total work performed at level j is (q^j)*(cn/2j) = ((q/2)^j)*cn.
+- Summing over all levels of recursion:
+As before, there are log2 n levels of recursion, and the total amount of work performed is the sum over all these:
+![image](https://user-images.githubusercontent.com/95273765/193502130-83e8b398-081a-48c3-8f1d-f2378be70fb7.png)
+
+This is a geometric sum, consisting of powers of r = q/2.
+We can use the formula for a geometric sum when r > 1, which gives us the formula
+![image](https://user-images.githubusercontent.com/95273765/193502267-31ff9ef6-524c-4ab7-9f35-3d9321056cdc.png)
+
+Since we're aiming for an asymptotic upper bound, it is useful to figure out what's simply a constant;
+we can pull out the factor of r - 1 fro the denominator, and write the last expression as
+
+![image](https://user-images.githubusercontent.com/95273765/193502398-f7ea85ec-4eb9-41ee-b112-9349358bae3c.png)
+
+Finally, we need to figure out what r^(log2 n) is.
+Here we use a very handy identity, which says that, for any a > 1 and b > 1, we have a^(log b) = b^(log a).
+
+Thus
+
+![image](https://user-images.githubusercontent.com/95273765/193502563-bc7a0b33-e34e-49f4-bab9-3f487810f5cf.png)
+
+Thus we have
+![image](https://user-images.githubusercontent.com/95273765/193502717-357d8e60-8819-4d7d-9cf8-6fbae7ad11dd.png)
+
+Therefore, any function T(.) satisfying the above structure with q > 2 is bounded by O(n^(log2 q)).
+
+![image](https://user-images.githubusercontent.com/95273765/193501175-26ae1f6e-d63f-4035-b1ab-060c4b44cdf9.png)
+
+#### The Case of One Subproblem
+By unrolling the recurrence to try constructing a solution:
+- Analyzing the first few levels:We show the first few levels of the recursion
+in Figure 5.3. At the first level of recursion, we have a single problem of
+size n, which takes time at most cn plus the time spent in all subsequent
+recursive calls. The next level has one problem of size n/2, which
+contributes cn/2, and the level after that has one problem of size n/4,
+which contributes cn/4. Sowe see that, unlike the previous case, the total
+work per level when q = 1 is actually decreasing as we proceed through
+the recursion.
+- Identifying a pattern: At an arbitrary level j, we still have just one
+instance; it has size n/2j and contributes cn/2j to the running time.
+- Summing over all levels of recursion: There are log2 n levels of recursion,
+and the total amount of work performed is the sum over all these:
+
+![image](https://user-images.githubusercontent.com/95273765/193505111-d8b3e2d5-2693-4613-bb0a-ba76309fd5f8.png)
+
+This geometric sum is very easy to work out, it converges to 2.
+
+Thus we have
+![image](https://user-images.githubusercontent.com/95273765/193505196-c44c464b-ee85-4b57-a129-9ddb4044a85b.png)
+
+Therefore, any function T(.) satisfying the above structure with q = 1 is bounded by O(n).
+
 ## Greedy Algorithms
 
 ## Dynamic Programming
