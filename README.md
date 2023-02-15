@@ -5894,7 +5894,100 @@ for i in files:
     print(i)
 ```
 
-## Python with OS
+## Python with numpy
+``` python
+import numpy as np
+
+a = np.array([1,2,3])
+
+# get dimention
+a.ndim
+
+# get shape
+a.shape
+
+# get type
+a.dtype
+
+# get size
+a.itemsize
+
+# get number of items
+a.size
+
+# get total size
+a.nbytes
+
+# get a specific element [r, c]
+a[1, 2]
+
+# get a specific row
+a[0, :]
+
+# get a specific column
+a[:, 2]
+
+# getting a part of a row (startindex:endindex:stepsize)
+a[0, 1:-1:2]
+
+# all 0s matrix
+np.zeros(55)
+
+# all 1s matrix
+np.ones((4, 2, 2), dtype='int32')
+
+# all other number
+np.full((2, 2),99)
+
+# random decimal numbers
+np.random.rand(4,2)
+
+# random integer values
+np.random.randint(7, size=(3,3))
+
+# the identity matrix
+np.identity(5)
+
+# add everything by 2
+a + 2
+
+# multiply matrix
+a = np.ones((2,3))
+b = np.full((3,2),2)
+np.matmul(a,b)
+```
+# add everything by 2
+a + 2
+
+# multiply matrix
+a = np.ones((2,3))
+b = np.full((3,2),2)
+np.matmul(a,b)
+
+# get minimum number of an array
+np.min(stats)
+
+# reshape
+after = before.reshape((2,2,2))
+
+# vertically stacking vectors
+np.vstack([v1, v2])
+
+# load data from file
+f = np.genfromtext('data.txt', delimiter=', ')
+f.astype('int32')
+
+# boolean making
+f > 5
+
+# indexing elements which meet requirements
+f[f > 50]
+
+# get part of a matrix
+a[2:4, 0:2]
+```
+
+# Python with OS
 ``` python
 import os
 ```
