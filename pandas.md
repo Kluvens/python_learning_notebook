@@ -122,3 +122,12 @@ reviews.iloc[:3, 0]
 Label-based selection derives its power from the labels in the index. Critically, the index we use is not immutable. We can manipulate the index in any way we see fit.
 
 The `set_index()` method can be used to do the job.
+
+## Info about the data
+The DataFrames object has a method called `info()`, that gives us more information about the data set.
+
+``` python
+print(df.info())
+```
+
+The `info()` method also tells us how many non-null values there are present in each column.
