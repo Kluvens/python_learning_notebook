@@ -131,3 +131,75 @@ print(df.info())
 ```
 
 The `info()` method also tells us how many non-null values there are present in each column.
+
+## Get columns
+``` python
+print(df[['Name', 'Type 1', 'HP']])
+```
+
+``` python
+for index, row in df.iterrows():
+  print(index, row['Name'])
+```
+
+## Conditional getting
+``` python
+df.loc(df['Type 1'] == Grass)
+```
+
+## Sort values
+``` python
+df.sort_values(['Name', 'HP'], ascending=[True, False])
+```
+
+## Make changes
+``` python
+df['Total'] = df['HP'] + df['Attack']
+```
+
+drop column
+
+``` python
+df = df.drop(column=['Total'])
+```
+
+another way getting total
+
+``` python
+df['Total'] = df.iloc[:, 4:9].sum(axis=1)
+```
+
+or
+
+``` python
+cols = list(df.columns.values)
+df = df[cols[0:4] + [cols[-1]]+cols[4:12]]
+```
+
+## Convert to csv
+df.to_csv('modified.csv')
+
+## Filtering data
+``` python
+df.loc[(df['Type 1'] == 'Grass') & (df['Type 2'] == 'Poison')]
+```
+
+if contains
+
+``` python
+df.loc[~df['Name'].str.contains('Mega')]
+```
+
+## Reset index
+new_df = new_df.reset_index()
+
+## Regex filtering
+``` python
+df.loc[df['Type 1'].str.contains('File|Grass', regex=True)]
+```
+
+ignores case
+
+``` python
+df.loc[df['Type 1'].str.contains('File|Grass', flag=re.I, regex=True)]
+```
